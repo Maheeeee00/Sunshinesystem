@@ -6,10 +6,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
-    { "src": "/dashboard", "dest": "/dashboard.html" },
-    { "src": "/panels",    "dest": "/panels.html"    },
-    { "src": "/analytics", "dest": "/analytics.html" },
-    { "src": "/settings",  "dest": "/settings.html"  },
+    { "src": "/services",  "dest": "/services.html"  },
+    { "src": "/pricing",   "dest": "/pricing.html"   },
+    { "src": "/about",     "dest": "/about.html"     },
+    { "src": "/contact",   "dest": "/contact.html"   },
     { "src": "/(.*)",      "dest": "/$1"             }
   ]
 }

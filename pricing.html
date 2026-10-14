@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — SolarOS</title>
+  <meta name="description" content="Simple, transparent pricing for homeowners, families, and commercial operators. Start free, upgrade when you need more.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/><line x1="6.3" y1="6.3" x2="9.2" y2="9.2"/><line x1="22.8" y1="22.8" x2="25.7" y2="25.7"/><line x1="25.7" y1="6.3" x2="22.8" y2="9.2"/><line x1="9.2" y1="22.8" x2="6.3" y2="25.7"/></g></svg>
+    Solar<span>OS</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact" class="nav-cta">Get Started Free</a></li>
+  </ul>
+  <button class="nav-burger">☰</button>
+</nav>
+<nav class="nav-mobile">
+  <a href="/">Home</a><a href="/services">Services</a><a href="/pricing">Pricing</a><a href="/about">About</a>
+  <a href="/contact" class="nav-cta">Get Started Free</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-tag reveal">Pricing</div>
+    <h1 class="reveal">Simple pricing,<br><span style="color:var(--gold)">no surprises.</span></h1>
+    <p class="reveal">Start for free and upgrade only when you need more. Cancel any time — no contracts, no lock-in.</p>
+  </div>
+</div>
+
+<!-- BILLING TOGGLE -->
+<section class="section" style="padding-top:48px;padding-bottom:48px">
+  <div class="container" style="text-align:center">
+    <div style="display:inline-flex;align-items:center;gap:16px;background:var(--navy-800);border:1px solid rgba(255,255,255,.08);border-radius:50px;padding:6px 20px">
+      <span id="lbl-m" style="font-weight:600;color:var(--white);font-size:.95rem">Monthly</span>
+      <div style="position:relative;width:44px;height:24px;cursor:pointer" onclick="toggleBilling()">
+        <div style="position:absolute;inset:0;background:var(--grad-sun);border-radius:50px"></div>
+        <div id="toggle-thumb" style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--navy);border-radius:50%;transition:transform .3s"></div>
+      </div>
+      <span id="lbl-y" style="font-weight:600;color:var(--muted);font-size:.95rem">Annual <span style="background:rgba(0,212,170,.15);color:var(--teal);padding:2px 8px;border-radius:50px;font-size:.75rem;font-weight:700">Save 20%</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING CARDS -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">
+          <span class="currency">£</span>
+          <span class="amount" id="price-free">0</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">Perfect for getting to know SolarOS. Free forever, no card needed.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="check">✓</span> 1 solar system</li>
+          <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
+          <li class="pricing-feature"><span class="check">✓</span> 7-day data history</li>
+          <li class="pricing-feature"><span class="check">✓</span> Basic alerts (email)</li>
+          <li class="pricing-feature"><span class="check">✓</span> Mobile app (iOS & Android)</li>
+          <li class="pricing-feature dim"><span class="cross">✕</span> Analytics & reporting</li>
+          <li class="pricing-feature dim"><span class="cross">✕</span> AI optimisation</li>
+          <li class="pricing-feature dim"><span class="cross">✕</span> Savings tracker</li>
+        </ul>
+        <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center">Get Started Free</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-price">
+          <span class="currency">£</span>
+          <span class="amount" id="price-pro">9</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">The complete toolkit for homeowners who want to maximise every kilowatt.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="check">✓</span> Up to 3 solar systems</li>
+          <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
+          <li class="pricing-feature"><span class="check">✓</span> Unlimited data history</li>
+          <li class="pricing-feature"><span class="check">✓</span> Smart alerts (push, email, SMS)</li>
+          <li class="pricing-feature"><span class="check">✓</span> Full analytics & reports</li>
+          <li class="pricing-feature"><span class="check">✓</span> AI optimisation engine</li>
+          <li class="pricing-feature"><span class="check">✓</span> Savings & CO₂ tracker</li>
+          <li class="pricing-feature"><span class="check">✓</span> PDF report exports</li>
+        </ul>
+        <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center">Start Pro Free — 30 Days</a>
+      </div>
+
+      <!-- Business -->
+      <div class="pricing-card reveal">
+        <div class="pricing-name">Business</div>
+        <div class="pricing-price">
+          <span class="currency">£</span>
+          <span class="amount" id="price-biz">49</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">For installers and commercial operators managing multiple sites.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="check">✓</span> Unlimited sites & systems</li>
+          <li class="pricing-feature"><span class="check">✓</span> Everything in Pro</li>
+          <li class="pricing-feature"><span class="check">✓</span> White-label client portal</li>
+          <li class="pricing-feature"><span class="check">✓</span> Branded PDF reports</li>
+          <li class="pricing-feature"><span class="check">✓</span> Fleet-wide alert management</li>
+          <li class="pricing-feature"><span class="check">✓</span> REST API & webhooks</li>
+          <li class="pricing-feature"><span class="check">✓</span> Priority support (4 hr SLA)</li>
+          <li class="pricing-feature"><span class="check">✓</span> Dedicated account manager</li>
+        </ul>
+        <a href="/contact" class="btn btn-teal" style="width:100%;justify-content:center">Talk to Sales &rarr;</a>
+      </div>
+
+    </div>
+
+    <!-- Enterprise -->
+    <div class="reveal" style="margin-top:24px;background:var(--navy-800);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Enterprise</div>
+        <h3 style="font-size:1.6rem;margin-bottom:8px">Need something custom?</h3>
+        <p style="color:var(--muted);max-width:520px">For large portfolios, utility-scale deployments, and organisations needing bespoke integrations, custom SLAs, or on-premise hosting — let's talk.</p>
+      </div>
+      <a href="/contact" class="btn btn-outline" style="white-space:nowrap">Contact Enterprise Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg-alt">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-tag reveal">FAQ</div>
+      <h2 class="section-title reveal">Common questions</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto" class="reveal">
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">Do I need a smart meter?</h4>
+        <p style="color:var(--muted);font-size:.9rem">No. SolarOS connects directly to your inverter. A smart meter adds extra import/export data but is not required to get started.</p>
+      </div>
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">Which inverters are compatible?</h4>
+        <p style="color:var(--muted);font-size:.9rem">We support 40+ brands including SolarEdge, Fronius, Sungrow, SMA, Huawei, and Growatt. Full list on our <a href="/services" style="color:var(--gold)">Services page</a>.</p>
+      </div>
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">Can I cancel at any time?</h4>
+        <p style="color:var(--muted);font-size:.9rem">Yes, always. Monthly plans cancel with no penalty at the end of your billing cycle. Annual plans are refunded pro-rata in the first 30 days.</p>
+      </div>
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">Is my energy data private?</h4>
+        <p style="color:var(--muted);font-size:.9rem">Absolutely. Your data is stored encrypted on UK servers and never sold to third parties. You own your data and can export or delete it at any time.</p>
+      </div>
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">What's included in the free trial?</h4>
+        <p style="color:var(--muted);font-size:.9rem">The Pro free trial gives you full access to every Pro feature for 30 days — no credit card required. At the end you can subscribe or drop to the free Starter plan.</p>
+      </div>
+      <div style="background:var(--navy);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);padding:28px">
+        <h4 style="margin-bottom:10px">Do you support battery storage?</h4>
+        <p style="color:var(--muted);font-size:.9rem">Yes. SolarOS monitors and controls compatible battery systems including Tesla Powerwall, Givenergy, and SolarEdge battery — included in Pro and above.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="container">
+    <h2>Start saving more today</h2>
+    <p>Join 12,000+ solar owners already using SolarOS. Free forever, upgrade when you're ready.</p>
+    <div class="cta-btns">
+      <a href="/contact" class="btn btn-primary">Get Started Free &rarr;</a>
+      <a href="/contact" class="btn btn-outline">Talk to Us First</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="logo"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>Solar<span>OS</span></div><p>The world's most trusted solar energy management platform.</p></div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="/services">Features</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/services">Integrations</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About Us</a></li><li><a href="/contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Support</h4><ul><li><a href="/contact">Help Centre</a></li><li><a href="/contact">API Docs</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 SolarOS Ltd. All rights reserved.</p><div class="footer-socials"><a href="#">𝕏</a><a href="#">in</a><a href="#">f</a></div></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+let annual = false;
+const prices = { free: [0, 0], pro: [9, 7], biz: [49, 39] };
+function toggleBilling() {
+  annual = !annual;
+  document.getElementById('toggle-thumb').style.transform = annual ? 'translateX(20px)' : 'none';
+  document.getElementById('lbl-m').style.color = annual ? 'var(--muted)' : 'var(--white)';
+  document.getElementById('lbl-y').style.color = annual ? 'var(--white)' : 'var(--muted)';
+  document.getElementById('price-free').textContent = prices.free[annual ? 1 : 0];
+  document.getElementById('price-pro').textContent = prices.pro[annual ? 1 : 0];
+  document.getElementById('price-biz').textContent = prices.biz[annual ? 1 : 0];
+}
+</script>
+</body>
+</html>
