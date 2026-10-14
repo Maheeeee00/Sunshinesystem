@@ -1,15 +1,10 @@
 {
-  "version": 2,
-  "name": "solaros",
-  "buildCommand": null,
-  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
-    { "src": "/services",  "dest": "/services.html"  },
-    { "src": "/pricing",   "dest": "/pricing.html"   },
-    { "src": "/about",     "dest": "/about.html"     },
-    { "src": "/contact",   "dest": "/contact.html"   },
-    { "src": "/(.*)",      "dest": "/$1"             }
+  "rewrites": [
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/pricing",  "destination": "/pricing.html"  },
+    { "source": "/about",    "destination": "/about.html"    },
+    { "source": "/contact",  "destination": "/contact.html"  }
   ]
 }
