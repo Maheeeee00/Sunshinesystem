@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Fleet — SolarOS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---- FILTER BAR ---- */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: .75rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .filter-search {
+      flex: 1;
+      min-width: 160px;
+      background: var(--navy-700);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: .5rem .75rem;
+      color: var(--text-primary);
+      font-size: .875rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+    }
+    .filter-search:focus { border-color: var(--solar-gold); }
+    .filter-search::placeholder { color: var(--text-muted); }
+    .filter-chip {
+      padding: .35rem .85rem;
+      border-radius: 99px;
+      font-size: .78rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all .2s;
+    }
+    .filter-chip:hover,
+    .filter-chip.active { border-color: var(--solar-gold); color: var(--solar-gold); background: rgba(240,165,0,.08); }
+    .filter-chip.teal.active { border-color: var(--solar-teal); color: var(--solar-teal); background: rgba(0,212,170,.08); }
+    .filter-chip.amber.active { border-color: var(--solar-amber); color: var(--solar-amber); background: rgba(255,124,32,.08); }
+
+    /* ---- PANEL CARDS GRID ---- */
+    .panels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .panel-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      transition: all .3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .panel-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .panel-card.on::after    { background: linear-gradient(90deg, #00d4aa, transparent); }
+    .panel-card.warn::after  { background: linear-gradient(90deg, #f0a500, transparent); }
+    .panel-card.alert::after { background: linear-gradient(90deg, #ff7c20, transparent); }
+    .panel-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    }
+    .panel-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .panel-id {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .panel-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: 1rem; }
+    .panel-metric-label { font-size: .7rem; color: var(--text-muted); margin-bottom: 1px; }
+    .panel-metric-val   { font-family: 'Outfit', sans-serif; font-size: 1.05rem; font-weight: 700; }
+    .panel-sparkwrap { height: 40px; }
+    .panel-sparkwrap canvas { width: 100%; height: 40px; display: block; }
+
+    /* ---- DETAIL MODAL ---- */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5,13,26,.85);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--navy-800);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeInUp .3s ease;
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .modal-close {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: var(--navy-700);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      transition: all .2s;
+    }
+    .modal-close:hover { border-color: var(--solar-amber); color: var(--solar-amber); }
+    .modal-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .modal-metric {
+      background: var(--navy-700);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: .9rem;
+      text-align: center;
+    }
+    .modal-metric-val  { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 700; }
+    .modal-metric-label { font-size: .72rem; color: var(--text-muted); margin-top: 3px; }
+    .history-bar-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 60px;
+      margin-bottom: .5rem;
+    }
+    .history-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      transition: opacity .2s;
+      background: linear-gradient(180deg, #f0a500, #ff7c20);
+    }
+    .history-bar:hover { opacity: .75; }
+
+    /* ---- MAINTENANCE ---- */
+    .maintenance-table { margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">☀️</div>
+      Solar<span>OS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+      <li><a href="dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+      <li><a href="panels.html" class="active"><span class="icon">⚡</span> Panels</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span> Analytics</a></li>
+      <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon nav-badge">🔔</button>
+      <div class="avatar">H</div>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="page-hero">
+        <div class="page-hero-label">Fleet Management</div>
+        <div class="flex-between" style="flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h1>Panel Fleet</h1>
+            <p>Monitor and control all 50 solar panels. Click any panel to view detailed telemetry.</p>
+          </div>
+          <div class="flex gap-1" style="flex-wrap:wrap;">
+            <button class="btn btn-secondary" onclick="showToast('Diagnostic scan started…','info')">🔍 Scan All</button>
+            <button class="btn btn-primary" onclick="showToast('Panel report exported','success')">⬇ Export Report</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid-4 mb-3 reveal">
+        <div class="stat-tile teal">
+          <div class="stat-label">Online</div>
+          <div class="stat-value teal">43</div>
+          <div class="stat-delta up">▲ 86% of fleet</div>
+        </div>
+        <div class="stat-tile gold">
+          <div class="stat-label">Warning</div>
+          <div class="stat-value gold">5</div>
+          <div class="stat-delta down">▼ Need inspection</div>
+        </div>
+        <div class="stat-tile amber">
+          <div class="stat-label">Alert</div>
+          <div class="stat-value amber">2</div>
+          <div class="stat-delta down">▼ Immediate action</div>
+        </div>
+        <div class="stat-tile blue">
+          <div class="stat-label">Avg Efficiency</div>
+          <div class="stat-value blue">92.3%</div>
+          <div class="stat-delta up">▲ Fleet average</div>
+        </div>
+      </div>
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar reveal">
+        <input class="filter-search" type="text" placeholder="Search panels by ID…" id="panel-search" oninput="filterPanels()" />
+        <button class="filter-chip active" onclick="setFilter(this,'all')">All (50)</button>
+        <button class="filter-chip teal" onclick="setFilter(this,'on')">Online (43)</button>
+        <button class="filter-chip" onclick="setFilter(this,'warn')">Warning (5)</button>
+        <button class="filter-chip amber" onclick="setFilter(this,'alert')">Alert (2)</button>
+        <select class="form-select" style="width:auto;padding:.4rem .7rem;font-size:.8rem;" onchange="showToast('Sort applied','info')">
+          <option>Sort: ID</option>
+          <option>Sort: Output ↓</option>
+          <option>Sort: Efficiency ↓</option>
+          <option>Sort: Temperature ↓</option>
+        </select>
+      </div>
+
+      <!-- PANELS GRID -->
+      <div class="panels-grid" id="panels-grid"></div>
+
+      <!-- MAINTENANCE TABLE -->
+      <div class="card maintenance-table reveal mt-3">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Maintenance Log</div>
+            <div class="section-subtitle">Recent service history</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:.8rem;" onclick="showToast('Full maintenance history downloaded','success')">Export Log</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Panel</th><th>Event</th><th>Technician</th><th>Date</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Panel #17</td><td>Low-voltage inspection</td><td>Usman Ali</td><td>2026-10-14</td><td><span class="badge badge-warning">Pending</span></td></tr>
+              <tr><td>Panel #32</td><td>Thermal imaging</td><td>Sara Raza</td><td>2026-10-14</td><td><span class="badge badge-info">Scheduled</span></td></tr>
+              <tr><td>Panel #08</td><td>Connector replacement</td><td>Kamran Baig</td><td>2026-10-12</td><td><span class="badge badge-online">Done</span></td></tr>
+              <tr><td>Panel #24</td><td>Surface cleaning</td><td>Tariq Mehmood</td><td>2026-10-10</td><td><span class="badge badge-online">Done</span></td></tr>
+              <tr><td>Panel #41</td><td>Bypass diode check</td><td>Nadia Khan</td><td>2026-10-08</td><td><span class="badge badge-online">Done</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2026 SolarOS</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="index.html">🏠</a>
+            <a class="footer-social-btn" href="dashboard.html">📊</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Panel data
+    const panelData = Array.from({length:50}, (_,i) => {
+      const id = i + 1;
+      const states = [16,31].includes(i) ? 'alert' : [3,7,12,22,38].includes(i) ? 'warn' : 'on';
+      const baseEff = states==='on' ? 90+Math.random()*8 : states==='warn' ? 74+Math.random()*12 : 58+Math.random()*15;
+      const voltage = states==='on' ? 382+Math.random()*8 : states==='warn' ? 340+Math.random()*30 : 290+Math.random()*40;
+      const current = states==='on' ? 7.5+Math.random()*1 : states==='warn' ? 6+Math.random()*1.5 : 4.5+Math.random()*1.5;
+      const temp    = states==='on' ? 24+Math.random()*6 : states==='warn' ? 38+Math.random()*8 : 46+Math.random()*6;
+      return { id, state: states, eff: baseEff.toFixed(1), voltage: voltage.toFixed(0), current: current.toFixed(1), temp: temp.toFixed(0),
+               output: (voltage*current/1000).toFixed(2),
+               history: Array.from({length:12}, () => Math.round(60 + Math.random()*40)) };
+    });
+
+    let activeFilter = 'all';
+
+    function renderPanels(panels) {
+      const grid = document.getElementById('panels-grid');
+      grid.innerHTML = '';
+      panels.forEach(p => {
+        const col = p.state==='on' ? 'var(--solar-teal)' : p.state==='warn' ? 'var(--solar-gold)' : 'var(--solar-amber)';
+        const div = document.createElement('div');
+        div.className = 'panel-card ' + p.state;
+        div.onclick = () => openModal(p);
+        div.innerHTML = `
+          <div class="panel-card-header">
+            <div class="panel-id">Panel #${String(p.id).padStart(2,'0')}</div>
+            <span class="badge badge-${p.state==='on'?'online':p.state==='warn'?'warning':'offline'}">
+              <span class="badge-dot"></span>${p.state==='on'?'Online':p.state==='warn'?'Warning':'Alert'}
+            </span>
+          </div>
+          <div class="panel-metrics">
+            <div>
+              <div class="panel-metric-label">Voltage</div>
+              <div class="panel-metric-val" style="color:${col}">${p.voltage} V</div>
+            </div>
+            <div>
+              <div class="panel-metric-label">Current</div>
+              <div class="panel-metric-val" style="color:${col}">${p.current} A</div>
+            </div>
+            <div>
+              <div class="panel-metric-label">Output</div>
+              <div class="panel-metric-val" style="color:${col}">${p.output} kW</div>
+            </div>
+            <div>
+              <div class="panel-metric-label">Temp</div>
+              <div class="panel-metric-val" style="color:${p.state==='on'?'var(--solar-blue)':'var(--solar-amber)'}">${p.temp} °C</div>
+            </div>
+          </div>
+          <div class="progress-bar mb-1">
+            <div class="progress-fill ${p.state==='on'?'teal':p.state==='warn'?'gold':'gold'} " data-width="${p.eff}%" style="width:0"></div>
+          </div>
+          <div class="flex-between">
+            <span style="font-size:.75rem;color:var(--text-muted);">Efficiency</span>
+            <span style="font-size:.8rem;font-weight:600;color:${col}">${p.eff}%</span>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+      animateProgressBars();
+    }
+
+    function setFilter(btn, key) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = key;
+      applyFilters();
+    }
+
+    function filterPanels() { applyFilters(); }
+
+    function applyFilters() {
+      const q = document.getElementById('panel-search').value.toLowerCase();
+      let filtered = panelData;
+      if (activeFilter !== 'all') filtered = filtered.filter(p => p.state === activeFilter);
+      if (q) filtered = filtered.filter(p => String(p.id).includes(q) || ('panel #'+String(p.id).padStart(2,'0')).includes(q));
+      renderPanels(filtered);
+    }
+
+    function openModal(p) {
+      const col = p.state==='on' ? 'var(--solar-teal)' : p.state==='warn' ? 'var(--solar-gold)' : 'var(--solar-amber)';
+      const maxH = Math.max(...p.history);
+      const bars = p.history.map(v => `<div class="history-bar" style="height:${(v/maxH*100).toFixed(0)}%" title="${v} kWh"></div>`).join('');
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-header">
+          <div>
+            <h3 style="font-size:1.3rem;">Panel #${String(p.id).padStart(2,'0')}</h3>
+            <span class="badge badge-${p.state==='on'?'online':p.state==='warn'?'warning':'offline'}" style="margin-top:.3rem;display:inline-flex;">
+              <span class="badge-dot"></span>${p.state==='on'?'Online & Healthy':p.state==='warn'?'Needs Inspection':'Alert — Action Required'}
+            </span>
+          </div>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-metrics">
+          <div class="modal-metric">
+            <div class="modal-metric-val" style="color:${col}">${p.voltage} V</div>
+            <div class="modal-metric-label">Voltage</div>
+          </div>
+          <div class="modal-metric">
+            <div class="modal-metric-val" style="color:${col}">${p.current} A</div>
+            <div class="modal-metric-label">Current</div>
+          </div>
+          <div class="modal-metric">
+            <div class="modal-metric-val" style="color:${col}">${p.output} kW</div>
+            <div class="modal-metric-label">Output</div>
+          </div>
+          <div class="modal-metric">
+            <div class="modal-metric-val" style="color:var(--solar-amber)">${p.temp} °C</div>
+            <div class="modal-metric-label">Temperature</div>
+          </div>
+          <div class="modal-metric">
+            <div class="modal-metric-val" style="color:${col}">${p.eff}%</div>
+            <div class="modal-metric-label">Efficiency</div>
+          </div>
+          <div class="modal-metric">
+            <div class="modal-metric-val text-muted">—</div>
+            <div class="modal-metric-label">Irradiance</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-title" style="font-size:.88rem;margin-bottom:.5rem;">12-Month Output History (kWh)</div>
+          <div class="history-bar-row">${bars}</div>
+          <div class="flex-between" style="font-size:.7rem;color:var(--text-muted);">
+            <span>Oct '25</span><span>Oct '26</span>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+          <button class="btn btn-secondary" style="font-size:.82rem;" onclick="showToast('Inspection request sent','info');closeModal()">📋 Schedule Inspection</button>
+          <button class="btn btn-ghost"   style="font-size:.82rem;" onclick="showToast('Panel data exported','success');closeModal()">⬇ Export Data</button>
+          ${p.state!=='on' ? `<button class="btn btn-primary" style="font-size:.82rem;" onclick="showToast('Alert acknowledged','warning');closeModal()">✓ Acknowledge Alert</button>` : ''}
+        </div>
+      `;
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+    }
+    document.getElementById('modal').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    renderPanels(panelData);
+  </script>
+</body>
+</html>

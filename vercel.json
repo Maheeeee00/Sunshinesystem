@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "solaros",
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "routes": [
+    { "src": "/dashboard", "dest": "/dashboard.html" },
+    { "src": "/panels",    "dest": "/panels.html"    },
+    { "src": "/analytics", "dest": "/analytics.html" },
+    { "src": "/settings",  "dest": "/settings.html"  },
+    { "src": "/(.*)",      "dest": "/$1"             }
+  ]
+}

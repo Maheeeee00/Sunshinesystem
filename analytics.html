@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analytics — SolarOS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---- DATE RANGE PICKER ---- */
+    .date-range {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--navy-700);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: .4rem .8rem;
+      font-size: .82rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    /* ---- CHART CARD ---- */
+    .chart-card-full {
+      padding: 1.5rem;
+    }
+    .chart-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .legend-entry {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .78rem;
+      color: var(--text-secondary);
+    }
+    .legend-line {
+      width: 18px; height: 3px;
+      border-radius: 2px;
+    }
+
+    /* ---- COMPARISON CARD ---- */
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .comp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .comp-item:last-child { border-bottom: none; }
+    .comp-label { font-size: .88rem; color: var(--text-secondary); }
+    .comp-vals  { display: flex; gap: .75rem; align-items: center; text-align: right; }
+    .comp-current { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .95rem; }
+    .comp-prev    { font-size: .8rem; color: var(--text-muted); }
+    .comp-delta   { font-size: .75rem; padding: .1rem .4rem; border-radius: 4px; }
+    .comp-delta.up   { background: rgba(0,212,170,.12); color: var(--solar-teal); }
+    .comp-delta.down { background: rgba(255,124,32,.12); color: var(--solar-amber); }
+
+    /* ---- FORECAST ---- */
+    .forecast-card { padding: 1.5rem; }
+    .forecast-row  { display: grid; grid-template-columns: repeat(7, 1fr); gap: .5rem; }
+    .forecast-day  {
+      background: var(--navy-700);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: .75rem .5rem;
+      text-align: center;
+      cursor: default;
+      transition: all .2s;
+    }
+    .forecast-day:hover { border-color: var(--border-glow); }
+    .forecast-day.today { border-color: var(--solar-gold); background: rgba(240,165,0,.06); }
+    .forecast-day-name { font-size: .68rem; color: var(--text-muted); margin-bottom: .4rem; }
+    .forecast-icon { font-size: 1.2rem; margin-bottom: .4rem; }
+    .forecast-kw   { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: .9rem; color: var(--solar-gold); }
+    .forecast-desc { font-size: .65rem; color: var(--text-muted); }
+
+    /* ---- IRRADIANCE ---- */
+    .irrad-bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex: 1;
+    }
+    .irrad-bar-wrap { width: 100%; height: 120px; display: flex; align-items: flex-end; }
+    .irrad-bar { width: 100%; border-radius: 3px 3px 0 0; transition: opacity .2s; }
+    .irrad-bar:hover { opacity: .75; }
+    .irrad-label { font-size: .65rem; color: var(--text-muted); }
+    .irrad-row { display: flex; gap: 4px; }
+
+    @media (max-width: 768px) {
+      .comparison-row { grid-template-columns: 1fr; }
+      .forecast-row   { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">☀️</div>
+      Solar<span>OS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+      <li><a href="dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+      <li><a href="panels.html"><span class="icon">⚡</span> Panels</a></li>
+      <li><a href="analytics.html" class="active"><span class="icon">📈</span> Analytics</a></li>
+      <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon nav-badge">🔔</button>
+      <div class="avatar">H</div>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="page-hero">
+        <div class="page-hero-label">Performance Intelligence</div>
+        <div class="flex-between" style="flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h1>Analytics</h1>
+            <p>Production trends, yield forecasts, and system performance over time.</p>
+          </div>
+          <div class="flex gap-1" style="flex-wrap:wrap;">
+            <div class="date-range">📅 Oct 2026 ▾</div>
+            <button class="btn btn-secondary" onclick="showToast('Report exported as PDF','success')">⬇ Export PDF</button>
+            <button class="btn btn-primary"   onclick="showToast('Generating custom report…','info')">📋 Custom Report</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI ROW -->
+      <div class="grid-4 mb-3 reveal">
+        <div class="stat-tile gold">
+          <div class="stat-label">This Month</div>
+          <div class="stat-value gold">2,841 <small style="font-size:.85rem;">kWh</small></div>
+          <div class="stat-delta up">▲ +12.3% vs Oct '25</div>
+        </div>
+        <div class="stat-tile teal">
+          <div class="stat-label">Peak Day</div>
+          <div class="stat-value teal">186.4 <small style="font-size:.85rem;">kWh</small></div>
+          <div class="stat-delta up">▲ Oct 6, 2026</div>
+        </div>
+        <div class="stat-tile blue">
+          <div class="stat-label">Revenue (MTD)</div>
+          <div class="stat-value blue">$412</div>
+          <div class="stat-delta up">▲ $38 vs last month</div>
+        </div>
+        <div class="stat-tile lime">
+          <div class="stat-label">CO₂ Avoided</div>
+          <div class="stat-value lime">2.1 <small style="font-size:.85rem;">t</small></div>
+          <div class="stat-delta up">▲ 9 trees equivalent</div>
+        </div>
+      </div>
+
+      <!-- MAIN PRODUCTION CHART -->
+      <div class="card chart-card-full reveal mb-3">
+        <div class="chart-header-row">
+          <div>
+            <div class="section-title">Daily Production — October 2026</div>
+            <div class="section-subtitle">kWh per day with irradiance overlay</div>
+          </div>
+          <div class="flex gap-2" style="flex-wrap:wrap;align-items:center;">
+            <div class="chart-legend">
+              <div class="legend-entry"><div class="legend-line" style="background:var(--solar-gold);"></div>Generation</div>
+              <div class="legend-entry"><div class="legend-line" style="background:var(--solar-blue);"></div>Irradiance</div>
+            </div>
+            <div class="chart-tabs">
+              <button class="chart-tab active" onclick="switchMainChart(this,'bar')">Bar</button>
+              <button class="chart-tab" onclick="switchMainChart(this,'line')">Line</button>
+            </div>
+          </div>
+        </div>
+        <canvas id="main-chart" style="width:100%;height:280px;display:block;"></canvas>
+      </div>
+
+      <!-- YEAR / COMPARISON -->
+      <div class="comparison-row reveal mb-3">
+        <!-- Year bars -->
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Monthly Production 2026</div>
+              <div class="section-subtitle">kWh per month YTD</div>
+            </div>
+          </div>
+          <canvas id="year-chart" style="width:100%;height:200px;display:block;"></canvas>
+        </div>
+
+        <!-- Comparison table -->
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Year-over-Year</div>
+              <div class="section-subtitle">Oct 2026 vs Oct 2025</div>
+            </div>
+          </div>
+          <div>
+            <div class="comp-item">
+              <div class="comp-label">Total Output</div>
+              <div class="comp-vals">
+                <div class="comp-current text-gold">2,841 kWh</div>
+                <div class="comp-prev">2,529 kWh</div>
+                <div class="comp-delta up">+12.3%</div>
+              </div>
+            </div>
+            <div class="comp-item">
+              <div class="comp-label">Revenue</div>
+              <div class="comp-vals">
+                <div class="comp-current text-teal">$412</div>
+                <div class="comp-prev">$374</div>
+                <div class="comp-delta up">+10.2%</div>
+              </div>
+            </div>
+            <div class="comp-item">
+              <div class="comp-label">Avg Efficiency</div>
+              <div class="comp-vals">
+                <div class="comp-current text-blue">92.3%</div>
+                <div class="comp-prev">88.1%</div>
+                <div class="comp-delta up">+4.2pp</div>
+              </div>
+            </div>
+            <div class="comp-item">
+              <div class="comp-label">Peak Output</div>
+              <div class="comp-vals">
+                <div class="comp-current text-amber">186.4 kWh</div>
+                <div class="comp-prev">172.0 kWh</div>
+                <div class="comp-delta up">+8.4%</div>
+              </div>
+            </div>
+            <div class="comp-item">
+              <div class="comp-label">Downtime</div>
+              <div class="comp-vals">
+                <div class="comp-current text-lime">0.4 h</div>
+                <div class="comp-prev">2.1 h</div>
+                <div class="comp-delta up">−81%</div>
+              </div>
+            </div>
+            <div class="comp-item">
+              <div class="comp-label">CO₂ Offset</div>
+              <div class="comp-vals">
+                <div class="comp-current text-teal">2.1 t</div>
+                <div class="comp-prev">1.9 t</div>
+                <div class="comp-delta up">+10.5%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IRRADIANCE + FORECAST -->
+      <div class="grid-2 reveal mb-3">
+        <!-- Hourly irradiance -->
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Today's Irradiance</div>
+              <div class="section-subtitle">W/m² by hour</div>
+            </div>
+            <span class="badge badge-info">Measured</span>
+          </div>
+          <div class="irrad-row" style="height:130px;align-items:flex-end;display:flex;gap:3px;" id="irrad-bars"></div>
+          <div style="display:flex;justify-content:space-between;font-size:.68rem;color:var(--text-muted);margin-top:.3rem;">
+            <span>6 AM</span><span>9 AM</span><span>12 PM</span><span>3 PM</span><span>6 PM</span>
+          </div>
+        </div>
+
+        <!-- Efficiency trend sparklines -->
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Efficiency Trend</div>
+              <div class="section-subtitle">Last 14 days — fleet average</div>
+            </div>
+          </div>
+          <canvas id="eff-trend" style="width:100%;height:120px;display:block;"></canvas>
+          <div class="grid-3 mt-2" style="text-align:center;">
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--solar-teal);">92.3%</div>
+              <div style="font-size:.7rem;color:var(--text-muted);">Current</div>
+            </div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--solar-gold);">94.1%</div>
+              <div style="font-size:.7rem;color:var(--text-muted);">Peak (14d)</div>
+            </div>
+            <div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--solar-blue);">89.7%</div>
+              <div style="font-size:.7rem;color:var(--text-muted);">Low (14d)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7-DAY FORECAST -->
+      <div class="card forecast-card reveal mb-3">
+        <div class="section-header" style="margin-bottom:1.25rem;">
+          <div>
+            <div class="section-title">7-Day Production Forecast</div>
+            <div class="section-subtitle">Estimated kWh based on weather model</div>
+          </div>
+          <span class="badge badge-info">AI-Powered</span>
+        </div>
+        <div class="forecast-row">
+          <div class="forecast-day today">
+            <div class="forecast-day-name">TODAY</div>
+            <div class="forecast-icon">☀️</div>
+            <div class="forecast-kw">148 kWh</div>
+            <div class="forecast-desc">Clear</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Thu</div>
+            <div class="forecast-icon">🌤</div>
+            <div class="forecast-kw">132 kWh</div>
+            <div class="forecast-desc">Partly cloudy</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Fri</div>
+            <div class="forecast-icon">⛅</div>
+            <div class="forecast-kw">98 kWh</div>
+            <div class="forecast-desc">Cloudy</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Sat</div>
+            <div class="forecast-icon">🌧</div>
+            <div class="forecast-kw">42 kWh</div>
+            <div class="forecast-desc">Rain</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Sun</div>
+            <div class="forecast-icon">🌤</div>
+            <div class="forecast-kw">121 kWh</div>
+            <div class="forecast-desc">Partly cloudy</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Mon</div>
+            <div class="forecast-icon">☀️</div>
+            <div class="forecast-kw">159 kWh</div>
+            <div class="forecast-desc">Clear</div>
+          </div>
+          <div class="forecast-day">
+            <div class="forecast-day-name">Tue</div>
+            <div class="forecast-icon">☀️</div>
+            <div class="forecast-kw">164 kWh</div>
+            <div class="forecast-desc">Clear</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPORT TABLE -->
+      <div class="card reveal">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Recent Production Log</div>
+            <div class="section-subtitle">Last 7 days — daily totals</div>
+          </div>
+          <button class="btn btn-ghost" style="font-size:.8rem;" onclick="showToast('CSV downloaded','success')">⬇ Download CSV</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Generation</th><th>Peak kW</th><th>Efficiency</th><th>Revenue</th><th>CO₂ Saved</th><th>Irradiance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Oct 14, 2026</td><td class="text-gold">148.2 kWh</td><td>24.6 kW</td><td>92.3%</td><td>$21.50</td><td>72.2 kg</td><td>845 W/m²</td></tr>
+              <tr><td>Oct 13, 2026</td><td class="text-gold">161.4 kWh</td><td>26.2 kW</td><td>93.7%</td><td>$23.40</td><td>78.6 kg</td><td>912 W/m²</td></tr>
+              <tr><td>Oct 12, 2026</td><td class="text-gold">138.7 kWh</td><td>23.1 kW</td><td>90.8%</td><td>$20.11</td><td>67.6 kg</td><td>798 W/m²</td></tr>
+              <tr><td>Oct 11, 2026</td><td class="text-gold">175.3 kWh</td><td>28.4 kW</td><td>95.1%</td><td>$25.42</td><td>85.4 kg</td><td>978 W/m²</td></tr>
+              <tr><td>Oct 10, 2026</td><td class="text-gold">156.9 kWh</td><td>25.5 kW</td><td>92.9%</td><td>$22.75</td><td>76.4 kg</td><td>882 W/m²</td></tr>
+              <tr><td>Oct 09, 2026</td><td class="text-gold">88.4 kWh</td><td>18.7 kW</td><td>81.2%</td><td>$12.82</td><td>43.1 kg</td><td>510 W/m²</td></tr>
+              <tr><td>Oct 08, 2026</td><td class="text-gold">142.1 kWh</td><td>23.8 kW</td><td>91.5%</td><td>$20.60</td><td>69.2 kg</td><td>820 W/m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2026 SolarOS — Analytics Module v2.4</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="index.html">🏠</a>
+            <a class="footer-social-btn" href="dashboard.html">📊</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      // Main production chart
+      const days = Array.from({length:14}, (_,i) => i+1);
+      const gen  = [138,162,128,175,156,88,142,148,165,130,178,158,145,148];
+      drawBarChart(document.getElementById('main-chart'),
+        ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        gen, '#f0a500');
+
+      // Year chart
+      drawBarChart(document.getElementById('year-chart'),
+        ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'],
+        [1820,1640,2180,2560,2840,3120,3480,3210,2760,2841], '#00d4aa');
+
+      // Irradiance bars
+      const irrad = [0,0,120,380,620,820,940,960,890,760,580,340,140,20,0];
+      const irradRow = document.getElementById('irrad-bars');
+      const maxI = Math.max(...irrad);
+      irrad.forEach(v => {
+        const col = document.createElement('div');
+        col.style.cssText = 'flex:1;display:flex;align-items:flex-end;height:100%;';
+        const bar = document.createElement('div');
+        bar.style.cssText = `width:100%;height:${(v/maxI*100).toFixed(0)}%;border-radius:3px 3px 0 0;transition:opacity .2s;`;
+        const pct = v / maxI;
+        const r = Math.round(56 + (240-56)*pct);
+        const g = Math.round(189 + (165-189)*pct);
+        const b = Math.round(248 + (0-248)*pct);
+        bar.style.background = `rgb(${r},${g},${b})`;
+        bar.onmouseenter = () => { bar.style.opacity = '.7'; };
+        bar.onmouseleave = () => { bar.style.opacity = '1'; };
+        col.appendChild(bar);
+        irradRow.appendChild(col);
+      });
+
+      // Efficiency trend
+      const effData = [89.7,91.2,90.8,92.1,93.7,91.4,90.5,92.3,93.1,94.1,92.8,91.9,93.4,92.3];
+      drawSparkline(document.getElementById('eff-trend'), effData, '#00d4aa', true);
+    });
+
+    let mainChartMode = 'bar';
+    function switchMainChart(btn, mode) {
+      document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const gen = [138,162,128,175,156,88,142,148,165,130,178,158,145,148];
+      const labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'];
+      if (mode === 'bar') {
+        drawBarChart(document.getElementById('main-chart'), labels, gen, '#f0a500');
+      } else {
+        drawSparkline(document.getElementById('main-chart'), gen, '#f0a500', true);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SolarOS — Solar Panel Management System</title>
+  <meta name="description" content="Professional solar panel management: real-time monitoring, analytics, and fleet control." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-canvas-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 5rem 0 4rem;
+      max-width: 580px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(240,165,0,0.12);
+      border: 1px solid rgba(240,165,0,0.25);
+      border-radius: 99px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--solar-gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--solar-gold);
+      animation: pulse-dot 2s infinite;
+    }
+    .hero h1 { margin-bottom: 1.25rem; }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--solar-gold), var(--solar-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-metrics {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+    }
+    .hero-metric-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    .hero-metric-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ---- FEATURES ---- */
+    .features-section {
+      background: var(--navy-800);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .features-intro {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+    }
+    .features-intro p { margin: 0.75rem auto 0; }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .feature-icon.gold   { background: rgba(240,165,0,0.15); }
+    .feature-icon.teal   { background: rgba(0,212,170,0.15); }
+    .feature-icon.blue   { background: rgba(56,189,248,0.15); }
+    .feature-icon.amber  { background: rgba(255,124,32,0.15); }
+    .feature-icon.lime   { background: rgba(163,230,53,0.15); }
+    .feature-icon.purple { background: rgba(167,139,250,0.15); }
+    .feature-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .feature-card p  { font-size: 0.875rem; }
+
+    /* ---- LIVE STATUS STRIP ---- */
+    .status-strip {
+      background: rgba(0,212,170,0.05);
+      border: 1px solid rgba(0,212,170,0.15);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .status-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .pulse-ring {
+      width: 12px; height: 12px;
+      position: relative;
+    }
+    .pulse-ring::before,
+    .pulse-ring::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    .pulse-ring::before { background: var(--solar-teal); }
+    .pulse-ring::after {
+      background: rgba(0,212,170,0.4);
+      animation: ping 1.5s ease-out infinite;
+    }
+    @keyframes ping {
+      0%   { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+    .status-strip-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .status-stat { text-align: center; }
+    .status-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .status-stat-lbl { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ---- TESTIMONIALS ---- */
+    .testimonial-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+    .testimonial-quote {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .testimonial-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--navy-900);
+    }
+    .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+    .testimonial-role { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ---- CTA SECTION ---- */
+    .cta-section {
+      text-align: center;
+      padding: 80px 0;
+      background: linear-gradient(180deg, transparent, rgba(240,165,0,0.04));
+    }
+    .cta-section h2 { margin-bottom: 1rem; }
+    .cta-section p  { margin: 0 auto 2rem; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">☀️</div>
+      Solar<span>OS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active"><span class="icon">🏠</span> Home</a></li>
+      <li><a href="dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+      <li><a href="panels.html"><span class="icon">⚡</span> Panels</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span> Analytics</a></li>
+      <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon nav-badge" title="Alerts">🔔</button>
+      <div class="avatar" title="Hassan">H</div>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrapper">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-canvas-wrap">
+        <canvas id="hero-canvas"></canvas>
+      </div>
+      <div class="container">
+        <div class="hero-content fade-in-up">
+          <div class="hero-eyebrow">System Online — 48 Panels Active</div>
+          <h1>Intelligent<br /><em>Solar Energy</em><br />Management</h1>
+          <p>Monitor, control, and optimise your entire solar fleet in real time. From a single rooftop to a utility-scale installation.</p>
+          <div class="hero-cta">
+            <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
+            <a href="panels.html" class="btn btn-ghost">Manage Panels</a>
+          </div>
+          <div class="hero-metrics">
+            <div>
+              <div class="hero-metric-val text-gold" id="hero-output">24.6 kW</div>
+              <div class="hero-metric-lbl">Live Output</div>
+            </div>
+            <div>
+              <div class="hero-metric-val text-teal">92.3%</div>
+              <div class="hero-metric-lbl">Efficiency</div>
+            </div>
+            <div>
+              <div class="hero-metric-val text-blue">48</div>
+              <div class="hero-metric-lbl">Active Panels</div>
+            </div>
+            <div>
+              <div class="hero-metric-val text-lime">4.2 t</div>
+              <div class="hero-metric-lbl">CO₂ Saved Today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE STATUS STRIP -->
+    <section class="section" style="padding: 40px 0;">
+      <div class="container">
+        <div class="status-strip reveal">
+          <div class="status-strip-left">
+            <div class="pulse-ring"></div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;">System Operational</div>
+              <div style="font-size:0.78rem;color:var(--text-muted);">All sensors reporting normally</div>
+            </div>
+          </div>
+          <div class="status-strip-stats">
+            <div class="status-stat">
+              <div class="status-stat-val text-gold" id="live-kw">24.6</div>
+              <div class="status-stat-lbl">kW Generated</div>
+            </div>
+            <div class="status-stat">
+              <div class="status-stat-val text-teal">148.2</div>
+              <div class="status-stat-lbl">kWh Today</div>
+            </div>
+            <div class="status-stat">
+              <div class="status-stat-val text-blue">48 / 50</div>
+              <div class="status-stat-lbl">Panels Online</div>
+            </div>
+            <div class="status-stat">
+              <div class="status-stat-val text-amber">28 °C</div>
+              <div class="status-stat-lbl">Avg Panel Temp</div>
+            </div>
+          </div>
+          <a href="dashboard.html" class="btn btn-teal" style="font-size:0.82rem;padding:0.55rem 1rem;">Open Dashboard →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section features-section">
+      <div class="container">
+        <div class="features-intro reveal">
+          <h2>Everything you need to run your solar fleet</h2>
+          <p>From granular per-panel telemetry to whole-site revenue forecasting — in one professional platform.</p>
+        </div>
+        <div class="grid-3">
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon gold">☀️</div>
+            <h3>Real-Time Monitoring</h3>
+            <p>Per-panel voltage, current, and temperature streams updated every 5 seconds. Spot issues the moment they arise.</p>
+          </div>
+          <div class="feature-card reveal delay-2">
+            <div class="feature-icon teal">⚡</div>
+            <h3>Automated Fault Detection</h3>
+            <p>ML-powered anomaly detection flags underperforming panels before they impact your output or your inverters.</p>
+          </div>
+          <div class="feature-card reveal delay-3">
+            <div class="feature-icon blue">📈</div>
+            <h3>Production Analytics</h3>
+            <p>Daily, weekly, and seasonal yield reports with irradiance correlation so you understand every dip and peak.</p>
+          </div>
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon amber">🔋</div>
+            <h3>Battery Integration</h3>
+            <p>Manage storage charge cycles, set export limits, and shift surplus energy automatically to maximise self-consumption.</p>
+          </div>
+          <div class="feature-card reveal delay-2">
+            <div class="feature-icon lime">🌍</div>
+            <h3>Carbon Tracking</h3>
+            <p>Live CO₂ offset calculations against your grid's emission factor — ready to export for ESG and sustainability reporting.</p>
+          </div>
+          <div class="feature-card reveal delay-3">
+            <div class="feature-icon purple">🔔</div>
+            <h3>Smart Alerts</h3>
+            <p>Configurable thresholds push notifications to your team via email, SMS, or webhook the moment something needs attention.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section">
+      <div class="container">
+        <div class="features-intro reveal">
+          <h2>Trusted by energy professionals</h2>
+          <p>Deployed across 200+ installations in 18 countries.</p>
+        </div>
+        <div class="grid-3">
+          <div class="testimonial-card reveal delay-1">
+            <div class="testimonial-quote">"SolarOS cut our O&M response time in half. We spotted a failing string in Block C before it affected the inverter — that alone paid for the platform."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#f0a500,#ff7c20);">AK</div>
+              <div>
+                <div class="testimonial-name">Ahmed Khan</div>
+                <div class="testimonial-role">Head of Operations · Sunrise Energy</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal delay-2">
+            <div class="testimonial-quote">"The analytics page alone is worth it. I can see exactly which hour of the day we're losing yield and correlate it with panel temperature — invaluable."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#00d4aa,#38bdf8);">SR</div>
+              <div>
+                <div class="testimonial-name">Sara Rahman</div>
+                <div class="testimonial-role">Energy Engineer · GreenGrid Ltd</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal delay-3">
+            <div class="testimonial-quote">"Rolled out across our 5-site portfolio in a weekend. The API made integrating with our SCADA system straightforward. Rock solid."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" style="background:linear-gradient(135deg,#a3e635,#00d4aa);">MN</div>
+              <div>
+                <div class="testimonial-name">Marco Neri</div>
+                <div class="testimonial-role">CTO · SunField Italia</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="reveal">Ready to take control<br />of your solar fleet?</h2>
+        <p class="reveal delay-1">Get up and running in under 10 minutes. No hardware changes required.</p>
+        <div class="cta-btns reveal delay-2">
+          <a href="dashboard.html" class="btn btn-primary" style="font-size:1rem;padding:.85rem 2rem;">Open Dashboard</a>
+          <a href="settings.html" class="btn btn-ghost" style="font-size:1rem;padding:.85rem 2rem;">Configure System</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="nav-logo" style="margin-bottom:.75rem;">
+              <div class="nav-logo-icon">☀️</div>
+              Solar<span style="color:var(--solar-gold);">OS</span>
+            </div>
+            <p>Professional solar panel management for residential, commercial, and utility-scale installations.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Platform</h4>
+            <ul>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="panels.html">Panel Fleet</a></li>
+              <li><a href="analytics.html">Analytics</a></li>
+              <li><a href="settings.html">Settings</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">API Documentation</a></li>
+              <li><a href="#">Integration Guide</a></li>
+              <li><a href="#">Release Notes</a></li>
+              <li><a href="#">System Status</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 SolarOS. Built for energy professionals worldwide.</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="#" title="GitHub">⌨</a>
+            <a class="footer-social-btn" href="#" title="LinkedIn">in</a>
+            <a class="footer-social-btn" href="#" title="Twitter">𝕏</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/solar-animation.js"></script>
+  <script>
+    // Live hero output flicker
+    startLiveFlicker(['#hero-output'], 23.8, 25.6, 1, ' kW');
+    startLiveFlicker(['#live-kw'],    23.8, 25.6, 1, '');
+  </script>
+</body>
+</html>

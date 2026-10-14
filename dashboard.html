@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — SolarOS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 0 4rem;
+    }
+
+    /* ---- TOP STATS ROW ---- */
+    .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+
+    /* ---- MAIN CHART AREA ---- */
+    .charts-row { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1.25rem; }
+
+    /* ---- MAIN CHART ---- */
+    .chart-card { padding: 1.5rem; }
+    .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: .5rem; }
+    .chart-tabs { display: flex; gap: .25rem; }
+    .chart-tab {
+      padding: .3rem .7rem;
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all .2s;
+    }
+    .chart-tab.active, .chart-tab:hover {
+      background: var(--solar-gold);
+      color: var(--navy-900);
+      border-color: var(--solar-gold);
+    }
+    canvas.chart-canvas {
+      width: 100%;
+      display: block;
+    }
+
+    /* ---- DONUT CARD ---- */
+    .donut-card { display: flex; flex-direction: column; }
+    .donut-wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .donut-legend { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem; margin-top: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--text-secondary); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+    /* ---- PANELS ROW ---- */
+    .panels-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+    /* ---- PANEL GRID ---- */
+    .mini-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
+    }
+    .mini-panel {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      position: relative;
+    }
+    .mini-panel:hover { transform: scale(1.15); z-index: 2; }
+    .mini-panel.on     { background: linear-gradient(135deg, #1e4d8a, #38bdf8); box-shadow: 0 0 6px rgba(56,189,248,.3); }
+    .mini-panel.warn   { background: linear-gradient(135deg, #7a4a00, #f0a500); box-shadow: 0 0 6px rgba(240,165,0,.3); }
+    .mini-panel.off    { background: var(--navy-600); opacity: .5; }
+    .mini-panel.alert  { background: linear-gradient(135deg, #7a2000, #ff7c20); box-shadow: 0 0 6px rgba(255,124,32,.4); }
+
+    /* ---- ALERTS LIST ---- */
+    .alert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .alert-item:last-child { border-bottom: none; }
+    .alert-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .alert-icon.warn  { background: rgba(240,165,0,.12); }
+    .alert-icon.error { background: rgba(255,124,32,.12); }
+    .alert-icon.info  { background: rgba(56,189,248,.12); }
+    .alert-title { font-size: .88rem; font-weight: 500; color: var(--text-primary); }
+    .alert-desc  { font-size: .78rem; color: var(--text-muted); margin-top: 2px; }
+    .alert-time  { font-size: .72rem; color: var(--text-muted); margin-left: auto; flex-shrink: 0; }
+
+    /* ---- INVERTERS ---- */
+    .inverter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+    }
+    .inverter-item:last-child { border-bottom: none; }
+    .inverter-name { font-size: .88rem; font-weight: 500; }
+    .inverter-output { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; }
+
+    @media (max-width: 1024px) {
+      .kpi-row { grid-template-columns: repeat(3, 1fr); }
+      .charts-row, .panels-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .mini-panel-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">☀️</div>
+      Solar<span>OS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+      <li><a href="dashboard.html" class="active"><span class="icon">📊</span> Dashboard</a></li>
+      <li><a href="panels.html"><span class="icon">⚡</span> Panels</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span> Analytics</a></li>
+      <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon nav-badge" title="Alerts">🔔</button>
+      <div class="avatar">H</div>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      <!-- PAGE HEADER -->
+      <div class="page-hero">
+        <div class="page-hero-label">Live System View</div>
+        <div class="flex-between" style="flex-wrap:wrap;gap:1rem;">
+          <div>
+            <h1>Energy Dashboard</h1>
+            <p>Real-time generation and fleet health across all 50 panels.</p>
+          </div>
+          <div class="flex gap-1" style="flex-wrap:wrap;">
+            <span class="badge badge-online"><span class="badge-dot"></span>System Live</span>
+            <span id="live-clock" style="font-size:.82rem;color:var(--text-muted);align-self:center;"></span>
+            <button class="btn btn-secondary" style="font-size:.82rem;" onclick="showToast('Dashboard refreshed','success')">↻ Refresh</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-layout">
+
+        <!-- KPI ROW -->
+        <div class="kpi-row">
+          <div class="stat-tile gold reveal">
+            <div class="stat-label">Live Output</div>
+            <div class="stat-value gold" id="kpi-output">24.6 <small style="font-size:.9rem;">kW</small></div>
+            <div class="stat-delta up">▲ 1.2 kW vs yesterday</div>
+          </div>
+          <div class="stat-tile teal reveal delay-1">
+            <div class="stat-label">Today's Yield</div>
+            <div class="stat-value teal">148.2 <small style="font-size:.9rem;">kWh</small></div>
+            <div class="stat-delta up">▲ 8.4% vs last week</div>
+          </div>
+          <div class="stat-tile blue reveal delay-2">
+            <div class="stat-label">Monthly Total</div>
+            <div class="stat-value blue">2,841 <small style="font-size:.9rem;">kWh</small></div>
+            <div class="stat-delta up">▲ On track for target</div>
+          </div>
+          <div class="stat-tile amber reveal delay-3">
+            <div class="stat-label">Revenue (MTD)</div>
+            <div class="stat-value amber">$<span id="kpi-rev">412</span></div>
+            <div class="stat-delta up">▲ $38 vs last month</div>
+          </div>
+          <div class="stat-tile lime reveal delay-4">
+            <div class="stat-label">CO₂ Offset</div>
+            <div class="stat-value lime">4.2 <small style="font-size:.9rem;">t</small></div>
+            <div class="stat-delta up">▲ 0.3t today</div>
+          </div>
+        </div>
+
+        <!-- CHARTS ROW -->
+        <div class="charts-row">
+          <!-- Bar chart -->
+          <div class="card chart-card reveal">
+            <div class="chart-header">
+              <div>
+                <div class="section-title">Energy Production</div>
+                <div class="section-subtitle">kWh per hour — today</div>
+              </div>
+              <div class="chart-tabs">
+                <button class="chart-tab active" onclick="setChartTab(this,'day')">Day</button>
+                <button class="chart-tab" onclick="setChartTab(this,'week')">Week</button>
+                <button class="chart-tab" onclick="setChartTab(this,'month')">Month</button>
+              </div>
+            </div>
+            <canvas id="bar-chart" class="chart-canvas" style="height:220px;"></canvas>
+          </div>
+
+          <!-- Donut -->
+          <div class="card donut-card reveal delay-1">
+            <div class="chart-header">
+              <div>
+                <div class="section-title">Fleet Health</div>
+                <div class="section-subtitle">Panel status distribution</div>
+              </div>
+            </div>
+            <div class="donut-wrap">
+              <canvas id="donut-chart" style="width:180px;height:180px;"></canvas>
+            </div>
+            <div class="donut-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#00d4aa;"></div>Online (43)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#f0a500;"></div>Warning (5)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#ff7c20;"></div>Alert (2)</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#162844;"></div>Offline (0)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANELS + ALERTS ROW -->
+        <div class="panels-row">
+          <!-- Mini panel grid -->
+          <div class="card reveal">
+            <div class="section-header">
+              <div>
+                <div class="section-title">Panel Fleet Overview</div>
+                <div class="section-subtitle">Click a panel for details</div>
+              </div>
+              <a href="panels.html" class="btn btn-ghost" style="font-size:.8rem;">View All →</a>
+            </div>
+            <div class="mini-panel-grid" id="panel-grid"></div>
+            <div class="flex gap-2 mt-3" style="flex-wrap:wrap;">
+              <div class="flex-center gap-1"><div style="width:10px;height:10px;border-radius:2px;background:#38bdf8;"></div><span style="font-size:.75rem;color:var(--text-muted);">Online</span></div>
+              <div class="flex-center gap-1"><div style="width:10px;height:10px;border-radius:2px;background:#f0a500;"></div><span style="font-size:.75rem;color:var(--text-muted);">Warning</span></div>
+              <div class="flex-center gap-1"><div style="width:10px;height:10px;border-radius:2px;background:#ff7c20;"></div><span style="font-size:.75rem;color:var(--text-muted);">Alert</span></div>
+            </div>
+          </div>
+
+          <!-- Alerts + Inverters -->
+          <div style="display:flex;flex-direction:column;gap:1.25rem;">
+            <!-- Active alerts -->
+            <div class="card reveal delay-1">
+              <div class="section-header">
+                <div class="section-title">Active Alerts</div>
+                <span class="badge badge-warning"><span class="badge-dot"></span>2 open</span>
+              </div>
+              <div class="alert-item">
+                <div class="alert-icon error">⚠️</div>
+                <div>
+                  <div class="alert-title">Panel #17 — Low voltage</div>
+                  <div class="alert-desc">Output 18% below expected for current irradiance</div>
+                </div>
+                <span class="alert-time">2 min ago</span>
+              </div>
+              <div class="alert-item">
+                <div class="alert-icon warn">🔆</div>
+                <div>
+                  <div class="alert-title">Panel #32 — High temp</div>
+                  <div class="alert-desc">Surface temperature 44 °C — above safe threshold</div>
+                </div>
+                <span class="alert-time">8 min ago</span>
+              </div>
+              <div class="alert-item">
+                <div class="alert-icon info">ℹ️</div>
+                <div>
+                  <div class="alert-title">Inverter 2 — Firmware update available</div>
+                  <div class="alert-desc">v3.1.4 includes efficiency improvements</div>
+                </div>
+                <span class="alert-time">1h ago</span>
+              </div>
+            </div>
+
+            <!-- Inverters -->
+            <div class="card reveal delay-2">
+              <div class="section-header">
+                <div class="section-title">Inverters</div>
+                <span class="badge badge-online"><span class="badge-dot"></span>3 / 3 Online</span>
+              </div>
+              <div class="inverter-item">
+                <div>
+                  <div class="inverter-name">Inverter 1</div>
+                  <div style="font-size:.75rem;color:var(--text-muted);">Panels 01–18</div>
+                </div>
+                <div class="inverter-output text-gold">8.4 kW</div>
+                <span class="badge badge-online"><span class="badge-dot"></span>Online</span>
+              </div>
+              <div class="inverter-item">
+                <div>
+                  <div class="inverter-name">Inverter 2</div>
+                  <div style="font-size:.75rem;color:var(--text-muted);">Panels 19–36</div>
+                </div>
+                <div class="inverter-output text-amber">7.9 kW</div>
+                <span class="badge badge-warning"><span class="badge-dot"></span>Update avail.</span>
+              </div>
+              <div class="inverter-item">
+                <div>
+                  <div class="inverter-name">Inverter 3</div>
+                  <div style="font-size:.75rem;color:var(--text-muted);">Panels 37–50</div>
+                </div>
+                <div class="inverter-output text-gold">8.3 kW</div>
+                <span class="badge badge-online"><span class="badge-dot"></span>Online</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPARKLINES ROW -->
+        <div class="grid-3 reveal">
+          <div class="card">
+            <div class="section-header" style="margin-bottom:.75rem;">
+              <div class="section-title" style="font-size:.9rem;">Voltage (avg)</div>
+              <span class="text-gold" style="font-family:'Outfit',sans-serif;font-weight:700;">382 V</span>
+            </div>
+            <canvas id="spark-v" style="width:100%;height:60px;display:block;"></canvas>
+          </div>
+          <div class="card">
+            <div class="section-header" style="margin-bottom:.75rem;">
+              <div class="section-title" style="font-size:.9rem;">Current (avg)</div>
+              <span class="text-teal" style="font-family:'Outfit',sans-serif;font-weight:700;">7.8 A</span>
+            </div>
+            <canvas id="spark-a" style="width:100%;height:60px;display:block;"></canvas>
+          </div>
+          <div class="card">
+            <div class="section-header" style="margin-bottom:.75rem;">
+              <div class="section-title" style="font-size:.9rem;">Panel Temp (avg)</div>
+              <span class="text-amber" style="font-family:'Outfit',sans-serif;font-weight:700;">28 °C</span>
+            </div>
+            <canvas id="spark-t" style="width:100%;height:60px;display:block;"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2026 SolarOS. Dashboard v2.4.1</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="index.html">🏠</a>
+            <a class="footer-social-btn" href="settings.html">⚙️</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    startClock('live-clock');
+
+    // Build mini panel grid
+    const grid = document.getElementById('panel-grid');
+    const states = Array.from({length:50}, (_,i) => {
+      if ([16,31].includes(i)) return 'alert';
+      if ([3,7,12,22,38].includes(i)) return 'warn';
+      return 'on';
+    });
+    states.forEach((s,i) => {
+      const p = document.createElement('div');
+      p.className = 'mini-panel ' + s;
+      p.title = `Panel ${i+1} — ${s}`;
+      p.onclick = () => showToast(`Panel ${i+1}: ${s==='on'?'Operating normally':s==='warn'?'Needs attention':'Alert - inspect now'}`, s==='on'?'success':s==='warn'?'warning':'error');
+      grid.appendChild(p);
+    });
+
+    // Charts
+    window.addEventListener('load', () => {
+      const hourLabels = ['6','7','8','9','10','11','12','13','14','15','16','17'];
+      const hourData   = [2,5,9,14,18,21,23,22,20,17,13,8];
+
+      drawBarChart(document.getElementById('bar-chart'), hourLabels, hourData, '#f0a500');
+      drawDonut(
+        document.getElementById('donut-chart'),
+        [43, 5, 2, 0],
+        ['Online','Warning','Alert','Offline'],
+        ['#00d4aa','#f0a500','#ff7c20','#162844']
+      );
+
+      const vData = [378,382,385,381,379,384,386,382,380,381,383,382];
+      const aData = [7.4,7.6,7.9,7.8,7.7,7.9,8.0,7.8,7.7,7.8,7.9,7.8];
+      const tData = [26,26,27,28,28,29,30,29,28,28,27,28];
+
+      drawSparkline(document.getElementById('spark-v'), vData, '#f0a500');
+      drawSparkline(document.getElementById('spark-a'), aData, '#00d4aa');
+      drawSparkline(document.getElementById('spark-t'), tData, '#ff7c20');
+    });
+
+    const chartDatasets = {
+      day:   { labels:['6','7','8','9','10','11','12','13','14','15','16','17'], data:[2,5,9,14,18,21,23,22,20,17,13,8] },
+      week:  { labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], data:[98,112,105,148,134,162,141] },
+      month: { labels:['W1','W2','W3','W4'], data:[610,720,680,831] }
+    };
+    function setChartTab(btn, key) {
+      document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const d = chartDatasets[key];
+      drawBarChart(document.getElementById('bar-chart'), d.labels, d.data, '#f0a500');
+    }
+
+    // Live flicker
+    startLiveFlicker(['#kpi-output'], 23.8, 25.6, 1, ' kW');
+  </script>
+</body>
+</html>

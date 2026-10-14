@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — SolarOS</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---- SETTINGS LAYOUT ---- */
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1.5rem;
+      padding-bottom: 4rem;
+    }
+
+    /* ---- SIDEBAR ---- */
+    .settings-sidebar {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+    }
+    .settings-nav {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .settings-nav-item {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .8rem 1rem;
+      font-size: .875rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: all .15s;
+    }
+    .settings-nav-item:hover {
+      background: var(--navy-700);
+      color: var(--text-primary);
+    }
+    .settings-nav-item.active {
+      border-left-color: var(--solar-gold);
+      background: rgba(240,165,0,.06);
+      color: var(--solar-gold);
+    }
+    .settings-nav-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: .25rem 0;
+    }
+
+    /* ---- CONTENT PANELS ---- */
+    .settings-panel { display: none; }
+    .settings-panel.active { display: block; }
+
+    .settings-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .settings-section-header {
+      padding: 1.1rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .settings-section-header h3 {
+      font-size: .95rem;
+      font-weight: 600;
+    }
+    .settings-section-header p {
+      font-size: .78rem;
+      margin: 0;
+      color: var(--text-muted);
+    }
+    .settings-section-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      flex-shrink: 0;
+    }
+    .settings-body { padding: 1.25rem 1.5rem; }
+
+    /* ---- SETTING ROW ---- */
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .75rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-info {}
+    .setting-label { font-size: .875rem; font-weight: 500; }
+    .setting-desc  { font-size: .78rem; color: var(--text-muted); margin-top: 2px; }
+    .setting-control { flex-shrink: 0; }
+
+    /* ---- THRESHOLD SLIDERS ---- */
+    .range-wrap { display: flex; align-items: center; gap: .75rem; }
+    .range-input {
+      -webkit-appearance: none;
+      width: 140px; height: 4px;
+      border-radius: 2px;
+      background: var(--navy-600);
+      outline: none;
+      cursor: pointer;
+    }
+    .range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--solar-gold);
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(240,165,0,.4);
+    }
+    .range-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--solar-gold);
+      min-width: 45px;
+      text-align: right;
+    }
+
+    /* ---- INTEGRATION CARDS ---- */
+    .integration-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .integration-card:last-child { border-bottom: none; }
+    .integration-info { display: flex; align-items: center; gap: .75rem; }
+    .integration-logo {
+      width: 38px; height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--navy-700);
+      border: 1px solid var(--border-subtle);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .integration-name { font-size: .88rem; font-weight: 500; }
+    .integration-desc { font-size: .75rem; color: var(--text-muted); }
+
+    /* ---- WEBHOOK ---- */
+    .webhook-url-wrap {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .webhook-url-wrap input {
+      flex: 1;
+      font-size: .82rem;
+      font-family: 'Courier New', monospace;
+      color: var(--solar-teal);
+    }
+
+    /* ---- DANGER ZONE ---- */
+    .danger-section .settings-section-header { border-left: 3px solid var(--solar-amber); }
+    .danger-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .9rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .danger-row:last-child { border-bottom: none; }
+    .btn-danger {
+      background: rgba(255,124,32,.1);
+      border: 1px solid rgba(255,124,32,.3);
+      color: var(--solar-amber);
+      font-size: .82rem;
+    }
+    .btn-danger:hover {
+      background: rgba(255,124,32,.2);
+      border-color: var(--solar-amber);
+    }
+
+    @media (max-width: 768px) {
+      .settings-layout { grid-template-columns: 1fr; }
+      .settings-sidebar { position: static; }
+      .settings-nav { display: flex; flex-wrap: wrap; gap: 0; }
+      .settings-nav-item { flex: 1; min-width: 130px; justify-content: center; border-left: none; border-bottom: 2px solid transparent; }
+      .settings-nav-item.active { border-left: none; border-bottom-color: var(--solar-gold); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">☀️</div>
+      Solar<span>OS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html"><span class="icon">🏠</span> Home</a></li>
+      <li><a href="dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+      <li><a href="panels.html"><span class="icon">⚡</span> Panels</a></li>
+      <li><a href="analytics.html"><span class="icon">📈</span> Analytics</a></li>
+      <li><a href="settings.html" class="active"><span class="icon">⚙️</span> Settings</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon nav-badge">🔔</button>
+      <div class="avatar">H</div>
+    </div>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="page-hero">
+        <div class="page-hero-label">System Configuration</div>
+        <h1>Settings</h1>
+        <p>Configure your solar management system, alerts, integrations, and account preferences.</p>
+      </div>
+
+      <div class="settings-layout">
+
+        <!-- SIDEBAR NAV -->
+        <aside class="settings-sidebar">
+          <nav class="settings-nav">
+            <div class="settings-nav-item active" onclick="showPanel('general',this)">⚙️ General</div>
+            <div class="settings-nav-divider"></div>
+            <div class="settings-nav-item" onclick="showPanel('alerts',this)">🔔 Alerts</div>
+            <div class="settings-nav-item" onclick="showPanel('thresholds',this)">📊 Thresholds</div>
+            <div class="settings-nav-item" onclick="showPanel('integrations',this)">🔌 Integrations</div>
+            <div class="settings-nav-item" onclick="showPanel('users',this)">👥 Users</div>
+            <div class="settings-nav-divider"></div>
+            <div class="settings-nav-item" onclick="showPanel('account',this)">👤 Account</div>
+            <div class="settings-nav-item" onclick="showPanel('billing',this)">💳 Billing</div>
+            <div class="settings-nav-divider"></div>
+            <div class="settings-nav-item" onclick="showPanel('danger',this)" style="color:var(--solar-amber);">⚠️ Danger Zone</div>
+          </nav>
+        </aside>
+
+        <!-- PANELS -->
+        <div>
+
+          <!-- GENERAL -->
+          <div class="settings-panel active" id="panel-general">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(240,165,0,.12);">🏭</div>
+                <div>
+                  <h3>Installation Details</h3>
+                  <p>Basic information about your solar installation</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Installation Name</label>
+                    <input class="form-input" value="Hassan Residence — Main Array" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input class="form-input" value="Karachi, Pakistan" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Total Capacity (kWp)</label>
+                    <input class="form-input" type="number" value="18.5" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Installation Date</label>
+                    <input class="form-input" type="date" value="2024-03-15" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Panel Model</label>
+                    <input class="form-input" value="Jinko Solar Tiger Neo 370W" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Grid Tariff ($/kWh)</label>
+                    <input class="form-input" type="number" value="0.145" step="0.001" />
+                  </div>
+                </div>
+                <button class="btn btn-primary" onclick="showToast('Installation details saved','success')">Save Changes</button>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(56,189,248,.12);">🌐</div>
+                <div>
+                  <h3>Display Preferences</h3>
+                  <p>Dashboard appearance and data format</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Dark Mode</div>
+                    <div class="setting-desc">Use the dark navy theme (recommended)</div>
+                  </div>
+                  <label class="toggle setting-control">
+                    <input type="checkbox" checked />
+                    <span class="toggle-track"></span>
+                  </label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Unit System</div>
+                    <div class="setting-desc">kW / kWh vs W / Wh display</div>
+                  </div>
+                  <select class="form-select setting-control" style="width:auto;">
+                    <option>kW / kWh</option>
+                    <option>W / Wh</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Currency</div>
+                    <div class="setting-desc">Used in revenue calculations</div>
+                  </div>
+                  <select class="form-select setting-control" style="width:auto;">
+                    <option>USD ($)</option>
+                    <option>PKR (₨)</option>
+                    <option>EUR (€)</option>
+                    <option>GBP (£)</option>
+                  </select>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Auto-refresh Dashboard</div>
+                    <div class="setting-desc">Refresh live data every 5 seconds</div>
+                  </div>
+                  <label class="toggle setting-control">
+                    <input type="checkbox" checked />
+                    <span class="toggle-track"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ALERTS -->
+          <div class="settings-panel" id="panel-alerts">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(240,165,0,.12);">🔔</div>
+                <div>
+                  <h3>Notification Channels</h3>
+                  <p>Where to send system alerts</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Email Alerts</div>
+                    <div class="setting-desc">hassanofficial740@gmail.com</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">SMS Alerts</div>
+                    <div class="setting-desc">+92 300 000 0000</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Push Notifications</div>
+                    <div class="setting-desc">Browser and mobile push</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Weekly Summary Report</div>
+                    <div class="setting-desc">Emailed every Monday 8:00 AM</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(255,124,32,.12);">🚨</div>
+                <div>
+                  <h3>Alert Types</h3>
+                  <p>Which events trigger notifications</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Panel offline alert</div>
+                    <div class="setting-desc">Alert when a panel stops reporting</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Low output alert</div>
+                    <div class="setting-desc">Panel output below efficiency threshold</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">High temperature alert</div>
+                    <div class="setting-desc">Panel surface exceeds safe threshold</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Inverter fault alert</div>
+                    <div class="setting-desc">Inverter error code detected</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" checked /><span class="toggle-track"></span></label>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Daily production digest</div>
+                    <div class="setting-desc">End-of-day summary email</div>
+                  </div>
+                  <label class="toggle setting-control"><input type="checkbox" /><span class="toggle-track"></span></label>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Alert settings saved','success')">Save Alert Settings</button>
+          </div>
+
+          <!-- THRESHOLDS -->
+          <div class="settings-panel" id="panel-thresholds">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(0,212,170,.12);">📊</div>
+                <div>
+                  <h3>Alert Thresholds</h3>
+                  <p>Adjust when the system triggers warnings and alerts</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Low efficiency warning</div>
+                    <div class="setting-desc">Warn when panel efficiency falls below this %</div>
+                  </div>
+                  <div class="range-wrap setting-control">
+                    <input type="range" class="range-input" min="60" max="95" value="80"
+                      oninput="document.getElementById('r1').textContent=this.value+'%'" />
+                    <span class="range-val" id="r1">80%</span>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">High temperature alert</div>
+                    <div class="setting-desc">Alert when panel surface exceeds this °C</div>
+                  </div>
+                  <div class="range-wrap setting-control">
+                    <input type="range" class="range-input" min="35" max="65" value="42"
+                      oninput="document.getElementById('r2').textContent=this.value+'°C'" />
+                    <span class="range-val" id="r2">42°C</span>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Low voltage warning</div>
+                    <div class="setting-desc">Warn when panel voltage drops below this V</div>
+                  </div>
+                  <div class="range-wrap setting-control">
+                    <input type="range" class="range-input" min="280" max="400" value="340"
+                      oninput="document.getElementById('r3').textContent=this.value+'V'" />
+                    <span class="range-val" id="r3">340V</span>
+                  </div>
+                </div>
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <div class="setting-label">Alert quiet hours</div>
+                    <div class="setting-desc">Suppress non-critical alerts at night</div>
+                  </div>
+                  <select class="form-select setting-control" style="width:auto;">
+                    <option>11 PM – 6 AM</option>
+                    <option>10 PM – 7 AM</option>
+                    <option>Disabled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('Thresholds updated','success')">Save Thresholds</button>
+          </div>
+
+          <!-- INTEGRATIONS -->
+          <div class="settings-panel" id="panel-integrations">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(56,189,248,.12);">🔌</div>
+                <div>
+                  <h3>Connected Integrations</h3>
+                  <p>Third-party services connected to SolarOS</p>
+                </div>
+              </div>
+              <div>
+                <div class="integration-card">
+                  <div class="integration-info">
+                    <div class="integration-logo">📡</div>
+                    <div>
+                      <div class="integration-name">SolarEdge Inverter API</div>
+                      <div class="integration-desc">Device serial: SE10K-RW0TEBNN4 · Last synced 2 min ago</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-1">
+                    <span class="badge badge-online"><span class="badge-dot"></span>Connected</span>
+                    <button class="btn btn-ghost" style="font-size:.78rem;" onclick="showToast('Inverter API disconnected','warning')">Disconnect</button>
+                  </div>
+                </div>
+                <div class="integration-card">
+                  <div class="integration-info">
+                    <div class="integration-logo">⛅</div>
+                    <div>
+                      <div class="integration-name">OpenWeatherMap</div>
+                      <div class="integration-desc">Irradiance and weather forecast — Karachi station</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-1">
+                    <span class="badge badge-online"><span class="badge-dot"></span>Connected</span>
+                    <button class="btn btn-ghost" style="font-size:.78rem;" onclick="showToast('Weather API disconnected','warning')">Disconnect</button>
+                  </div>
+                </div>
+                <div class="integration-card">
+                  <div class="integration-info">
+                    <div class="integration-logo">📊</div>
+                    <div>
+                      <div class="integration-name">Google Sheets Export</div>
+                      <div class="integration-desc">Auto-export daily production data to Drive</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-1">
+                    <span class="badge badge-offline">Not connected</span>
+                    <button class="btn btn-secondary" style="font-size:.78rem;" onclick="showToast('Connecting to Google…','info')">Connect</button>
+                  </div>
+                </div>
+                <div class="integration-card">
+                  <div class="integration-info">
+                    <div class="integration-logo">📱</div>
+                    <div>
+                      <div class="integration-name">Slack Notifications</div>
+                      <div class="integration-desc">Post alerts to #solar-ops channel</div>
+                    </div>
+                  </div>
+                  <div class="flex gap-1">
+                    <span class="badge badge-offline">Not connected</span>
+                    <button class="btn btn-secondary" style="font-size:.78rem;" onclick="showToast('Opening Slack OAuth…','info')">Connect</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(163,230,53,.12);">🔗</div>
+                <div>
+                  <h3>Webhook</h3>
+                  <p>POST alert and production events to your endpoint</p>
+                </div>
+              </div>
+              <div class="settings-body">
+                <div class="form-group">
+                  <label class="form-label">Endpoint URL</label>
+                  <div class="webhook-url-wrap">
+                    <input class="form-input" value="https://hooks.yourapp.com/solar/abc123" />
+                    <button class="btn btn-secondary" style="font-size:.8rem;white-space:nowrap;" onclick="showToast('Test event sent','success')">Test</button>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Secret Key</label>
+                  <input class="form-input" type="password" value="whsec_xxxxxxxxxxxxxxxxxx" />
+                </div>
+                <button class="btn btn-primary" onclick="showToast('Webhook settings saved','success')">Save Webhook</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- USERS -->
+          <div class="settings-panel" id="panel-users">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(167,139,250,.12);">👥</div>
+                <div>
+                  <h3>Team Members</h3>
+                  <p>People with access to this installation</p>
+                </div>
+              </div>
+              <div style="overflow-x:auto;">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>Name</th><th>Email</th><th>Role</th><th>Last Active</th><th></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><div class="flex-center gap-1"><div class="avatar" style="width:28px;height:28px;font-size:.7rem;">H</div>Hassan (you)</div></td>
+                      <td>hassanofficial740@gmail.com</td>
+                      <td><span class="badge badge-online">Owner</span></td>
+                      <td>Now</td>
+                      <td>—</td>
+                    </tr>
+                    <tr>
+                      <td><div class="flex-center gap-1"><div class="avatar" style="width:28px;height:28px;font-size:.7rem;background:linear-gradient(135deg,#00d4aa,#38bdf8);">U</div>Usman Ali</div></td>
+                      <td>usman@greentech.pk</td>
+                      <td><span class="badge badge-info">Technician</span></td>
+                      <td>2h ago</td>
+                      <td><button class="btn btn-ghost" style="font-size:.75rem;" onclick="showToast('User removed','warning')">Remove</button></td>
+                    </tr>
+                    <tr>
+                      <td><div class="flex-center gap-1"><div class="avatar" style="width:28px;height:28px;font-size:.7rem;background:linear-gradient(135deg,#a3e635,#00d4aa);">S</div>Sara Raza</div></td>
+                      <td>sara@greentech.pk</td>
+                      <td><span class="badge badge-info">Technician</span></td>
+                      <td>Yesterday</td>
+                      <td><button class="btn btn-ghost" style="font-size:.75rem;" onclick="showToast('User removed','warning')">Remove</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="settings-body" style="border-top:1px solid var(--border-subtle);">
+                <div class="grid-2">
+                  <div class="form-group mb-1">
+                    <label class="form-label">Invite by email</label>
+                    <input class="form-input" type="email" placeholder="colleague@example.com" />
+                  </div>
+                  <div class="form-group mb-1">
+                    <label class="form-label">Role</label>
+                    <select class="form-select">
+                      <option>Viewer</option>
+                      <option>Technician</option>
+                      <option>Admin</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-primary" onclick="showToast('Invitation sent','success')">Send Invite</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCOUNT -->
+          <div class="settings-panel" id="panel-account">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(240,165,0,.12);">👤</div>
+                <div><h3>Account Details</h3><p>Your personal information</p></div>
+              </div>
+              <div class="settings-body">
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-input" value="Hassan" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input class="form-input" type="email" value="hassanofficial740@gmail.com" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input class="form-input" value="+92 300 000 0000" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Timezone</label>
+                    <select class="form-select">
+                      <option>Asia/Karachi (UTC+5)</option>
+                      <option>Asia/Dubai (UTC+4)</option>
+                      <option>Europe/London (UTC+0)</option>
+                    </select>
+                  </div>
+                </div>
+                <button class="btn btn-primary" onclick="showToast('Account updated','success')">Save Account</button>
+              </div>
+            </div>
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(56,189,248,.12);">🔑</div>
+                <div><h3>Change Password</h3><p>Keep your account secure</p></div>
+              </div>
+              <div class="settings-body">
+                <div class="grid-2">
+                  <div class="form-group"><label class="form-label">Current Password</label><input class="form-input" type="password" /></div>
+                  <div></div>
+                  <div class="form-group"><label class="form-label">New Password</label><input class="form-input" type="password" /></div>
+                  <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" type="password" /></div>
+                </div>
+                <button class="btn btn-secondary" onclick="showToast('Password changed','success')">Update Password</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- BILLING -->
+          <div class="settings-panel" id="panel-billing">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(0,212,170,.12);">💳</div>
+                <div><h3>Current Plan</h3><p>SolarOS Professional</p></div>
+              </div>
+              <div class="settings-body">
+                <div class="grid-3">
+                  <div class="stat-tile teal"><div class="stat-label">Plan</div><div class="stat-value teal" style="font-size:1.4rem;">Pro</div></div>
+                  <div class="stat-tile gold"><div class="stat-label">Next Renewal</div><div class="stat-value gold" style="font-size:1.1rem;">Nov 14, 2026</div></div>
+                  <div class="stat-tile blue"><div class="stat-label">Billing</div><div class="stat-value blue" style="font-size:1.4rem;">$49/mo</div></div>
+                </div>
+                <div class="flex gap-1 mt-2">
+                  <button class="btn btn-ghost" onclick="showToast('Redirecting to billing portal…','info')">Manage Billing</button>
+                  <button class="btn btn-secondary" onclick="showToast('Downloading invoice…','success')">⬇ Last Invoice</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DANGER ZONE -->
+          <div class="settings-panel danger-section" id="panel-danger">
+            <div class="settings-section">
+              <div class="settings-section-header">
+                <div class="settings-section-icon" style="background:rgba(255,124,32,.12);">⚠️</div>
+                <div><h3>Danger Zone</h3><p>Irreversible actions — proceed with caution</p></div>
+              </div>
+              <div class="settings-body">
+                <div class="danger-row">
+                  <div>
+                    <div class="setting-label">Reset All Thresholds</div>
+                    <div class="setting-desc">Restore all alert thresholds to factory defaults</div>
+                  </div>
+                  <button class="btn btn-danger" onclick="showToast('Thresholds reset to defaults','warning')">Reset Thresholds</button>
+                </div>
+                <div class="danger-row">
+                  <div>
+                    <div class="setting-label">Clear Historical Data</div>
+                    <div class="setting-desc">Permanently delete all production history. Cannot be undone.</div>
+                  </div>
+                  <button class="btn btn-danger" onclick="showToast('This cannot be undone — confirmation required','error')">Clear Data</button>
+                </div>
+                <div class="danger-row">
+                  <div>
+                    <div class="setting-label">Delete Installation</div>
+                    <div class="setting-desc">Remove this installation and all associated data permanently.</div>
+                  </div>
+                  <button class="btn btn-danger" onclick="showToast('Deletion cancelled — no changes made','info')">Delete Installation</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2026 SolarOS — Settings v2.4.1</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="index.html">🏠</a>
+            <a class="footer-social-btn" href="dashboard.html">📊</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    function showPanel(id, navItem) {
+      document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.settings-nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      navItem.classList.add('active');
+    }
+  </script>
+</body>
+</html>
