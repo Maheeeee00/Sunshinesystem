@@ -407,14 +407,27 @@
 </section>
 
 <!-- CTA BAND -->
-<div class="cta-band">
-  <div class="cta-band-bg"></div>
+<div class="cta-band" style="position:relative;overflow:hidden">
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop')"></div>
   <div class="cta-band-overlay"></div>
-  <h2>Ready to take control of your solar?</h2>
-  <p>Join 12,000+ households already saving more with SolarOS. Free to start — no credit card required.</p>
-  <div class="cta-btns">
-    <a href="/contact" class="btn btn-white">Start Free Today →</a>
-    <a href="/pricing" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35)">See Pricing</a>
+  <!-- Animated particles -->
+  <div class="cta-particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="container" style="position:relative;z-index:2">
+    <div class="cta-band-icon reveal-cta">☀️</div>
+    <h2 class="reveal-cta" style="color:#fff">Ready to take control of your solar?</h2>
+    <p class="reveal-cta" style="color:rgba(255,255,255,.8)">Join 12,000+ households already saving more with SolarOS. Free to start — no credit card required.</p>
+    <div class="cta-btns reveal-cta">
+      <a href="/contact" class="btn btn-white">Start Free Today →</a>
+      <a href="/pricing" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35)">See Pricing</a>
+    </div>
+    <div class="cta-trust reveal-cta">
+      <span>🔒 No credit card</span>
+      <span>✓ Cancel any time</span>
+      <span>⚡ Live in 2 minutes</span>
+    </div>
   </div>
 </div>
 
