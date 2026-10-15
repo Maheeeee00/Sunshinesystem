@@ -3,270 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services — SolarOS</title>
-  <meta name="description" content="Explore SolarOS services — monitoring, analytics, AI optimisation, alerts, and commercial solutions for every solar energy need.">
+  <title>Products & Services — Sunshine Solar</title>
+  <meta name="description" content="Solar panels, battery storage, commercial solar and EV chargers from Sunshine Solar. MCS certified installation across the UK.">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── Services page extras ── */
-    .service-row { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); }
-    .service-img { position:relative; overflow:hidden; min-height:460px; }
-    .service-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease; }
-    .service-img:hover img { transform:scale(1.04); }
-    .service-img-badge { position:absolute; top:20px; left:20px; background:rgba(0,0,0,.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:10px 16px; color:#fff; font-family:'Outfit',sans-serif; font-size:.82rem; font-weight:700; display:flex; align-items:center; gap:8px; }
-    .service-img-badge .dot { width:8px; height:8px; border-radius:50%; background:#00d4aa; flex-shrink:0; animation:glow-pulse 2s ease-in-out infinite; }
-    .service-content { padding:64px 56px; display:flex; flex-direction:column; justify-content:center; }
-    .service-list { list-style:none; margin:24px 0 0; display:flex; flex-direction:column; gap:10px; }
-    .service-list li { display:flex; align-items:flex-start; gap:10px; font-size:.92rem; color:var(--text-mid); line-height:1.5; }
-    .service-list li::before { content:''; width:18px; height:18px; border-radius:50%; background:rgba(240,165,0,.15); border:1.5px solid var(--gold); flex-shrink:0; margin-top:2px; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23f0a500' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; background-size:10px 10px; }
-
-    /* integrations strip */
-    .integrations-strip { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:40px 0; }
-    .integrations-strip h3 { text-align:center; font-size:1rem; font-weight:700; color:var(--text-muted); letter-spacing:.05em; margin-bottom:28px; }
-    .integrations-logos { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:800px; margin:0 auto; }
-    .integration-chip { display:flex; align-items:center; gap:8px; padding:10px 18px; background:var(--bg-soft); border:1px solid var(--border); border-radius:50px; font-size:.82rem; font-weight:600; color:var(--text-mid); transition:all .25s; }
-    .integration-chip:hover { border-color:var(--gold); color:var(--gold-dark); background:#fff; transform:translateY(-2px); box-shadow:0 4px 16px rgba(240,165,0,.12); }
-    .integration-chip span { font-size:1rem; }
-
-    @media(max-width:768px){
-      .service-row { grid-template-columns:1fr; }
-      .service-row[style*="direction:rtl"] { direction:ltr !important; }
-      .service-content { padding:40px 24px; }
+    .service-section { padding: 80px 0; border-bottom: 1px solid var(--slate-100); }
+    .service-section:last-of-type { border-bottom: none; }
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .service-grid.reverse { direction: rtl; }
+    .service-grid.reverse > * { direction: ltr; }
+    .service-img { border-radius: var(--radius-lg); overflow: hidden; height: 420px; }
+    .service-img img { width: 100%; height: 100%; object-fit: cover; }
+    .service-features { display: flex; flex-direction: column; gap: 12px; margin: 24px 0 32px; }
+    .service-feature { display: flex; align-items: flex-start; gap: 12px; font-size: .88rem; color: var(--text-mid); line-height: 1.6; }
+    .service-feature::before { content: '✓'; color: var(--gold); font-weight: 800; font-size: .9rem; flex-shrink: 0; margin-top: 1px; }
+    .battery-models { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 32px 0; }
+    .battery-model { background: var(--slate-50); border: 1.5px solid var(--slate-100); border-radius: var(--radius); padding: 20px; text-align: center; transition: all var(--transition); }
+    .battery-model:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .battery-model .capacity { font-family: 'Outfit',sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--navy); }
+    .battery-model .battery-label { font-size: .78rem; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+    .battery-model .battery-price { font-size: .85rem; font-weight: 700; color: var(--gold); margin-top: 8px; }
+    .inclusions-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 32px; }
+    .inclusion-item { background: var(--white); border: 1.5px solid var(--slate-100); border-radius: var(--radius); padding: 20px 22px; display: flex; gap: 14px; align-items: flex-start; }
+    .inclusion-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .inclusion-item h4 { font-size: .9rem; margin-bottom: 4px; }
+    .inclusion-item p { font-size: .8rem; color: var(--text-muted); line-height: 1.6; }
+    @media(max-width:900px){
+      .service-grid { grid-template-columns: 1fr; gap: 32px; }
+      .service-grid.reverse { direction: ltr; }
+      .inclusions-grid { grid-template-columns: 1fr; }
+      .service-img { height: 280px; }
     }
+    @media(max-width:600px){ .battery-models { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="/" class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/><line x1="6.3" y1="6.3" x2="9.2" y2="9.2"/><line x1="22.8" y1="22.8" x2="25.7" y2="25.7"/><line x1="25.7" y1="6.3" x2="22.8" y2="9.2"/><line x1="9.2" y1="22.8" x2="6.3" y2="25.7"/></g></svg>
-    Solar<span>OS</span>
+    <svg viewBox="0 0 32 32" fill="none" width="32" height="32"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="1" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="31"/><line x1="1" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="31" y2="16"/><line x1="5.5" y1="5.5" x2="9" y2="9"/><line x1="23" y1="23" x2="26.5" y2="26.5"/><line x1="26.5" y1="5.5" x2="23" y2="9"/><line x1="9" y1="23" x2="5.5" y2="26.5"/></g></svg>
+    Sunshine <span>Solar</span>
   </a>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
-    <li><a href="/services">Services</a></li>
+    <li><a href="/services" class="active">Products</a></li>
     <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact" class="nav-cta">Get Started Free</a></li>
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/contact" class="nav-cta">Free Quote</a></li>
   </ul>
   <button class="nav-burger">☰</button>
 </nav>
 <nav class="nav-mobile">
-  <a href="/">Home</a>
-  <a href="/services">Services</a>
-  <a href="/pricing">Pricing</a>
-  <a href="/about">About</a>
-  <a href="/contact" class="nav-cta">Get Started Free</a>
+  <a href="/">Home</a><a href="/services" class="active">Products</a><a href="/pricing">Pricing</a>
+  <a href="/about">About Us</a><a href="/contact" class="nav-cta">Free Quote</a>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-content">
-    <div class="section-tag reveal">Our Services</div>
-    <h1 class="reveal">Everything your solar system needs, in one platform.</h1>
-    <p class="reveal">From simple home monitoring to enterprise-grade fleet management — SolarOS scales with you.</p>
-    <div class="hero-mini-stats reveal" style="display:flex;gap:28px;margin-top:28px;flex-wrap:wrap">
-      <div>
-        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-dark)" data-count="40" data-suffix="+">0</div>
-        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Inverter brands</div>
-      </div>
-      <div>
-        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--teal)" data-count="5" data-suffix="s">0</div>
-        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Data refresh</div>
-      </div>
-      <div>
-        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-dark)" data-count="99.9" data-suffix="%">0</div>
-        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Uptime SLA</div>
-      </div>
+    <div class="page-eyebrow fade-in">Products & Services</div>
+    <h1 class="fade-in delay-1">Solar panels, batteries & EV chargers</h1>
+    <p class="fade-in delay-2">Premium solar equipment from the world's leading manufacturers, custom-designed and installed by our MCS-certified engineers.</p>
+    <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap" class="fade-in delay-3">
+      <a href="/contact" class="btn btn-gold">Get Free Survey</a>
+      <a href="/pricing" class="btn btn-outline-white">View Pricing</a>
     </div>
   </div>
-  <div class="page-hero-img">
-    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80&fit=crop" alt="Solar panels on rooftop">
-    <div style="position:absolute;bottom:20px;right:20px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 18px;color:#fff;font-family:'Outfit',sans-serif">
-      <div style="font-size:.7rem;color:rgba(255,255,255,.6);margin-bottom:4px">LIVE OUTPUT</div>
-      <div style="font-size:1.5rem;font-weight:900" class="hero-card-kpi">8.4 kW</div>
-      <div style="font-size:.72rem;color:#00d4aa;display:flex;align-items:center;gap:4px">
-        <span style="width:6px;height:6px;border-radius:50%;background:#00d4aa;display:inline-block;animation:glow-pulse 2s ease-in-out infinite"></span>
-        Monitoring active
-      </div>
-    </div>
+  <div class="page-hero-img fade-in delay-2">
+    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=900&q=80&fit=crop" alt="Solar panels installed on a residential roof">
   </div>
 </div>
 
-<!-- SERVICES -->
-<section class="section" style="padding:0">
-  <div style="max-width:100%">
+<div class="stats-strip">
+  <div class="stats-strip-inner">
+    <div class="stat-block"><div class="stat-num" data-count="3200" data-suffix="+">0</div><div class="stat-lbl">Systems Installed</div></div>
+    <div class="stat-block"><div class="stat-num" data-count="14" data-suffix=" yrs">0</div><div class="stat-lbl">Trading Since</div></div>
+    <div class="stat-block"><div class="stat-num" data-count="1" data-suffix=" day">0</div><div class="stat-lbl">Typical Install Time</div></div>
+    <div class="stat-block"><div class="stat-num" data-count="25" data-suffix=" yr">0</div><div class="stat-lbl">Panel Warranty</div></div>
+  </div>
+</div>
 
-    <!-- 1 — Real-Time Monitoring -->
-    <div class="service-row">
-      <div class="service-img">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&fit=crop" alt="Solar monitoring dashboard on tablet">
-        <div class="service-img-badge"><span class="dot"></span> Live every 5 seconds</div>
-      </div>
-      <div class="service-content reveal">
-        <div class="section-tag">Monitoring</div>
-        <h2>Real-Time Monitoring</h2>
-        <p>See your system's live performance down to the panel level. SolarOS connects directly to your inverter and displays data updated every 5 seconds — so you always know exactly what your solar array is doing.</p>
-        <ul class="service-list">
-          <li>Live kW output, voltage, and current per panel</li>
-          <li>Battery state of charge and charge/discharge rates</li>
-          <li>Grid import/export tracking with tariff awareness</li>
-          <li>Works with 40+ inverter brands including SolarEdge, Fronius, Sungrow</li>
-          <li>iOS and Android apps with home screen widgets</li>
-        </ul>
+<section style="padding:80px 0 0">
+  <div class="container">
+    <!-- Residential Solar -->
+    <div class="service-section">
+      <div class="service-grid">
+        <div class="service-img reveal">
+          <img src="https://images.unsplash.com/photo-1545209463-f14e86da3b37?w=900&q=80&fit=crop" alt="Premium solar panels on modern house roof">
+        </div>
+        <div class="service-content">
+          <div class="section-eyebrow reveal">Solar Panels</div>
+          <h2 class="section-title reveal">Residential Solar Panel Systems</h2>
+          <p style="color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:8px" class="reveal">Premium monocrystalline panels for homes. Whether you have a 2-bed flat or a 5-bed detached, we design the perfect system to maximise your roof's potential.</p>
+          <div class="service-features reveal">
+            <div class="service-feature">Premium monocrystalline panels, 21%+ efficiency rating</div>
+            <div class="service-feature">All-black design option for a sleek, discreet finish</div>
+            <div class="service-feature">Custom 3D roof design before any commitment</div>
+            <div class="service-feature">System sizes from 4kW up to 12kW for larger homes</div>
+            <div class="service-feature">25-year panel performance guarantee included</div>
+            <div class="service-feature">MCS certificate issued — required for SEG payments</div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap" class="reveal">
+            <a href="/contact" class="btn btn-gold">Get Free Quote</a>
+            <a href="/pricing" class="btn btn-outline-navy">View Packages</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 2 — Analytics (reversed) -->
-    <div class="service-row" style="direction:rtl">
-      <div class="service-img" style="direction:ltr">
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80&fit=crop" alt="Analytics dashboard with charts">
-        <div class="service-img-badge"><span class="dot" style="background:#f0a500"></span> 14-day history free</div>
-      </div>
-      <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
-        <div class="section-tag">Analytics</div>
-        <h2>Smart Analytics &amp; Reporting</h2>
-        <p>Turn raw data into actionable insight. SolarOS's analytics engine crunches your historical data to reveal trends, forecast performance, and calculate your true return on investment down to the penny.</p>
-        <ul class="service-list">
-          <li>14-day, monthly, and yearly production charts</li>
-          <li>Year-on-year comparison with weather correlation</li>
-          <li>Savings calculator updated in real time</li>
-          <li>CO₂ offset and equivalent trees planted tracker</li>
-          <li>Exportable PDF and CSV reports for your installer or accountant</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 3 — Smart Alerts -->
-    <div class="service-row">
-      <div class="service-img">
-        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1000&q=80&fit=crop" alt="Smartphone with notifications">
-        <div class="service-img-badge"><span class="dot" style="background:#ff7c20"></span> Instant push alerts</div>
-      </div>
-      <div class="service-content reveal">
-        <div class="section-tag">Alerts</div>
-        <h2>Smart Alerts &amp; Fault Detection</h2>
-        <p>SolarOS monitors your system around the clock and sends instant alerts when something goes wrong — or when performance dips below what it should be. Catch issues before they cost you money.</p>
-        <ul class="service-list">
-          <li>Panel-level fault detection via string analysis</li>
-          <li>Push, email, and SMS notifications</li>
-          <li>Configurable thresholds for temperature, voltage, and output</li>
-          <li>Automatic service ticket creation with your installer</li>
-          <li>Historical alert log with resolution tracking</li>
-        </ul>
+    <!-- Battery Storage -->
+    <div class="service-section">
+      <div class="service-grid reverse">
+        <div class="service-img reveal">
+          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=900&q=80&fit=crop" alt="Home battery storage unit installed in garage">
+        </div>
+        <div class="service-content">
+          <div class="section-eyebrow reveal">Battery Storage</div>
+          <h2 class="section-title reveal">Home Battery Storage Systems</h2>
+          <p style="color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:8px" class="reveal">Store the solar energy you generate during the day and use it at night. With a home battery you can become genuinely energy-independent — slashing what you pay to the grid.</p>
+          <div class="battery-models reveal">
+            <div class="battery-model"><div class="capacity">5kWh</div><div class="battery-label">Starter</div><div class="battery-price">from £2,100</div></div>
+            <div class="battery-model" style="border-color:var(--gold);background:var(--gold-pale)"><div class="capacity">10kWh</div><div class="battery-label">Most Popular</div><div class="battery-price">from £3,400</div></div>
+            <div class="battery-model"><div class="capacity">15kWh</div><div class="battery-label">Maximum</div><div class="battery-price">from £4,900</div></div>
+          </div>
+          <div class="service-features reveal">
+            <div class="service-feature">Tesla Powerwall, GivEnergy, Pylontech — top brands stocked</div>
+            <div class="service-feature">Smart app control — set charge schedules and tariff savings</div>
+            <div class="service-feature">Can be retrofitted to an existing solar system</div>
+            <div class="service-feature">10-year manufacturer warranty on all batteries</div>
+          </div>
+          <a href="/contact" class="btn btn-gold reveal">Add Battery to My System</a>
+        </div>
       </div>
     </div>
 
-    <!-- 4 — AI Optimisation (reversed) -->
-    <div class="service-row" style="direction:rtl">
-      <div class="service-img" style="direction:ltr">
-        <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=1000&q=80&fit=crop" alt="Modern smart home energy management">
-        <div class="service-img-badge" style="direction:ltr"><span class="dot" style="background:#6366f1"></span> AI-powered</div>
-      </div>
-      <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
-        <div class="section-tag">AI</div>
-        <h2>AI Energy Optimisation</h2>
-        <p>Our AI engine learns your home's energy patterns, your tariff structure, and local weather forecasts to make intelligent recommendations — and in supported setups, automate them for you.</p>
-        <ul class="service-list">
-          <li>Shift EV charging and appliances to peak solar hours</li>
-          <li>Smart export decisions based on grid tariff pricing</li>
-          <li>Personalised weekly energy tips based on your usage</li>
-          <li>Integration with Octopus, EDF, and major UK tariffs</li>
-          <li>Compatible with Tesla Powerwall, Givenergy, SolarEdge battery</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 5 — Commercial Fleet -->
-    <div class="service-row" style="border-bottom:none">
-      <div class="service-img">
-        <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1000&q=80&fit=crop" alt="Large commercial solar farm aerial view">
-        <div class="service-img-badge"><span class="dot"></span> Multi-site dashboard</div>
-      </div>
-      <div class="service-content reveal">
-        <div class="section-tag">Enterprise</div>
-        <h2>Commercial Fleet Management</h2>
-        <p>Managing multiple sites? SolarOS Pro gives installers and commercial operators a single dashboard to oversee every installation — with client portals, white-labelling, and API access included.</p>
-        <ul class="service-list">
-          <li>Unlimited sites on one account</li>
-          <li>Client portal with branded reports</li>
-          <li>Bulk alert management across your fleet</li>
-          <li>SLA tracking and maintenance scheduling</li>
-          <li>REST API and webhook integrations for your own systems</li>
-        </ul>
-        <a href="/contact" class="btn btn-primary" style="margin-top:28px;align-self:flex-start">Talk to Sales &rarr;</a>
+    <!-- Commercial -->
+    <div class="service-section">
+      <div class="service-grid">
+        <div class="service-img reveal">
+          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=900&q=80&fit=crop" alt="Large commercial solar array on industrial roof">
+        </div>
+        <div class="service-content">
+          <div class="section-eyebrow reveal">Commercial Solar</div>
+          <h2 class="section-title reveal">Business & Commercial Solar Systems</h2>
+          <p style="color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:8px" class="reveal">Reduce your business overheads with a commercial solar installation. We work with warehouses, factories, office parks, schools and farms — designing systems that deliver a measurable return on investment.</p>
+          <div class="service-features reveal">
+            <div class="service-feature">Systems from 20kW up to 500kW+ for large sites</div>
+            <div class="service-feature">3-phase inverter systems for commercial demand</div>
+            <div class="service-feature">Full planning, DNO application and grid connection managed</div>
+            <div class="service-feature">Detailed payback and ROI analysis provided</div>
+            <div class="service-feature">Finance and PPA options available for zero upfront cost</div>
+          </div>
+          <a href="/contact" class="btn btn-gold reveal">Talk to Our Commercial Team</a>
+        </div>
       </div>
     </div>
 
+    <!-- EV Chargers -->
+    <div class="service-section">
+      <div class="service-grid reverse">
+        <div class="service-img reveal">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop" alt="Electric vehicle being charged at home charger">
+        </div>
+        <div class="service-content">
+          <div class="section-eyebrow reveal">EV Chargers</div>
+          <h2 class="section-title reveal">Home EV Charging Points</h2>
+          <p style="color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:8px" class="reveal">Complete your clean-energy home with a smart EV charger. Combined with solar and battery storage, charge your car using 100% free energy from your own roof.</p>
+          <div class="service-features reveal">
+            <div class="service-feature">7kW and 22kW smart chargers installed</div>
+            <div class="service-feature">Solar-optimised charging — uses your surplus solar first</div>
+            <div class="service-feature">Compatible with all current EV and PHEV models</div>
+            <div class="service-feature">OZEV grant eligible — up to £350 off for eligible homes</div>
+            <div class="service-feature">App control: schedule, monitor and track your charging</div>
+          </div>
+          <a href="/contact" class="btn btn-gold reveal">Get EV Charger Quote</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- INTEGRATIONS STRIP -->
-<div class="integrations-strip">
-  <h3>Compatible with 40+ inverter brands &amp; energy platforms</h3>
-  <div class="integrations-logos">
-    <div class="integration-chip reveal"><span>⚡</span>SolarEdge</div>
-    <div class="integration-chip reveal"><span>🔋</span>Tesla Powerwall</div>
-    <div class="integration-chip reveal"><span>☀️</span>Fronius</div>
-    <div class="integration-chip reveal"><span>📊</span>SMA</div>
-    <div class="integration-chip reveal"><span>🌊</span>Sungrow</div>
-    <div class="integration-chip reveal"><span>🐙</span>Octopus Energy</div>
-    <div class="integration-chip reveal"><span>🔌</span>Huawei FusionSolar</div>
-    <div class="integration-chip reveal"><span>🏠</span>Givenergy</div>
-    <div class="integration-chip reveal"><span>📈</span>Growatt</div>
-    <div class="integration-chip reveal"><span>🌿</span>EDF</div>
-    <div class="integration-chip reveal"><span>📱</span>IFTTT</div>
-    <div class="integration-chip reveal"><span>🔗</span>REST API</div>
+<!-- WHAT'S INCLUDED -->
+<section class="section bg-slate">
+  <div class="container">
+    <div class="section-header center">
+      <div class="section-eyebrow reveal">Every Installation</div>
+      <h2 class="section-title reveal">What's included as standard</h2>
+      <p class="section-sub reveal">We don't charge extras for the essentials. Every Sunshine Solar installation includes the following at no additional cost.</p>
+    </div>
+    <div class="inclusions-grid">
+      <div class="inclusion-item reveal"><span class="inclusion-icon">🏠</span><div><h4>Free Home Survey</h4><p>A qualified surveyor visits your property to assess your roof and energy needs before you commit to anything.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">📐</span><div><h4>Custom System Design</h4><p>3D modelling of your roof with optimised panel placement and full shading analysis included.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">🔌</span><div><h4>Full Electrical Installation</h4><p>All wiring, inverter setup, consumer unit connection and weatherproofing by our NICEIC-approved electricians.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">📋</span><div><h4>DNO Notification</h4><p>We handle all grid connection paperwork and DNO notification on your behalf.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">📱</span><div><h4>Monitoring App Setup</h4><p>Live generation monitoring with your personal dashboard set up and explained before we leave.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">🏅</span><div><h4>MCS Certificate</h4><p>Your MCS certificate is issued upon completion — essential for SEG payments and finance schemes.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">🧹</span><div><h4>Full Site Cleanup</h4><p>Our teams leave your home exactly as they found it. All packaging and waste is removed by us.</p></div></div>
+      <div class="inclusion-item reveal"><span class="inclusion-icon">📞</span><div><h4>Aftercare Support</h4><p>Dedicated aftercare team available by phone and email. We're here for the life of your system.</p></div></div>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- CTA BAND -->
-<div class="cta-band" style="position:relative;overflow:hidden">
-  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop')"></div>
+<section class="cta-band">
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&fit=crop')"></div>
   <div class="cta-band-overlay"></div>
-  <div class="cta-band-icon">☀️</div>
-  <div class="cta-particles">
-    <span style="left:5%;animation-delay:0s;animation-duration:3.2s"></span>
-    <span style="left:15%;animation-delay:.4s;animation-duration:2.8s"></span>
-    <span style="left:25%;animation-delay:.8s;animation-duration:3.6s"></span>
-    <span style="left:40%;animation-delay:.2s;animation-duration:3s"></span>
-    <span style="left:55%;animation-delay:.6s;animation-duration:2.9s"></span>
-    <span style="left:65%;animation-delay:1s;animation-duration:3.4s"></span>
-    <span style="left:75%;animation-delay:.3s;animation-duration:3.1s"></span>
-    <span style="left:85%;animation-delay:.7s;animation-duration:2.7s"></span>
-    <span style="left:92%;animation-delay:.1s;animation-duration:3.3s"></span>
-    <span style="left:48%;animation-delay:.9s;animation-duration:3.5s"></span>
-  </div>
-  <div class="container" style="position:relative;z-index:2">
-    <h2 style="color:#fff" class="reveal-cta">Find the right plan for you</h2>
-    <p style="color:rgba(255,255,255,.8)" class="reveal-cta">Whether you're a homeowner with 6 panels or an installer managing 500 sites, there's a SolarOS plan built for you.</p>
-    <div class="cta-btns reveal-cta">
-      <a href="/pricing" class="btn btn-primary">See Pricing &rarr;</a>
-      <a href="/contact" class="btn btn-white">Contact Sales</a>
+  <div class="container">
+    <h2 class="reveal">Not sure which system is right for you?</h2>
+    <p class="reveal">Our surveyors will assess your property for free and recommend exactly what you need. No upselling, no pressure — just honest advice.</p>
+    <div class="cta-btns reveal">
+      <a href="/contact" class="btn btn-gold btn-lg">Book Free Survey ☀️</a>
+      <a href="/pricing" class="btn btn-outline-white btn-lg">See Pricing Packages</a>
     </div>
-    <div class="cta-trust reveal-cta">
-      <span>✓ Free 30-day trial</span>
-      <span>✓ No credit card needed</span>
-      <span>✓ Cancel any time</span>
-    </div>
+    <div class="cta-trust reveal"><span>No obligation</span><span>Free site visit</span><span>MCS certified</span><span>Finance available</span></div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="logo"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>Solar<span>OS</span></div>
-        <p>The world's most trusted solar energy management platform.</p>
+        <div class="nav-logo" style="color:#fff"><svg viewBox="0 0 32 32" fill="none" width="28" height="28"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>Sunshine <span style="color:var(--gold)">Solar</span></div>
+        <p>Premium solar panels and battery storage, expertly installed across the UK since 2010.</p>
+        <div class="footer-cert"><span class="cert-badge">MCS Certified</span><span class="cert-badge">NICEIC Approved</span><span class="cert-badge">Which? Trusted</span><span class="cert-badge">TrustMark</span></div>
       </div>
-      <div class="footer-col"><h4>Product</h4><ul><li><a href="/services">Features</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/services">Integrations</a></li></ul></div>
-      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About Us</a></li><li><a href="/contact">Contact</a></li><li><a href="/about">Careers</a></li></ul></div>
-      <div class="footer-col"><h4>Support</h4><ul><li><a href="/contact">Help Centre</a></li><li><a href="/contact">API Docs</a></li><li><a href="/contact">Status Page</a></li></ul></div>
+      <div class="footer-col"><h4>Products</h4><ul><li><a href="/services">Solar Panels</a></li><li><a href="/services">Battery Storage</a></li><li><a href="/services">Commercial Solar</a></li><li><a href="/services">EV Chargers</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About Us</a></li><li><a href="/about">Our Team</a></li><li><a href="/about">Certifications</a></li><li><a href="/contact">Careers</a></li></ul></div>
+      <div class="footer-col"><h4>Get In Touch</h4><ul><li><a href="/contact">Free Survey</a></li><li><a href="/pricing">Packages & Pricing</a></li><li><a href="tel:+441179001820">📞 0117 900 1820</a></li><li><a href="mailto:hello@sunshinesolar.co.uk">✉️ hello@sunshinesolar.co.uk</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 SolarOS Ltd. All rights reserved.</p>
-      <div class="footer-socials"><a href="#">𝕏</a><a href="#">in</a><a href="#">f</a></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:12px">
+      <p>© 2026 Sunshine Solar Ltd. All rights reserved.</p>
+      <div style="display:flex;gap:16px"><a href="#" style="color:rgba(255,255,255,.35)">Privacy Policy</a><a href="#" style="color:rgba(255,255,255,.35)">Terms</a></div>
     </div>
   </div>
 </footer>

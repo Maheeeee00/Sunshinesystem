@@ -3,239 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact &amp; Get Started — SolarOS</title>
-  <meta name="description" content="Get in touch with the SolarOS team. Start your free account, ask a question, or talk to sales.">
+  <title>Free Survey & Contact — Sunshine Solar</title>
+  <meta name="description" content="Book your free, no-obligation solar survey with Sunshine Solar. We cover the whole UK. Response within 4 hours guaranteed.">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .contact-grid { display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:start; }
-    .contact-info { display:flex; flex-direction:column; gap:16px; }
-    .contact-item { display:flex; align-items:flex-start; gap:16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; transition:all .25s; }
-    .contact-item:hover { border-color:var(--gold); transform:translateX(4px); }
-    .contact-item-icon { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,rgba(240,165,0,.15),rgba(240,165,0,.05)); border:1px solid rgba(240,165,0,.2); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-    .contact-item h4 { font-size:.88rem; margin-bottom:4px; }
-    .contact-item p { font-size:.85rem; color:var(--text-mid); margin:0; }
-    .contact-item small { font-size:.77rem; color:var(--text-muted); display:block; margin-top:2px; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
 
-    .contact-form-wrap { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:44px 40px; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:18px; }
-    .form-group label { font-size:.8rem; font-weight:600; color:var(--text-mid); }
+    .contact-info-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .contact-info-card {
+      background: var(--white); border: 1.5px solid var(--slate-100); border-radius: var(--radius);
+      padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px;
+      transition: all var(--transition);
+    }
+    .contact-info-card:hover { border-color: var(--gold); transform: translateX(4px); }
+    .ci-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: var(--gold-pale); border: 1px solid rgba(245,158,11,.25);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .ci-card-title { font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .ci-card-val { font-size: .85rem; color: var(--text-muted); }
+    .ci-card-note { font-size: .75rem; color: var(--text-muted); margin-top: 2px; }
+
+    .quick-links-box { background: var(--slate-50); border: 1.5px solid var(--slate-100); border-radius: var(--radius); padding: 22px; }
+    .quick-links-box h5 { font-size: .72rem; font-weight: 800; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+    .ql-item { display: flex; align-items: center; gap: 10px; color: var(--text-mid); font-size: .86rem; padding: 9px 0; border-bottom: 1px solid var(--slate-100); text-decoration: none; transition: color .2s; }
+    .ql-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .ql-item:hover { color: var(--gold); }
+    .ql-item .arrow { color: var(--gold); font-weight: 800; }
+
+    .contact-form-card { background: var(--white); border: 1.5px solid var(--slate-100); border-radius: var(--radius-lg); padding: 44px 40px; box-shadow: var(--shadow-lg); }
+    .form-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .form-group label { font-size: .78rem; font-weight: 700; color: var(--text-mid); }
     .form-group input,
     .form-group select,
-    .form-group textarea { background:var(--bg-soft); border:1px solid var(--border); border-radius:10px; padding:12px 16px; font-family:'Inter',sans-serif; font-size:.88rem; color:var(--text); transition:border-color .2s, box-shadow .2s; outline:none; }
+    .form-group textarea {
+      background: var(--slate-50); border: 1.5px solid var(--slate-200); border-radius: 10px;
+      padding: 12px 16px; font-family: 'Inter',sans-serif; font-size: .88rem; color: var(--text);
+      transition: border-color .2s, box-shadow .2s; outline: none;
+    }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(240,165,0,.12); }
-    .form-group textarea { resize:vertical; min-height:120px; }
-    .form-submit { width:100%; justify-content:center; margin-top:4px; }
+    .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(245,158,11,.12); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; justify-content: center; margin-top: 4px; font-size: 1rem; padding: 16px; }
 
-    .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-    .trust-item { text-align:center; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 20px; transition:all .3s; }
-    .trust-item:hover { transform:translateY(-3px); border-color:var(--teal); box-shadow:0 8px 24px rgba(0,212,170,.08); }
-    .trust-icon { width:52px; height:52px; border-radius:14px; background:linear-gradient(135deg,rgba(0,212,170,.12),rgba(56,189,248,.08)); border:1px solid rgba(0,212,170,.2); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin:0 auto 16px; }
-    .trust-item h4 { font-size:.92rem; margin-bottom:6px; }
-    .trust-item p { font-size:.82rem; color:var(--text-muted); line-height:1.55; margin:0; }
+    .coverage-strip { background: var(--gold-pale); border: 1.5px solid rgba(245,158,11,.25); border-radius: var(--radius); padding: 20px 24px; margin-top: 24px; }
+    .coverage-strip p { font-size: .84rem; color: var(--text-mid); line-height: 1.65; }
+    .coverage-strip strong { color: var(--navy); }
 
-    .quick-links { background:var(--bg-soft); border:1px solid var(--border); border-radius:var(--radius); padding:24px; }
-    .quick-links h5 { font-size:.75rem; font-weight:700; color:var(--text-muted); letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px; }
-    .quick-link-item { display:flex; align-items:center; gap:10px; color:var(--text-mid); font-size:.88rem; padding:10px 0; border-bottom:1px solid var(--border); text-decoration:none; transition:color .2s; }
-    .quick-link-item:last-child { border-bottom:none; padding-bottom:0; }
-    .quick-link-item:hover { color:var(--gold-dark); }
-    .quick-link-item span { color:var(--gold-dark); font-weight:700; }
-
-    @media(max-width:900px){
-      .contact-grid { grid-template-columns:1fr; }
-      .trust-grid { grid-template-columns:repeat(2,1fr); }
-      .contact-form-wrap { padding:28px 20px; }
-      .form-row { grid-template-columns:1fr; }
-    }
-    @media(max-width:500px){ .trust-grid { grid-template-columns:1fr 1fr; } }
+    @media(max-width:960px){ .contact-layout { grid-template-columns: 1fr; } .contact-form-card { padding: 28px 20px; } .form-2col { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="/" class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/><line x1="6.3" y1="6.3" x2="9.2" y2="9.2"/><line x1="22.8" y1="22.8" x2="25.7" y2="25.7"/><line x1="25.7" y1="6.3" x2="22.8" y2="9.2"/><line x1="9.2" y1="22.8" x2="6.3" y2="25.7"/></g></svg>
-    Solar<span>OS</span>
+    <svg viewBox="0 0 32 32" fill="none" width="32" height="32"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="1" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="31"/><line x1="1" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="31" y2="16"/><line x1="5.5" y1="5.5" x2="9" y2="9"/><line x1="23" y1="23" x2="26.5" y2="26.5"/><line x1="26.5" y1="5.5" x2="23" y2="9"/><line x1="9" y1="23" x2="5.5" y2="26.5"/></g></svg>
+    Sunshine <span>Solar</span>
   </a>
   <ul class="nav-links">
     <li><a href="/">Home</a></li>
-    <li><a href="/services">Services</a></li>
+    <li><a href="/services">Products</a></li>
     <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact" class="nav-cta">Get Started Free</a></li>
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/contact" class="nav-cta active">Free Quote</a></li>
   </ul>
   <button class="nav-burger">☰</button>
 </nav>
 <nav class="nav-mobile">
-  <a href="/">Home</a><a href="/services">Services</a><a href="/pricing">Pricing</a><a href="/about">About</a>
-  <a href="/contact" class="nav-cta">Get Started Free</a>
+  <a href="/">Home</a><a href="/services">Products</a><a href="/pricing">Pricing</a>
+  <a href="/about">About Us</a><a href="/contact" class="nav-cta">Free Quote</a>
 </nav>
 
-<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="page-hero-content">
-    <div class="section-tag reveal">Get in Touch</div>
-    <h1 class="reveal">Let's get your solar working smarter.</h1>
-    <p class="reveal">Start your free account, ask us anything, or talk to our team about a custom plan for your business.</p>
-    <div class="reveal" style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:8px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--teal)">
-        ⚡ Response in under 4 hours
+    <div class="page-eyebrow fade-in">Free, No-Obligation</div>
+    <h1 class="fade-in delay-1">Book your free solar survey</h1>
+    <p class="fade-in delay-2">Fill in the form and we'll arrange a free home survey at a time that suits you. Our engineer will assess your roof, design your system and give you a full written quote — all at no cost.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap" class="fade-in delay-3">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.35);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:700;color:var(--gold)">
+        ⚡ Response within 4 hours
       </div>
-      <div style="display:flex;align-items:center;gap:8px;background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--gold-dark)">
-        ☀️ Free setup call available
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:700;color:#16a34a">
+        ✓ 100% free, no obligation
       </div>
     </div>
   </div>
-  <div class="page-hero-img">
-    <img src="https://images.unsplash.com/photo-1617886903355-9354bb57751f?w=1200&q=80&fit=crop" alt="Solar panels on a modern home rooftop">
+  <div class="page-hero-img fade-in delay-2">
+    <img src="https://images.unsplash.com/photo-1617886903355-9354bb57751f?w=900&q=80&fit=crop" alt="Solar panels on a modern UK home rooftop">
   </div>
 </div>
 
 <!-- CONTACT SECTION -->
 <section class="section">
   <div class="container">
-    <div class="contact-grid">
+    <div class="contact-layout">
 
-      <!-- LEFT: Info -->
-      <div class="contact-info">
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">📧</div>
-          <div>
-            <h4>Email Us</h4>
-            <p>hello@solaros.io</p>
-            <small>We reply within 4 business hours</small>
+      <!-- LEFT -->
+      <div>
+        <div class="section-eyebrow reveal" style="margin-bottom:20px">Get In Touch</div>
+        <div class="contact-info-cards">
+          <div class="contact-info-card reveal">
+            <div class="ci-icon">📞</div>
+            <div>
+              <div class="ci-card-title">Call Us</div>
+              <div class="ci-card-val">0117 900 1820</div>
+              <div class="ci-card-note">Mon–Fri 8am–6pm, Sat 9am–1pm</div>
+            </div>
           </div>
-        </div>
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">📞</div>
-          <div>
-            <h4>Call Us</h4>
-            <p>+44 117 900 1820</p>
-            <small>Mon–Fri, 9am–6pm GMT</small>
+          <div class="contact-info-card reveal">
+            <div class="ci-icon">📧</div>
+            <div>
+              <div class="ci-card-title">Email Us</div>
+              <div class="ci-card-val">hello@sunshinesolar.co.uk</div>
+              <div class="ci-card-note">We reply within 4 business hours</div>
+            </div>
           </div>
-        </div>
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">📍</div>
-          <div>
-            <h4>Visit Us</h4>
-            <p>Unit 4, Paintworks, Bath Road<br>Bristol, BS4 3EH, UK</p>
+          <div class="contact-info-card reveal">
+            <div class="ci-icon">📍</div>
+            <div>
+              <div class="ci-card-title">Head Office</div>
+              <div class="ci-card-val">Unit 12, The Paintworks<br>Bath Road, Bristol BS4 3EH</div>
+            </div>
           </div>
-        </div>
-        <div class="contact-item reveal">
-          <div class="contact-item-icon">💬</div>
-          <div>
-            <h4>Live Chat</h4>
-            <p>Available in the app Mon–Sat</p>
-            <small>Typical response: under 2 minutes</small>
+          <div class="contact-info-card reveal">
+            <div class="ci-icon">💬</div>
+            <div>
+              <div class="ci-card-title">Live Chat</div>
+              <div class="ci-card-val">Available on the website Mon–Sat</div>
+              <div class="ci-card-note">Typical response under 2 minutes</div>
+            </div>
           </div>
         </div>
 
-        <div class="quick-links reveal">
-          <h5>Quick Links</h5>
-          <a href="/pricing" class="quick-link-item"><span>→</span> View pricing plans</a>
-          <a href="/services" class="quick-link-item"><span>→</span> Explore all features</a>
-          <a href="/about" class="quick-link-item"><span>→</span> Meet the team</a>
-          <a href="#" class="quick-link-item"><span>→</span> Help centre &amp; docs</a>
+        <div class="coverage-strip reveal">
+          <p><strong>We cover the whole of England and Wales</strong> — with regional teams based in Bristol, Birmingham, Leeds and Manchester. We typically survey within 3–5 working days of your enquiry.</p>
+        </div>
+
+        <div class="quick-links-box reveal" style="margin-top:20px">
+          <h5>Useful Links</h5>
+          <a href="/pricing" class="ql-item"><span class="arrow">→</span> View our pricing packages</a>
+          <a href="/services" class="ql-item"><span class="arrow">→</span> Explore all products & services</a>
+          <a href="/about" class="ql-item"><span class="arrow">→</span> About Sunshine Solar</a>
+          <a href="#faq" class="ql-item"><span class="arrow">→</span> Common questions</a>
         </div>
       </div>
 
       <!-- RIGHT: Form -->
-      <div class="contact-form-wrap reveal">
-        <h2 style="font-size:1.6rem;margin-bottom:8px">Send us a message</h2>
-        <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:32px">Fill in the form and we'll get back to you within one business day.</p>
+      <div class="contact-form-card reveal">
+        <h2 style="font-size:1.55rem;margin-bottom:6px">Request your free survey</h2>
+        <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:30px">Fill in the form below and we'll be in touch within 4 hours to arrange your free home survey.</p>
 
         <form id="contact-form">
-          <div class="form-row">
+          <div class="form-2col">
             <div class="form-group">
-              <label>First name</label>
+              <label>First name *</label>
               <input type="text" placeholder="James" required>
             </div>
             <div class="form-group">
-              <label>Last name</label>
+              <label>Last name *</label>
               <input type="text" placeholder="Morris" required>
             </div>
           </div>
           <div class="form-group">
-            <label>Email address</label>
+            <label>Email address *</label>
             <input type="email" placeholder="james@example.com" required>
           </div>
           <div class="form-group">
-            <label>Phone number (optional)</label>
-            <input type="tel" placeholder="+44 7700 000000">
+            <label>Phone number *</label>
+            <input type="tel" placeholder="+44 7700 000 000" required>
           </div>
           <div class="form-group">
-            <label>What can we help you with?</label>
+            <label>Property postcode *</label>
+            <input type="text" placeholder="BS1 4DJ" required>
+          </div>
+          <div class="form-group">
+            <label>What are you interested in? *</label>
             <select required>
-              <option value="" disabled selected>Select a topic…</option>
-              <option>I want to get started with SolarOS</option>
-              <option>I'm an installer / business</option>
-              <option>I have a technical question</option>
-              <option>I want to see a demo</option>
-              <option>Billing or account query</option>
-              <option>Press or partnership enquiry</option>
-              <option>Something else</option>
+              <option value="" disabled selected>Select a product…</option>
+              <option>Solar panels only</option>
+              <option>Solar panels + battery storage</option>
+              <option>Battery storage only (retrofit)</option>
+              <option>EV charger</option>
+              <option>Solar + battery + EV charger</option>
+              <option>Commercial solar</option>
+              <option>Not sure — need advice</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Tell us more</label>
-            <textarea placeholder="How many panels do you have? What inverter brand? Any specific questions? We love detail."></textarea>
+            <label>Property type</label>
+            <select>
+              <option value="" disabled selected>Select…</option>
+              <option>Detached house</option>
+              <option>Semi-detached house</option>
+              <option>Terraced house</option>
+              <option>Bungalow</option>
+              <option>Flat / Apartment</option>
+              <option>Commercial / Industrial</option>
+            </select>
           </div>
-          <div class="form-group" style="flex-direction:row;align-items:center;gap:12px;margin-bottom:24px">
-            <input type="checkbox" id="consent" required style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0">
-            <label for="consent" style="font-size:.82rem;color:var(--text-muted);font-weight:400;cursor:pointer">I agree to SolarOS processing my data to respond to this enquiry. <a href="#" style="color:var(--gold-dark)">Privacy policy</a>.</label>
+          <div class="form-group">
+            <label>Anything else we should know? (optional)</label>
+            <textarea placeholder="e.g. my roof faces south, I have an EV, I'm on a time-of-use tariff, I'd like finance options…"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+          <div class="form-group" style="flex-direction:row;align-items:flex-start;gap:12px;margin-bottom:24px">
+            <input type="checkbox" id="consent" required style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;margin-top:2px">
+            <label for="consent" style="font-size:.8rem;color:var(--text-muted);font-weight:400;cursor:pointer;line-height:1.6">I agree to Sunshine Solar contacting me about this enquiry and processing my data in line with their <a href="#" style="color:var(--gold)">Privacy Policy</a>.</label>
+          </div>
+          <button type="submit" class="btn btn-gold form-submit">☀️ Book My Free Survey</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST SIGNALS -->
-<section class="section bg-alt">
+<!-- TRUST SECTION -->
+<section class="section bg-slate" id="faq">
   <div class="container">
-    <div class="section-header center" style="margin-bottom:32px">
-      <div class="section-tag reveal">Why Choose Us</div>
-      <h2 class="section-title reveal">Built on trust</h2>
+    <div class="section-header center">
+      <div class="section-eyebrow reveal">Why Choose Us</div>
+      <h2 class="section-title reveal">What to expect when you contact us</h2>
     </div>
-    <div class="trust-grid">
-      <div class="trust-item reveal">
-        <div class="trust-icon">🔒</div>
-        <h4>SSL Encrypted</h4>
-        <p>All data encrypted in transit and at rest on UK servers.</p>
+    <div class="guarantee-grid" style="max-width:900px;margin:0 auto">
+      <div class="guarantee-item reveal" style="background:var(--white);border-color:var(--slate-100)">
+        <span class="guarantee-icon" style="font-size:1.8rem">📱</span>
+        <h4 style="color:var(--navy)">We reply within 4 hours</h4>
+        <p style="color:var(--text-muted)">Every enquiry is acknowledged within 4 business hours. We'll suggest survey times that work for you.</p>
       </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">✅</div>
-        <h4>GDPR Compliant</h4>
-        <p>Your data is yours. We follow all UK GDPR requirements fully.</p>
+      <div class="guarantee-item reveal" style="background:var(--white);border-color:var(--slate-100)">
+        <span class="guarantee-icon" style="font-size:1.8rem">🏠</span>
+        <h4 style="color:var(--navy)">Free home survey</h4>
+        <p style="color:var(--text-muted)">Your engineer visits your property, assesses your roof and gives you a no-obligation written proposal.</p>
       </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">🚀</div>
-        <h4>99.9% Uptime</h4>
-        <p>Our infrastructure runs on AWS London with full redundancy.</p>
+      <div class="guarantee-item reveal" style="background:var(--white);border-color:var(--slate-100)">
+        <span class="guarantee-icon" style="font-size:1.8rem">🤝</span>
+        <h4 style="color:var(--navy)">No pressure, no hard sell</h4>
+        <p style="color:var(--text-muted)">Our engineers don't work on commission. You'll get honest advice, whatever that turns out to be.</p>
       </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">🤝</div>
-        <h4>No Lock-In</h4>
-        <p>Cancel any time. Export all your data in one click, for free.</p>
+      <div class="guarantee-item reveal" style="background:var(--white);border-color:var(--slate-100)">
+        <span class="guarantee-icon" style="font-size:1.8rem">💷</span>
+        <h4 style="color:var(--navy)">Finance options available</h4>
+        <p style="color:var(--text-muted)">0% interest and low-rate loans available. We'll include finance options in your quote with no obligation.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
-      <div class="footer-brand"><div class="logo"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f0a500"/><g stroke="#f0a500" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>Solar<span>OS</span></div><p>The world's most trusted solar energy management platform.</p></div>
-      <div class="footer-col"><h4>Product</h4><ul><li><a href="/services">Features</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/services">Integrations</a></li></ul></div>
-      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About Us</a></li><li><a href="/contact">Contact</a></li><li><a href="/about">Careers</a></li></ul></div>
-      <div class="footer-col"><h4>Support</h4><ul><li><a href="/contact">Help Centre</a></li><li><a href="/contact">API Docs</a></li><li><a href="/contact">Status Page</a></li></ul></div>
+      <div class="footer-brand">
+        <div class="nav-logo" style="color:#fff"><svg viewBox="0 0 32 32" fill="none" width="28" height="28"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>Sunshine <span style="color:var(--gold)">Solar</span></div>
+        <p>Premium solar panels and battery storage, expertly installed across the UK since 2010.</p>
+        <div class="footer-cert"><span class="cert-badge">MCS Certified</span><span class="cert-badge">NICEIC Approved</span><span class="cert-badge">Which? Trusted</span><span class="cert-badge">TrustMark</span></div>
+      </div>
+      <div class="footer-col"><h4>Products</h4><ul><li><a href="/services">Solar Panels</a></li><li><a href="/services">Battery Storage</a></li><li><a href="/services">Commercial Solar</a></li><li><a href="/services">EV Chargers</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="/about">About Us</a></li><li><a href="/about">Our Team</a></li><li><a href="/about">Certifications</a></li><li><a href="/contact">Careers</a></li></ul></div>
+      <div class="footer-col"><h4>Get In Touch</h4><ul><li><a href="/contact">Free Survey</a></li><li><a href="/pricing">Packages & Pricing</a></li><li><a href="tel:+441179001820">📞 0117 900 1820</a></li><li><a href="mailto:hello@sunshinesolar.co.uk">✉️ hello@sunshinesolar.co.uk</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 SolarOS Ltd. All rights reserved.</p><div class="footer-socials"><a href="#">𝕏</a><a href="#">in</a><a href="#">f</a></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:12px">
+      <p>© 2026 Sunshine Solar Ltd. All rights reserved. Company No. 07341820.</p>
+      <div style="display:flex;gap:16px"><a href="#" style="color:rgba(255,255,255,.35)">Privacy Policy</a><a href="#" style="color:rgba(255,255,255,.35)">Terms</a></div>
+    </div>
   </div>
 </footer>
 

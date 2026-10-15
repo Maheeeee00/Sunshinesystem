@@ -103,15 +103,15 @@ if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
   }, { passive: true });
 }
 
-// ── Ticking live kW on hero card ──────────────────────────
-(function liveKw() {
-  const kpiEl = document.querySelector('.hero-card-kpi');
-  if (!kpiEl) return;
-  let base = 8.4;
+// ── Savings counter pulse on hero card ──────────────────────
+(function pulseSaving() {
+  const el = document.querySelector('.saving-val.gold');
+  if (!el) return;
   setInterval(() => {
-    base = Math.max(5.0, Math.min(12.0, base + (Math.random() - 0.48) * 0.15));
-    kpiEl.textContent = base.toFixed(1) + ' kW';
-  }, 3200);
+    el.style.transform = 'scale(1.04)';
+    el.style.transition = 'transform .3s ease';
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 300);
+  }, 4000);
 })();
 
 // ── Trusted logos duplicate for infinite scroll ───────────
