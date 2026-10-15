@@ -34,21 +34,27 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-content">
     <div class="section-tag reveal">Our Services</div>
-    <h1 class="reveal">Everything your solar system needs,<br><span style="color:#d97706">in one platform.</span></h1>
+    <h1 class="reveal">Everything your solar system needs,<br>in one platform.</h1>
     <p class="reveal">From simple home monitoring to enterprise-grade fleet management — SolarOS scales with you.</p>
+  </div>
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80&fit=crop" alt="Solar panels on rooftop">
   </div>
 </div>
 
 <!-- SERVICES -->
-<section class="section">
-  <div class="container">
+<section class="section" style="padding-top:0;padding-bottom:0">
+  <div style="max-width:100%">
 
-    <!-- 1 -->
+    <!-- 1 — Real-Time Monitoring -->
     <div class="service-row">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&fit=crop" alt="Solar monitoring dashboard on tablet">
+      </div>
       <div class="service-content reveal">
-        <div class="service-icon-big">☀️</div>
+        <div class="section-tag">Monitoring</div>
         <h2>Real-Time Monitoring</h2>
         <p>See your system's live performance down to the panel level. SolarOS connects directly to your inverter and displays data updated every 5 seconds — so you always know exactly what your solar array is doing.</p>
         <ul class="service-list">
@@ -59,25 +65,16 @@
           <li>iOS and Android apps with home screen widgets</li>
         </ul>
       </div>
-      <div class="service-visual reveal">
-        <div style="text-align:center;width:100%">
-          <div style="font-size:5rem;margin-bottom:16px;">📡</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:2.8rem;font-weight:900;color:#d97706;margin-bottom:8px;">8.4 kW</div>
-          <div style="font-size:.9rem;color:var(--text-muted)">Live right now</div>
-          <div style="margin-top:24px;display:flex;gap:16px;justify-content:center">
-            <div style="text-align:center"><div style="font-size:1.3rem;font-weight:800;font-family:'Outfit',sans-serif;color:#0d9488">47.2</div><div style="font-size:.75rem;color:var(--text-muted)">kWh today</div></div>
-            <div style="text-align:center"><div style="font-size:1.3rem;font-weight:800;font-family:'Outfit',sans-serif;color:#0284c7">240V</div><div style="font-size:.75rem;color:var(--text-muted)">Grid voltage</div></div>
-            <div style="text-align:center"><div style="font-size:1.3rem;font-weight:800;font-family:'Outfit',sans-serif;color:#d97706">38°C</div><div style="font-size:.75rem;color:var(--text-muted)">Panel temp</div></div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- 2 -->
+    <!-- 2 — Analytics (reversed) -->
     <div class="service-row" style="direction:rtl">
-      <div class="service-content reveal" style="direction:ltr">
-        <div class="service-icon-big" style="background:rgba(0,212,170,.12);border-color:rgba(0,212,170,.25)">📊</div>
-        <h2>Smart Analytics & Reporting</h2>
+      <div class="service-img" style="direction:ltr">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80&fit=crop" alt="Analytics dashboard with charts">
+      </div>
+      <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
+        <div class="section-tag">Analytics</div>
+        <h2>Smart Analytics &amp; Reporting</h2>
         <p>Turn raw data into actionable insight. SolarOS's analytics engine crunches your historical data to reveal trends, forecast performance, and calculate your true return on investment down to the penny.</p>
         <ul class="service-list">
           <li>14-day, monthly, and yearly production charts</li>
@@ -87,27 +84,16 @@
           <li>Exportable PDF and CSV reports for your installer or accountant</li>
         </ul>
       </div>
-      <div class="service-visual reveal" style="direction:ltr">
-        <div style="text-align:center;width:100%">
-          <div style="font-size:5rem;margin-bottom:16px;">📈</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:16px">This Month vs Last Month</div>
-          <div style="display:flex;gap:8px;align-items:flex-end;justify-content:center;height:80px">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:rgba(240,165,0,.35);border-radius:4px 4px 0 0" class="viz-bar" data-h="60%"></div><div style="font-size:.65rem;color:var(--text-muted)">Oct</div></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:rgba(240,165,0,.45);border-radius:4px 4px 0 0" class="viz-bar" data-h="75%"></div><div style="font-size:.65rem;color:var(--text-muted)">Nov</div></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:rgba(240,165,0,.55);border-radius:4px 4px 0 0" class="viz-bar" data-h="50%"></div><div style="font-size:.65rem;color:var(--text-muted)">Dec</div></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:rgba(240,165,0,.5);border-radius:4px 4px 0 0" class="viz-bar" data-h="58%"></div><div style="font-size:.65rem;color:var(--text-muted)">Jan</div></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:rgba(240,165,0,.6);border-radius:4px 4px 0 0" class="viz-bar" data-h="72%"></div><div style="font-size:.65rem;color:var(--text-muted)">Feb</div></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:28px;background:var(--gold);border-radius:4px 4px 0 0" class="viz-bar" data-h="95%"></div><div style="font-size:.65rem;color:var(--text-muted)">Mar</div></div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- 3 -->
+    <!-- 3 — Smart Alerts -->
     <div class="service-row">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1601751818941-571144562016?w=1000&q=80&fit=crop" alt="Smartphone with notifications">
+      </div>
       <div class="service-content reveal">
-        <div class="service-icon-big" style="background:#fff7ed;border-color:rgba(255,124,32,.25)">🔔</div>
-        <h2>Smart Alerts & Fault Detection</h2>
+        <div class="section-tag">Alerts</div>
+        <h2>Smart Alerts &amp; Fault Detection</h2>
         <p>SolarOS monitors your system around the clock and sends instant alerts when something goes wrong — or when performance dips below what it should be. Catch issues before they cost you money.</p>
         <ul class="service-list">
           <li>Panel-level fault detection via string analysis</li>
@@ -117,30 +103,15 @@
           <li>Historical alert log with resolution tracking</li>
         </ul>
       </div>
-      <div class="service-visual reveal">
-        <div style="width:100%">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:center">
-              <span style="font-size:1.2rem">⚠️</span>
-              <div><div style="font-size:.85rem;font-weight:600;color:var(--text)">Panel 3B underperforming</div><div style="font-size:.75rem;color:var(--text-muted)">12% below expected — check shading</div></div>
-            </div>
-            <div style="background:#f0fdf4;border:1px solid #99f6e4;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:center">
-              <span style="font-size:1.2rem">✅</span>
-              <div><div style="font-size:.85rem;font-weight:600;color:var(--text)">Battery fully charged</div><div style="font-size:.75rem;color:var(--text-muted)">Ready to power your evening</div></div>
-            </div>
-            <div style="background:#eff6ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:center">
-              <span style="font-size:1.2rem">☀️</span>
-              <div><div style="font-size:.85rem;font-weight:600;color:var(--text)">Peak production window</div><div style="font-size:.75rem;color:var(--text-muted)">Run heavy appliances now to save</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- 4 -->
+    <!-- 4 — AI Optimisation (reversed) -->
     <div class="service-row" style="direction:rtl">
-      <div class="service-content reveal" style="direction:ltr">
-        <div class="service-icon-big" style="background:#eff6ff;border-color:rgba(56,189,248,.25)">🤖</div>
+      <div class="service-img" style="direction:ltr">
+        <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=1000&q=80&fit=crop" alt="Modern smart home energy management">
+      </div>
+      <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
+        <div class="section-tag">AI</div>
         <h2>AI Energy Optimisation</h2>
         <p>Our AI engine learns your home's energy patterns, your tariff structure, and local weather forecasts to make intelligent recommendations — and in supported setups, automate them for you.</p>
         <ul class="service-list">
@@ -151,23 +122,15 @@
           <li>Compatible with Tesla Powerwall, Givenergy, SolarEdge battery</li>
         </ul>
       </div>
-      <div class="service-visual reveal" style="direction:ltr">
-        <div style="text-align:center;width:100%">
-          <div style="font-size:4rem;margin-bottom:16px;">🧠</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:20px">AI Saving Opportunity</div>
-          <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:12px;padding:20px;text-align:left">
-            <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:6px">Today's recommendation</div>
-            <div style="font-size:.95rem;color:var(--text);margin-bottom:12px">Run dishwasher at 1pm — solar peak window. Save approx. <strong style="color:#d97706">£0.38</strong> today.</div>
-            <div style="display:inline-block;padding:6px 16px;background:var(--gold);color:var(--navy);border-radius:50px;font-size:.8rem;font-weight:700">Apply Automatically</div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- 5 -->
+    <!-- 5 — Commercial Fleet -->
     <div class="service-row" style="border-bottom:none">
+      <div class="service-img">
+        <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1000&q=80&fit=crop" alt="Large commercial solar farm aerial view">
+      </div>
       <div class="service-content reveal">
-        <div class="service-icon-big" style="background:rgba(163,230,53,.12);border-color:rgba(163,230,53,.25)">🏢</div>
+        <div class="section-tag">Enterprise</div>
         <h2>Commercial Fleet Management</h2>
         <p>Managing multiple sites? SolarOS Pro gives installers and commercial operators a single dashboard to oversee every installation — with client portals, white-labelling, and API access included.</p>
         <ul class="service-list">
@@ -177,18 +140,7 @@
           <li>SLA tracking and maintenance scheduling</li>
           <li>REST API and webhook integrations for your own systems</li>
         </ul>
-        <a href="/contact" class="btn btn-primary" style="margin-top:24px">Talk to Sales &rarr;</a>
-      </div>
-      <div class="service-visual reveal">
-        <div style="text-align:center;width:100%">
-          <div style="font-size:4rem;margin-bottom:16px;">🗺️</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.82rem">
-            <div style="background:#f0fdf4;border:1px solid #99f6e4;border-radius:10px;padding:12px;text-align:left"><div style="color:#0d9488;font-weight:700;font-size:1.2rem">43</div><div style="color:var(--text-muted)">Sites online</div></div>
-            <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:12px;text-align:left"><div style="color:#c2410c;font-weight:700;font-size:1.2rem">2</div><div style="color:var(--text-muted)">Needs attention</div></div>
-            <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:10px;padding:12px;text-align:left"><div style="color:#d97706;font-weight:700;font-size:1.2rem">8.4 MW</div><div style="color:var(--text-muted)">Total output now</div></div>
-            <div style="background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:12px;text-align:left"><div style="color:#0284c7;font-weight:700;font-size:1.2rem">£12K</div><div style="color:var(--text-muted)">Client savings today</div></div>
-          </div>
-        </div>
+        <a href="/contact" class="btn btn-primary" style="margin-top:24px;align-self:flex-start">Talk to Sales &rarr;</a>
       </div>
     </div>
 
@@ -196,13 +148,15 @@
 </section>
 
 <!-- CTA BAND -->
-<div class="cta-band">
-  <div class="container">
-    <h2>Find the right plan for you</h2>
-    <p>Whether you're a homeowner with 6 panels or an installer managing 500 sites, there's a SolarOS plan built for you.</p>
+<div class="cta-band" style="position:relative;overflow:hidden">
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&fit=crop')"></div>
+  <div class="cta-band-overlay"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <h2 style="color:#fff">Find the right plan for you</h2>
+    <p style="color:rgba(255,255,255,.75)">Whether you're a homeowner with 6 panels or an installer managing 500 sites, there's a SolarOS plan built for you.</p>
     <div class="cta-btns">
       <a href="/pricing" class="btn btn-primary">See Pricing &rarr;</a>
-      <a href="/contact" class="btn btn-outline">Contact Sales</a>
+      <a href="/contact" class="btn btn-white">Contact Sales</a>
     </div>
   </div>
 </div>
@@ -227,13 +181,5 @@
 </footer>
 
 <script src="js/main.js"></script>
-<script>
-// Animate the bar chart viz on scroll
-const bars = document.querySelectorAll('.viz-bar');
-const bo = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.style.height = e.target.dataset.h; bo.unobserve(e.target); }
-}), {threshold:.3});
-bars.forEach(b => { b.style.height = '0'; b.style.transition = 'height .8s ease'; bo.observe(b); });
-</script>
 </body>
 </html>

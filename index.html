@@ -34,17 +34,18 @@
 
 <!-- HERO -->
 <section class="hero">
-  <canvas id="hero-canvas" class="hero-canvas"></canvas>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badge fade-in">
         <span class="dot"></span> Trusted by 12,000+ homeowners
       </div>
       <h1 class="fade-in delay-1">Harness the Sun.<br>Power Your <span class="highlight">Future.</span></h1>
-      <p class="hero-desc fade-in delay-2">SolarOS gives you a complete view of your solar energy system — real-time output, savings tracking, alerts, and AI-driven optimisation, all in one beautiful platform.</p>
+      <p class="hero-desc fade-in delay-2">SolarOS gives you a complete view of your solar energy system — real-time output, savings tracking, alerts, and AI-driven optimisation, all in one platform.</p>
       <div class="hero-btns fade-in delay-3">
-        <a href="/contact" class="btn btn-primary">Start for Free &rarr;</a>
-        <a href="/services" class="btn btn-outline">See How It Works</a>
+        <a href="/contact" class="btn btn-white">Start for Free →</a>
+        <a href="/services" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35)">See How It Works</a>
       </div>
       <div class="hero-stats fade-in delay-3">
         <div class="hero-stat">
@@ -62,7 +63,7 @@
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-card" style="animation: float 5s ease-in-out infinite;">
+      <div class="hero-card" style="animation: fadeInUp .8s .3s ease both">
         <div class="hero-card-title">Live System Output</div>
         <div class="hero-card-kpi">8.4 kW</div>
         <div class="hero-card-sub">↑ 12% above forecast today</div>
@@ -84,6 +85,16 @@
           </div>
         </div>
       </div>
+      <div class="hero-mini-cards" style="animation: fadeInUp .8s .5s ease both">
+        <div class="hero-mini-card">
+          <div class="mini-val">£184</div>
+          <div class="mini-lbl">Saved this month</div>
+        </div>
+        <div class="hero-mini-card">
+          <div class="mini-val">47 kg</div>
+          <div class="mini-lbl">CO₂ avoided</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -103,81 +114,68 @@
   </div>
 </div>
 
-<!-- FEATURES -->
-<section class="section bg-white">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-tag reveal">Everything You Need</div>
-      <h2 class="section-title reveal">A smarter way to<br>manage solar energy</h2>
-      <p class="section-sub reveal">From installation to optimisation, SolarOS gives you the tools to get the most from every ray of sunshine.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feat-card reveal">
-        <div class="feat-icon gold">☀️</div>
-        <h3>Real-Time Monitoring</h3>
-        <p>Watch your panels produce energy live. Track output, voltage, current, and temperature from any device, anywhere in the world.</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon teal">📊</div>
-        <h3>Smart Analytics</h3>
-        <p>Understand your energy patterns with beautiful charts, forecasts, and year-over-year comparisons. Know exactly what's working.</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon blue">🔔</div>
-        <h3>Instant Alerts</h3>
-        <p>Get notified the moment something needs attention. Smart fault detection catches issues before they become costly repairs.</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon amber">💰</div>
-        <h3>Savings Tracker</h3>
-        <p>See your exact savings, feed-in earnings, and CO₂ offset in real time. SolarOS makes the financial case clear and compelling.</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon purple">🤖</div>
-        <h3>AI Optimisation</h3>
-        <p>Our AI learns your energy usage and weather patterns to shift loads automatically, maximising self-consumption every day.</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon green">🔌</div>
-        <h3>Easy Integrations</h3>
-        <p>Connect to your inverter, smart home, weather services, and billing tools. Over 30 integrations with more added every month.</p>
-      </div>
+<!-- IMAGE FEATURE — Monitoring -->
+<div class="img-row">
+  <div class="img-row-img">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop" alt="Solar panels on a modern rooftop" loading="lazy">
+  </div>
+  <div class="img-row-content" style="padding: 80px 72px;">
+    <div class="section-tag reveal">Real-Time Monitoring</div>
+    <h2 class="reveal" style="font-size:clamp(1.9rem,2.8vw,2.5rem);margin-bottom:18px">Know exactly what your panels are doing — right now.</h2>
+    <p class="reveal" style="color:var(--text-muted);margin-bottom:28px;line-height:1.85">Live output, voltage, battery state, and grid flow updated every 5 seconds. SolarOS connects directly to your inverter — no extra hardware needed.</p>
+    <ul class="feat-list reveal">
+      <li><span class="feat-check">✓</span> 40+ inverter brands supported</li>
+      <li><span class="feat-check">✓</span> Panel-level performance data</li>
+      <li><span class="feat-check">✓</span> iOS &amp; Android with home screen widgets</li>
+      <li><span class="feat-check">✓</span> Battery &amp; grid import/export tracking</li>
+    </ul>
+    <div class="reveal">
+      <a href="/services" class="btn btn-primary">Explore Monitoring →</a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- HOW IT WORKS -->
-<section class="section bg-alt">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-tag reveal">How It Works</div>
-      <h2 class="section-title reveal">Up and running in minutes</h2>
-      <p class="section-sub reveal">No technical knowledge needed. If you have solar panels, SolarOS can connect to them and start working today.</p>
-    </div>
-    <div class="how-grid">
-      <div class="how-step reveal">
-        <div class="how-num">1</div>
-        <h3>Connect Your System</h3>
-        <p>Enter your inverter details or scan the QR code on your equipment. SolarOS auto-discovers your setup in seconds.</p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-num">2</div>
-        <h3>See Live Data</h3>
-        <p>Your dashboard goes live immediately with real-time output, battery status, and grid import/export data.</p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-num">3</div>
-        <h3>Get Smart Insights</h3>
-        <p>SolarOS analyses your usage and weather to surface savings tips and spot any underperforming panels automatically.</p>
-      </div>
-      <div class="how-step reveal">
-        <div class="how-num">4</div>
-        <h3>Save More Every Day</h3>
-        <p>Watch your savings grow month on month. Share reports with your energy provider or installer at the tap of a button.</p>
-      </div>
+<!-- IMAGE FEATURE — Analytics -->
+<div class="img-row reverse">
+  <div class="img-row-img">
+    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop" alt="Data analytics dashboard" loading="lazy">
+  </div>
+  <div class="img-row-content soft" style="padding: 80px 72px;">
+    <div class="section-tag reveal">Smart Analytics</div>
+    <h2 class="reveal" style="font-size:clamp(1.9rem,2.8vw,2.5rem);margin-bottom:18px">Turn data into decisions that save you money.</h2>
+    <p class="reveal" style="color:var(--text-muted);margin-bottom:28px;line-height:1.85">Historical charts, weather correlation, CO₂ tracking, and a live savings calculator — all in one clean dashboard built for clarity, not complexity.</p>
+    <ul class="feat-list reveal">
+      <li><span class="feat-check">✓</span> Year-on-year production comparison</li>
+      <li><span class="feat-check">✓</span> Real-time savings &amp; ROI tracker</li>
+      <li><span class="feat-check">✓</span> PDF &amp; CSV export in one click</li>
+      <li><span class="feat-check">✓</span> Weather-adjusted forecasting</li>
+    </ul>
+    <div class="reveal">
+      <a href="/services" class="btn btn-primary">Explore Analytics →</a>
     </div>
   </div>
-</section>
+</div>
+
+<!-- IMAGE FEATURE — AI -->
+<div class="img-row">
+  <div class="img-row-img">
+    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&q=80&fit=crop" alt="Modern sustainable home with solar" loading="lazy">
+  </div>
+  <div class="img-row-content dark" style="padding: 80px 72px;">
+    <div class="section-tag reveal" style="color:#fbbf24"><span style="background:#fbbf24;display:inline-block;width:18px;height:2px;border-radius:2px;margin-right:8px;vertical-align:middle"></span>AI Optimisation</div>
+    <h2 class="reveal" style="font-size:clamp(1.9rem,2.8vw,2.5rem);margin-bottom:18px;color:#fff">Your solar system, always running at its best.</h2>
+    <p class="reveal" style="color:rgba(255,255,255,.6);margin-bottom:28px;line-height:1.85">Our AI learns your energy patterns and local weather to shift loads automatically — shifting EV charging, heating, and appliances to peak solar hours without you lifting a finger.</p>
+    <ul class="feat-list reveal">
+      <li><span class="feat-check" style="color:#34d399">✓</span> <span style="color:rgba(255,255,255,.75)">Automated load shifting</span></li>
+      <li><span class="feat-check" style="color:#34d399">✓</span> <span style="color:rgba(255,255,255,.75)">EV charging optimisation</span></li>
+      <li><span class="feat-check" style="color:#34d399">✓</span> <span style="color:rgba(255,255,255,.75)">Weather-aware battery scheduling</span></li>
+      <li><span class="feat-check" style="color:#34d399">✓</span> <span style="color:rgba(255,255,255,.75)">Avg. 18% more self-consumption</span></li>
+    </ul>
+    <div class="reveal">
+      <a href="/services" class="btn btn-gold">Explore AI Features →</a>
+    </div>
+  </div>
+</div>
 
 <!-- STATS BAND -->
 <div class="stats-band">
@@ -201,8 +199,41 @@
   </div>
 </div>
 
+<!-- HOW IT WORKS -->
+<section class="section bg-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag reveal">How It Works</div>
+      <h2 class="section-title reveal">Up and running in minutes</h2>
+      <p class="section-sub reveal">No technical knowledge needed. If you have solar panels, SolarOS can connect to them today.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Connect Your System</h3>
+        <p>Enter your inverter details or scan its QR code. SolarOS auto-discovers your setup in seconds — no engineer needed.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>See Live Data</h3>
+        <p>Your dashboard goes live immediately with real-time output, battery status, and grid import/export data.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Get Smart Insights</h3>
+        <p>SolarOS analyses your usage and weather to surface savings tips and spot underperforming panels automatically.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h3>Save More Every Day</h3>
+        <p>Watch your savings grow month on month. Share reports with your energy provider at the tap of a button.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TESTIMONIALS -->
-<section class="section bg-white">
+<section class="section">
   <div class="container">
     <div class="section-header center">
       <div class="section-tag reveal">Customer Stories</div>
@@ -214,10 +245,7 @@
         <p class="testi-text">"Before SolarOS I had no idea what my panels were actually doing. Now I check my app every morning like the news. My energy bill is down £180 a month."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#f97316)">SR</div>
-          <div>
-            <div class="testi-name">Sarah R.</div>
-            <div class="testi-role">Homeowner, Bristol</div>
-          </div>
+          <div><div class="testi-name">Sarah R.</div><div class="testi-role">Homeowner, Bristol</div></div>
         </div>
       </div>
       <div class="testi-card reveal">
@@ -225,10 +253,7 @@
         <p class="testi-text">"We manage 40 commercial installations across the South East. SolarOS is the only platform that gives us everything in one place — alerts, reports, client portals, the lot."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#0d9488,#0ea5e9)">MH</div>
-          <div>
-            <div class="testi-name">Marcus H.</div>
-            <div class="testi-role">Director, SolarFirst Ltd</div>
-          </div>
+          <div><div class="testi-name">Marcus H.</div><div class="testi-role">Director, SolarFirst Ltd</div></div>
         </div>
       </div>
       <div class="testi-card reveal">
@@ -236,10 +261,7 @@
         <p class="testi-text">"The AI optimisation paid for the Pro plan in the first month. It automatically shifted our EV charging to peak solar hours — saved us about £300 straight away."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#22c55e,#0d9488)">TK</div>
-          <div>
-            <div class="testi-name">Tom K.</div>
-            <div class="testi-role">EV owner, Manchester</div>
-          </div>
+          <div><div class="testi-name">Tom K.</div><div class="testi-role">EV owner, Manchester</div></div>
         </div>
       </div>
     </div>
@@ -248,13 +270,13 @@
 
 <!-- CTA BAND -->
 <div class="cta-band">
-  <div class="container">
-    <h2>Ready to take control of<br>your solar energy?</h2>
-    <p>Join 12,000+ households and businesses already saving more with SolarOS. Free to start — no credit card required.</p>
-    <div class="cta-btns">
-      <a href="/contact" class="btn btn-primary">Start Free Today &rarr;</a>
-      <a href="/pricing" class="btn btn-outline">See Pricing</a>
-    </div>
+  <div class="cta-band-bg"></div>
+  <div class="cta-band-overlay"></div>
+  <h2>Ready to take control of your solar?</h2>
+  <p>Join 12,000+ households already saving more with SolarOS. Free to start — no credit card required.</p>
+  <div class="cta-btns">
+    <a href="/contact" class="btn btn-white">Start Free Today →</a>
+    <a href="/pricing" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.35)">See Pricing</a>
   </div>
 </div>
 
@@ -264,7 +286,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="logo">
-          <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7" fill="#f59e0b"/><g stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><line x1="16" y1="2" x2="16" y2="6"/><line x1="16" y1="26" x2="16" y2="30"/><line x1="2" y1="16" x2="6" y2="16"/><line x1="26" y1="16" x2="30" y2="16"/></g></svg>
           Solar<span>OS</span>
         </div>
         <p>The world's most trusted solar energy management platform. Built for homeowners, installers, and commercial operators.</p>
@@ -280,7 +302,14 @@
   </div>
 </footer>
 
-<script src="js/solar-animation.js"></script>
 <script src="js/main.js"></script>
+<script>
+window.addEventListener('load', () => {
+  document.querySelectorAll('.bar-fill').forEach(el => {
+    const w = el.dataset.width || '0%';
+    setTimeout(() => { el.style.width = w; }, 600);
+  });
+});
+</script>
 </body>
 </html>

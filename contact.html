@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact & Get Started — SolarOS</title>
+  <title>Contact &amp; Get Started — SolarOS</title>
   <meta name="description" content="Get in touch with the SolarOS team. Start your free account, ask a question, or talk to sales.">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -31,10 +31,13 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-content">
     <div class="section-tag reveal">Get in Touch</div>
-    <h1 class="reveal">Let's get your solar<br><span style="color:#d97706">working smarter.</span></h1>
+    <h1 class="reveal">Let's get your solar working smarter.</h1>
     <p class="reveal">Start your free account, ask us anything, or talk to our team about a custom plan for your business.</p>
+  </div>
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1617886903355-9354bb57751f?w=1200&q=80&fit=crop" alt="Solar panels on a modern home rooftop">
   </div>
 </div>
 
@@ -81,17 +84,17 @@
         <div class="reveal" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:8px">
           <h4 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:16px">Quick Links</h4>
           <div style="display:flex;flex-direction:column;gap:12px">
-            <a href="/pricing" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--light)'">
-              <span style="color:#d97706">→</span> View pricing plans
+            <a href="/pricing" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s">
+              <span style="color:var(--gold-dark)">→</span> View pricing plans
             </a>
-            <a href="/services" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--light)'">
-              <span style="color:#d97706">→</span> Explore all features
+            <a href="/services" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s">
+              <span style="color:var(--gold-dark)">→</span> Explore all features
             </a>
-            <a href="/about" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--light)'">
-              <span style="color:#d97706">→</span> Meet the team
+            <a href="/about" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s">
+              <span style="color:var(--gold-dark)">→</span> Meet the team
             </a>
-            <a href="#" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--light)'">
-              <span style="color:#d97706">→</span> Help centre & docs
+            <a href="#" style="display:flex;align-items:center;gap:10px;color:var(--text-mid);font-size:.9rem;transition:color .2s">
+              <span style="color:var(--gold-dark)">→</span> Help centre &amp; docs
             </a>
           </div>
         </div>
@@ -139,53 +142,38 @@
             <textarea placeholder="How many panels do you have? What inverter brand? Any specific questions? We love detail."></textarea>
           </div>
           <div class="form-group" style="flex-direction:row;align-items:center;gap:12px">
-            <input type="checkbox" id="consent" required style="width:18px;height:18px;accent-color:#d97706;flex-shrink:0">
-            <label for="consent" style="font-size:.82rem;color:var(--text-muted);font-weight:400;cursor:pointer">I agree to SolarOS processing my data to respond to this enquiry. <a href="#" style="color:#d97706">Privacy policy</a>.</label>
+            <input type="checkbox" id="consent" required style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0">
+            <label for="consent" style="font-size:.82rem;color:var(--text-muted);font-weight:400;cursor:pointer">I agree to SolarOS processing my data to respond to this enquiry. <a href="#" style="color:var(--gold-dark)">Privacy policy</a>.</label>
           </div>
-          <button type="submit" class="btn btn-primary form-submit">Send Message ☀️</button>
+          <button type="submit" class="btn btn-primary form-submit">Send Message</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SIGNUP CTA -->
-<section class="section bg-alt" style="padding-top:72px;padding-bottom:72px">
-  <div class="container">
-    <div style="text-align:center">
-      <div class="section-tag reveal" style="justify-content:center">Or just dive in</div>
-      <h2 class="reveal" style="font-size:2rem;margin-bottom:16px">Create your free account in 2 minutes</h2>
-      <p class="reveal" style="color:var(--text-muted);max-width:500px;margin:0 auto 36px">No credit card. No contract. Start monitoring your solar system today on our free Starter plan.</p>
-      <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="#" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Start Free →</a>
-        <a href="/pricing" class="btn btn-outline">See Plans</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- TRUST SIGNALS -->
-<section class="section">
+<section class="section bg-alt">
   <div class="container">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center" class="reveal">
       <div>
-        <div style="font-size:2rem;margin-bottom:12px">🔒</div>
-        <h4 style="margin-bottom:6px">SSL Encrypted</h4>
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--bg-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.3rem">🔒</div>
+        <h4 style="margin-bottom:6px;font-size:1rem">SSL Encrypted</h4>
         <p style="font-size:.85rem;color:var(--text-muted)">All data is encrypted in transit and at rest on UK servers.</p>
       </div>
       <div>
-        <div style="font-size:2rem;margin-bottom:12px">✅</div>
-        <h4 style="margin-bottom:6px">GDPR Compliant</h4>
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--bg-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.3rem">✅</div>
+        <h4 style="margin-bottom:6px;font-size:1rem">GDPR Compliant</h4>
         <p style="font-size:.85rem;color:var(--text-muted)">Your data is yours. We follow all UK GDPR requirements.</p>
       </div>
       <div>
-        <div style="font-size:2rem;margin-bottom:12px">🚀</div>
-        <h4 style="margin-bottom:6px">99.9% Uptime</h4>
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--bg-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.3rem">🚀</div>
+        <h4 style="margin-bottom:6px;font-size:1rem">99.9% Uptime</h4>
         <p style="font-size:.85rem;color:var(--text-muted)">Our infrastructure runs on AWS London with full redundancy.</p>
       </div>
       <div>
-        <div style="font-size:2rem;margin-bottom:12px">🤝</div>
-        <h4 style="margin-bottom:6px">No Lock-In</h4>
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--bg-soft);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.3rem">🤝</div>
+        <h4 style="margin-bottom:6px;font-size:1rem">No Lock-In</h4>
         <p style="font-size:.85rem;color:var(--text-muted)">Cancel any time. Export all your data in one click, for free.</p>
       </div>
     </div>

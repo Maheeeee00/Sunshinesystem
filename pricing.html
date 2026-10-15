@@ -31,10 +31,13 @@
 
 <!-- PAGE HERO -->
 <div class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-content">
     <div class="section-tag reveal">Pricing</div>
-    <h1 class="reveal">Simple pricing,<br><span style="color:#d97706">no surprises.</span></h1>
+    <h1 class="reveal">Simple pricing, no surprises.</h1>
     <p class="reveal">Start for free and upgrade only when you need more. Cancel any time — no contracts, no lock-in.</p>
+  </div>
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1200&q=80&fit=crop" alt="Solar panels close-up in bright sunlight">
   </div>
 </div>
 
@@ -45,7 +48,7 @@
       <span id="lbl-m" style="font-weight:600;color:var(--text);font-size:.95rem">Monthly</span>
       <div style="position:relative;width:44px;height:24px;cursor:pointer" onclick="toggleBilling()">
         <div style="position:absolute;inset:0;background:var(--grad-sun);border-radius:50px"></div>
-        <div id="toggle-thumb" style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--bg-soft);border-radius:50%;transition:transform .3s"></div>
+        <div id="toggle-thumb" style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .3s"></div>
       </div>
       <span id="lbl-y" style="font-weight:600;color:var(--text-muted);font-size:.95rem">Annual <span style="background:rgba(0,212,170,.15);color:#0d9488;padding:2px 8px;border-radius:50px;font-size:.75rem;font-weight:700">Save 20%</span></span>
     </div>
@@ -71,8 +74,8 @@
           <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
           <li class="pricing-feature"><span class="check">✓</span> 7-day data history</li>
           <li class="pricing-feature"><span class="check">✓</span> Basic alerts (email)</li>
-          <li class="pricing-feature"><span class="check">✓</span> Mobile app (iOS & Android)</li>
-          <li class="pricing-feature dim"><span class="cross">✕</span> Analytics & reporting</li>
+          <li class="pricing-feature"><span class="check">✓</span> Mobile app (iOS &amp; Android)</li>
+          <li class="pricing-feature dim"><span class="cross">✕</span> Analytics &amp; reporting</li>
           <li class="pricing-feature dim"><span class="cross">✕</span> AI optimisation</li>
           <li class="pricing-feature dim"><span class="cross">✕</span> Savings tracker</li>
         </ul>
@@ -94,9 +97,9 @@
           <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
           <li class="pricing-feature"><span class="check">✓</span> Unlimited data history</li>
           <li class="pricing-feature"><span class="check">✓</span> Smart alerts (push, email, SMS)</li>
-          <li class="pricing-feature"><span class="check">✓</span> Full analytics & reports</li>
+          <li class="pricing-feature"><span class="check">✓</span> Full analytics &amp; reports</li>
           <li class="pricing-feature"><span class="check">✓</span> AI optimisation engine</li>
-          <li class="pricing-feature"><span class="check">✓</span> Savings & CO₂ tracker</li>
+          <li class="pricing-feature"><span class="check">✓</span> Savings &amp; CO₂ tracker</li>
           <li class="pricing-feature"><span class="check">✓</span> PDF report exports</li>
         </ul>
         <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center">Start Pro Free — 30 Days</a>
@@ -112,12 +115,12 @@
         </div>
         <p class="pricing-desc">For installers and commercial operators managing multiple sites.</p>
         <ul class="pricing-features">
-          <li class="pricing-feature"><span class="check">✓</span> Unlimited sites & systems</li>
+          <li class="pricing-feature"><span class="check">✓</span> Unlimited sites &amp; systems</li>
           <li class="pricing-feature"><span class="check">✓</span> Everything in Pro</li>
           <li class="pricing-feature"><span class="check">✓</span> White-label client portal</li>
           <li class="pricing-feature"><span class="check">✓</span> Branded PDF reports</li>
           <li class="pricing-feature"><span class="check">✓</span> Fleet-wide alert management</li>
-          <li class="pricing-feature"><span class="check">✓</span> REST API & webhooks</li>
+          <li class="pricing-feature"><span class="check">✓</span> REST API &amp; webhooks</li>
           <li class="pricing-feature"><span class="check">✓</span> Priority support (4 hr SLA)</li>
           <li class="pricing-feature"><span class="check">✓</span> Dedicated account manager</li>
         </ul>
@@ -152,7 +155,7 @@
       </div>
       <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
         <h4 style="margin-bottom:10px">Which inverters are compatible?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">We support 40+ brands including SolarEdge, Fronius, Sungrow, SMA, Huawei, and Growatt. Full list on our <a href="/services" style="color:#d97706">Services page</a>.</p>
+        <p style="color:var(--text-muted);font-size:.9rem">We support 40+ brands including SolarEdge, Fronius, Sungrow, SMA, Huawei, and Growatt. Full list on our <a href="/services" style="color:var(--gold-dark)">Services page</a>.</p>
       </div>
       <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
         <h4 style="margin-bottom:10px">Can I cancel at any time?</h4>
@@ -175,13 +178,15 @@
 </section>
 
 <!-- CTA BAND -->
-<div class="cta-band">
-  <div class="container">
-    <h2>Start saving more today</h2>
-    <p>Join 12,000+ solar owners already using SolarOS. Free forever, upgrade when you're ready.</p>
+<div class="cta-band" style="position:relative;overflow:hidden">
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&fit=crop')"></div>
+  <div class="cta-band-overlay"></div>
+  <div class="container" style="position:relative;z-index:2">
+    <h2 style="color:#fff">Start saving more today</h2>
+    <p style="color:rgba(255,255,255,.75)">Join 12,000+ solar owners already using SolarOS. Free forever, upgrade when you're ready.</p>
     <div class="cta-btns">
       <a href="/contact" class="btn btn-primary">Get Started Free &rarr;</a>
-      <a href="/contact" class="btn btn-outline">Talk to Us First</a>
+      <a href="/contact" class="btn btn-white">Talk to Us First</a>
     </div>
   </div>
 </div>
@@ -206,8 +211,8 @@ const prices = { free: [0, 0], pro: [9, 7], biz: [49, 39] };
 function toggleBilling() {
   annual = !annual;
   document.getElementById('toggle-thumb').style.transform = annual ? 'translateX(20px)' : 'none';
-  document.getElementById('lbl-m').style.color = annual ? 'var(--muted)' : 'var(--white)';
-  document.getElementById('lbl-y').style.color = annual ? 'var(--white)' : 'var(--muted)';
+  document.getElementById('lbl-m').style.color = annual ? 'var(--text-muted)' : 'var(--text)';
+  document.getElementById('lbl-y').style.color = annual ? 'var(--text)' : 'var(--text-muted)';
   document.getElementById('price-free').textContent = prices.free[annual ? 1 : 0];
   document.getElementById('price-pro').textContent = prices.pro[annual ? 1 : 0];
   document.getElementById('price-biz').textContent = prices.biz[annual ? 1 : 0];
