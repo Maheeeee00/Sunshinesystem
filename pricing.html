@@ -6,6 +6,46 @@
   <title>Pricing — SolarOS</title>
   <meta name="description" content="Simple, transparent pricing for homeowners, families, and commercial operators. Start free, upgrade when you need more.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:0; align-items:start; }
+    .pricing-card { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:36px 32px; position:relative; transition:all .3s cubic-bezier(.16,1,.3,1); }
+    .pricing-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,.1); }
+    .pricing-card.featured { background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%); border-color:var(--gold); box-shadow:0 8px 40px rgba(240,165,0,.2); }
+    .pricing-badge { position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:var(--grad-sun); color:#fff; font-size:.72rem; font-weight:800; padding:5px 16px; border-radius:50px; white-space:nowrap; letter-spacing:.04em; }
+    .pricing-name { font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:20px; }
+    .pricing-card.featured .pricing-name { color:#fff; }
+    .pricing-price { display:flex; align-items:baseline; gap:4px; margin-bottom:16px; }
+    .currency { font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:700; color:var(--text); margin-top:8px; }
+    .amount { font-family:'Outfit',sans-serif; font-size:3.2rem; font-weight:900; color:var(--text); line-height:1; }
+    .period { font-size:.85rem; color:var(--text-muted); }
+    .pricing-card.featured .currency,
+    .pricing-card.featured .amount,
+    .pricing-card.featured .period { color:#fff; }
+    .pricing-desc { font-size:.85rem; color:var(--text-muted); margin-bottom:24px; line-height:1.6; }
+    .pricing-card.featured .pricing-desc { color:rgba(255,255,255,.65); }
+    .pricing-divider { border:none; border-top:1px solid var(--border); margin:24px 0; }
+    .pricing-card.featured .pricing-divider { border-color:rgba(255,255,255,.12); }
+    .pricing-features { list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+    .pricing-feature { display:flex; align-items:flex-start; gap:10px; font-size:.86rem; color:var(--text-mid); line-height:1.4; }
+    .pricing-card.featured .pricing-feature { color:rgba(255,255,255,.8); }
+    .pricing-feature.dim { opacity:.45; }
+    .check { width:18px; height:18px; border-radius:50%; background:rgba(0,212,170,.15); color:#00d4aa; display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:800; flex-shrink:0; margin-top:1px; }
+    .cross { width:18px; height:18px; border-radius:50%; background:rgba(0,0,0,.06); color:var(--text-light); display:flex; align-items:center; justify-content:center; font-size:.7rem; flex-shrink:0; margin-top:1px; }
+
+    .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:960px; margin:40px auto 0; }
+    .faq-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; transition:all .25s; }
+    .faq-card:hover { border-color:var(--gold); box-shadow:0 4px 20px rgba(240,165,0,.07); }
+    .faq-card h4 { font-size:.92rem; margin-bottom:10px; }
+    .faq-card p { color:var(--text-muted); font-size:.86rem; line-height:1.65; margin:0; }
+
+    .enterprise-row { margin-top:20px; background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:40px 48px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+    .enterprise-row:hover { border-color:var(--teal); box-shadow:0 8px 32px rgba(0,212,170,.08); }
+    .enterprise-tag { font-size:.72rem; font-weight:800; color:var(--teal); letter-spacing:.1em; text-transform:uppercase; margin-bottom:8px; }
+    .enterprise-row h3 { font-size:1.5rem; margin-bottom:8px; }
+    .enterprise-row p { color:var(--text-muted); max-width:520px; font-size:.9rem; }
+
+    @media(max-width:900px){ .pricing-grid { grid-template-columns:1fr; } .faq-grid { grid-template-columns:1fr; } .enterprise-row { padding:28px 24px; } }
+  </style>
 </head>
 <body>
 
@@ -35,6 +75,14 @@
     <div class="section-tag reveal">Pricing</div>
     <h1 class="reveal">Simple pricing, no surprises.</h1>
     <p class="reveal">Start for free and upgrade only when you need more. Cancel any time — no contracts, no lock-in.</p>
+    <div class="reveal" style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--teal)">
+        ✓ Free plan available forever
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--gold-dark)">
+        ✓ 30-day Pro trial, no card needed
+      </div>
+    </div>
   </div>
   <div class="page-hero-img">
     <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=1200&q=80&fit=crop" alt="Solar panels close-up in bright sunlight">
@@ -69,6 +117,7 @@
           <span class="period">/mo</span>
         </div>
         <p class="pricing-desc">Perfect for getting to know SolarOS. Free forever, no card needed.</p>
+        <hr class="pricing-divider">
         <ul class="pricing-features">
           <li class="pricing-feature"><span class="check">✓</span> 1 solar system</li>
           <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
@@ -92,6 +141,7 @@
           <span class="period">/mo</span>
         </div>
         <p class="pricing-desc">The complete toolkit for homeowners who want to maximise every kilowatt.</p>
+        <hr class="pricing-divider">
         <ul class="pricing-features">
           <li class="pricing-feature"><span class="check">✓</span> Up to 3 solar systems</li>
           <li class="pricing-feature"><span class="check">✓</span> Real-time monitoring</li>
@@ -114,6 +164,7 @@
           <span class="period">/mo</span>
         </div>
         <p class="pricing-desc">For installers and commercial operators managing multiple sites.</p>
+        <hr class="pricing-divider">
         <ul class="pricing-features">
           <li class="pricing-feature"><span class="check">✓</span> Unlimited sites &amp; systems</li>
           <li class="pricing-feature"><span class="check">✓</span> Everything in Pro</li>
@@ -130,16 +181,40 @@
     </div>
 
     <!-- Enterprise -->
-    <div class="reveal" style="margin-top:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div class="enterprise-row reveal">
       <div>
-        <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Enterprise</div>
-        <h3 style="font-size:1.6rem;margin-bottom:8px">Need something custom?</h3>
-        <p style="color:var(--text-muted);max-width:520px">For large portfolios, utility-scale deployments, and organisations needing bespoke integrations, custom SLAs, or on-premise hosting — let's talk.</p>
+        <div class="enterprise-tag">Enterprise</div>
+        <h3>Need something custom?</h3>
+        <p>For large portfolios, utility-scale deployments, and organisations needing bespoke integrations, custom SLAs, or on-premise hosting — let's talk.</p>
       </div>
-      <a href="/contact" class="btn btn-outline" style="white-space:nowrap">Contact Enterprise Sales</a>
+      <a href="/contact" class="btn btn-outline" style="white-space:nowrap;flex-shrink:0">Contact Enterprise Sales</a>
     </div>
   </div>
 </section>
+
+<!-- TRUST STATS -->
+<div style="background:var(--bg-card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:0">
+      <div style="padding:40px 24px;border-right:1px solid var(--border)" class="reveal">
+        <div style="font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;color:var(--gold-dark)" data-count="12" data-suffix="K+">0</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px;font-weight:500">Active customers</div>
+      </div>
+      <div style="padding:40px 24px;border-right:1px solid var(--border)" class="reveal">
+        <div style="font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;color:var(--teal)" data-count="4.8" data-suffix="★">0</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px;font-weight:500">Average rating</div>
+      </div>
+      <div style="padding:40px 24px;border-right:1px solid var(--border)" class="reveal">
+        <div style="font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;color:var(--gold-dark)" data-count="99.9" data-suffix="%">0</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px;font-weight:500">Uptime last 12 months</div>
+      </div>
+      <div style="padding:40px 24px" class="reveal">
+        <div style="font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;color:var(--teal)" data-count="2" data-suffix="min">0</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px;font-weight:500">Avg. support response</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- FAQ -->
 <section class="section bg-alt">
@@ -148,30 +223,30 @@
       <div class="section-tag reveal">FAQ</div>
       <h2 class="section-title reveal">Common questions</h2>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:960px;margin:0 auto" class="reveal">
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">Do I need a smart meter?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">No. SolarOS connects directly to your inverter. A smart meter adds extra import/export data but is not required to get started.</p>
+    <div class="faq-grid">
+      <div class="faq-card reveal">
+        <h4>Do I need a smart meter?</h4>
+        <p>No. SolarOS connects directly to your inverter. A smart meter adds extra import/export data but is not required to get started.</p>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">Which inverters are compatible?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">We support 40+ brands including SolarEdge, Fronius, Sungrow, SMA, Huawei, and Growatt. Full list on our <a href="/services" style="color:var(--gold-dark)">Services page</a>.</p>
+      <div class="faq-card reveal">
+        <h4>Which inverters are compatible?</h4>
+        <p>We support 40+ brands including SolarEdge, Fronius, Sungrow, SMA, Huawei, and Growatt. Full list on our <a href="/services" style="color:var(--gold-dark)">Services page</a>.</p>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">Can I cancel at any time?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">Yes, always. Monthly plans cancel with no penalty at the end of your billing cycle. Annual plans are refunded pro-rata in the first 30 days.</p>
+      <div class="faq-card reveal">
+        <h4>Can I cancel at any time?</h4>
+        <p>Yes, always. Monthly plans cancel with no penalty at the end of your billing cycle. Annual plans are refunded pro-rata in the first 30 days.</p>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">Is my energy data private?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">Absolutely. Your data is stored encrypted on UK servers and never sold to third parties. You own your data and can export or delete it at any time.</p>
+      <div class="faq-card reveal">
+        <h4>Is my energy data private?</h4>
+        <p>Absolutely. Your data is stored encrypted on UK servers and never sold to third parties. You own your data and can export or delete it at any time.</p>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">What's included in the free trial?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">The Pro free trial gives you full access to every Pro feature for 30 days — no credit card required. At the end you can subscribe or drop to the free Starter plan.</p>
+      <div class="faq-card reveal">
+        <h4>What's included in the free trial?</h4>
+        <p>The Pro free trial gives you full access to every Pro feature for 30 days — no credit card required. At the end you can subscribe or drop to the free Starter plan.</p>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:28px">
-        <h4 style="margin-bottom:10px">Do you support battery storage?</h4>
-        <p style="color:var(--text-muted);font-size:.9rem">Yes. SolarOS monitors and controls compatible battery systems including Tesla Powerwall, Givenergy, and SolarEdge battery — included in Pro and above.</p>
+      <div class="faq-card reveal">
+        <h4>Do you support battery storage?</h4>
+        <p>Yes. SolarOS monitors and controls compatible battery systems including Tesla Powerwall, Givenergy, and SolarEdge battery — included in Pro and above.</p>
       </div>
     </div>
   </div>
@@ -179,14 +254,32 @@
 
 <!-- CTA BAND -->
 <div class="cta-band" style="position:relative;overflow:hidden">
-  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&fit=crop')"></div>
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop')"></div>
   <div class="cta-band-overlay"></div>
+  <div class="cta-band-icon">☀️</div>
+  <div class="cta-particles">
+    <span style="left:5%;animation-delay:0s;animation-duration:3.2s"></span>
+    <span style="left:14%;animation-delay:.4s;animation-duration:2.8s"></span>
+    <span style="left:28%;animation-delay:.8s;animation-duration:3.6s"></span>
+    <span style="left:42%;animation-delay:.2s;animation-duration:3s"></span>
+    <span style="left:56%;animation-delay:.6s;animation-duration:2.9s"></span>
+    <span style="left:68%;animation-delay:1s;animation-duration:3.4s"></span>
+    <span style="left:79%;animation-delay:.3s;animation-duration:3.1s"></span>
+    <span style="left:88%;animation-delay:.7s;animation-duration:2.7s"></span>
+    <span style="left:93%;animation-delay:.1s;animation-duration:3.3s"></span>
+    <span style="left:35%;animation-delay:.9s;animation-duration:3.5s"></span>
+  </div>
   <div class="container" style="position:relative;z-index:2">
-    <h2 style="color:#fff">Start saving more today</h2>
-    <p style="color:rgba(255,255,255,.75)">Join 12,000+ solar owners already using SolarOS. Free forever, upgrade when you're ready.</p>
-    <div class="cta-btns">
+    <h2 style="color:#fff" class="reveal-cta">Start saving more today</h2>
+    <p style="color:rgba(255,255,255,.8)" class="reveal-cta">Join 12,000+ solar owners already using SolarOS. Free forever, upgrade when you're ready.</p>
+    <div class="cta-btns reveal-cta">
       <a href="/contact" class="btn btn-primary">Get Started Free &rarr;</a>
       <a href="/contact" class="btn btn-white">Talk to Us First</a>
+    </div>
+    <div class="cta-trust reveal-cta">
+      <span>✓ No credit card needed</span>
+      <span>✓ Setup in 5 minutes</span>
+      <span>✓ Cancel any time</span>
     </div>
   </div>
 </div>

@@ -14,26 +14,36 @@
   --blue:       #0ea5e9;
   --green:      #22c55e;
 
-  --bg:         #ffffff;
-  --bg-soft:    #f8fafc;
+  /* Richer, non-white backgrounds */
+  --bg:         #f6f8fb;
+  --bg-soft:    #eef2f7;
   --bg-card:    #ffffff;
-  --bg-alt:     #f1f5f9;
-  --border:     #e8ecf0;
-  --border-mid: #cbd5e1;
+  --bg-alt:     #e9eef5;
+  --border:     #dde3ec;
+  --border-mid: #c4cdd9;
 
-  --text:       #0f172a;
-  --text-mid:   #334155;
-  --text-muted: #64748b;
-  --text-light: #94a3b8;
+  --text:       #0c1525;
+  --text-mid:   #2d3d52;
+  --text-muted: #5d7285;
+  --text-light: #8fa3b3;
 
   --grad-sun:   linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
   --grad-teal:  linear-gradient(135deg, #0d9488 0%, #0ea5e9 100%);
 
-  --radius:     12px;
-  --radius-lg:  20px;
-  --shadow-sm:  0 1px 4px rgba(0,0,0,.06);
-  --shadow:     0 4px 20px rgba(0,0,0,.07);
-  --shadow-lg:  0 16px 48px rgba(0,0,0,.1);
+  --radius:     14px;
+  --radius-lg:  22px;
+  --shadow-sm:  0 1px 4px rgba(12,21,37,.07);
+  --shadow:     0 4px 20px rgba(12,21,37,.09);
+  --shadow-lg:  0 16px 48px rgba(12,21,37,.13);
+}
+
+/* Subtle dot-grid on body for depth */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(circle, #c8d4e0 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: .35;
 }
 
 /* ---------- Reset ---------- */
@@ -229,17 +239,74 @@ button { cursor: pointer; font-family: inherit; }
 .hero-mini-card .mini-val { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
 .hero-mini-card .mini-lbl { font-size: .72rem; color: rgba(255,255,255,.45); }
 
-/* ---------- Trusted by ---------- */
+/* ---------- Trusted by — marquee ---------- */
 .trusted {
-  padding: 32px 5%;
+  padding: 0;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  overflow: hidden;
 }
-.trusted-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; gap: 48px; flex-wrap: wrap; }
-.trusted-label { font-size: .72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: .14em; font-weight: 600; white-space: nowrap; }
-.trusted-logos { display: flex; align-items: center; gap: 44px; flex-wrap: wrap; }
-.trusted-logos span {
-  font-family: 'Outfit', sans-serif; font-size: .95rem; font-weight: 800;
-  color: #d1d5db; letter-spacing: .06em;
+.trusted-inner {
+  display: flex; align-items: stretch;
+}
+.trusted-label-col {
+  flex-shrink: 0;
+  padding: 22px 28px;
+  display: flex; align-items: center;
+  border-right: 1px solid var(--border);
+  background: var(--bg-soft);
+  gap: 10px;
+}
+.trustpilot-badge {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.tp-stars { display: flex; gap: 3px; }
+.tp-star {
+  width: 16px; height: 16px; border-radius: 3px; background: #00b67a;
+  display: flex; align-items: center; justify-content: center;
+}
+.tp-star svg { width: 10px; height: 10px; }
+.tp-text { font-size: .75rem; color: var(--text-muted); font-weight: 600; }
+.tp-text strong { color: #00b67a; }
+.trusted-divider { width: 1px; background: var(--border); margin: 12px 0; }
+
+/* Marquee track */
+.trusted-marquee-wrap {
+  flex: 1; overflow: hidden; position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.trusted-marquee {
+  display: flex; align-items: center; gap: 0;
+  width: max-content;
+  animation: marquee-scroll 26s linear infinite;
+}
+.trusted-marquee:hover { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.brand-tile {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 36px;
+  border-right: 1px solid var(--border);
+  transition: background .25s;
+  cursor: default;
+  white-space: nowrap;
+}
+.brand-tile:hover { background: var(--bg-soft); }
+.brand-tile:hover .brand-logo { opacity: 1; filter: none; transform: scale(1.06); }
+.brand-tile:hover .brand-name { color: var(--text); }
+
+.brand-logo {
+  width: 28px; height: 28px; flex-shrink: 0;
+  opacity: .5; filter: grayscale(1);
+  transition: opacity .3s, filter .3s, transform .3s;
+}
+.brand-name {
+  font-family: 'Outfit', sans-serif; font-size: .9rem; font-weight: 800;
+  color: var(--text-light); letter-spacing: .02em;
+  transition: color .3s;
 }
 
 /* ---------- Image Feature Rows ---------- */

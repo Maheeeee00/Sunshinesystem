@@ -6,6 +6,60 @@
   <title>About Us — SolarOS</title>
   <meta name="description" content="We're on a mission to make solar energy work harder for every household and business. Meet the team behind SolarOS.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .mission-band { text-align:center; padding:56px 48px; background:linear-gradient(135deg,rgba(240,165,0,.07) 0%,rgba(0,212,170,.07) 100%); border:1px solid var(--border); border-radius:20px; }
+    .mission-band h2 { font-size:clamp(1.4rem,3vw,2rem); color:var(--text); line-height:1.4; max-width:680px; margin:16px auto 20px; }
+    .mission-band p { color:var(--text-muted); max-width:560px; margin:0 auto; }
+
+    .stats-band { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .stats-inner { display:grid; grid-template-columns:repeat(4,1fr); }
+    .stat-item { padding:48px 32px; text-align:center; border-right:1px solid var(--border); }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-family:'Outfit',sans-serif; font-size:2.8rem; font-weight:900; color:var(--gold-dark); line-height:1; margin-bottom:8px; }
+    .stat-lbl { font-size:.82rem; color:var(--text-muted); font-weight:500; }
+
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:40px; }
+    .value-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; transition:all .3s cubic-bezier(.16,1,.3,1); }
+    .value-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.08); border-color:var(--gold); }
+    .value-card .icon { font-size:2rem; margin-bottom:16px; display:block; }
+    .value-card h3 { font-size:1.05rem; margin-bottom:10px; }
+    .value-card p { font-size:.88rem; color:var(--text-muted); line-height:1.65; margin:0; }
+
+    .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:40px; }
+    .team-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 24px; text-align:center; transition:all .3s cubic-bezier(.16,1,.3,1); }
+    .team-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(0,0,0,.08); border-color:var(--gold); }
+    .team-avatar { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; font-size:1.2rem; font-weight:900; color:#fff; margin:0 auto 16px; }
+    .team-card h4 { font-size:.95rem; margin-bottom:4px; }
+    .team-card .role { font-size:.78rem; color:var(--text-muted); font-weight:500; }
+
+    .press-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+    .press-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; transition:all .3s; }
+    .press-card:hover { transform:translateY(-3px); box-shadow:0 8px 32px rgba(0,0,0,.07); }
+    .press-source { font-size:.72rem; font-weight:800; letter-spacing:.12em; color:var(--text-muted); margin-bottom:16px; text-transform:uppercase; }
+    .press-quote { font-size:.93rem; color:var(--text-mid); font-style:italic; line-height:1.7; margin-bottom:16px; }
+    .press-date { font-size:.75rem; color:var(--text-light); }
+
+    .timeline { display:flex; flex-direction:column; gap:0; position:relative; padding-left:32px; margin-top:32px; }
+    .timeline::before { content:''; position:absolute; left:10px; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--gold),var(--teal)); border-radius:2px; }
+    .timeline-item { position:relative; padding:0 0 32px 28px; }
+    .timeline-item::before { content:''; position:absolute; left:-4px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--gold); border:2px solid var(--bg); box-shadow:0 0 0 3px rgba(240,165,0,.25); }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-year { font-family:'Outfit',sans-serif; font-size:.8rem; font-weight:800; color:var(--gold-dark); margin-bottom:4px; }
+    .timeline-title { font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .timeline-desc { font-size:.85rem; color:var(--text-muted); line-height:1.5; }
+
+    @media(max-width:900px){
+      .stats-inner { grid-template-columns:repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right:none; }
+      .values-grid { grid-template-columns:repeat(2,1fr); }
+      .team-grid { grid-template-columns:repeat(2,1fr); }
+      .press-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:600px){
+      .values-grid { grid-template-columns:1fr; }
+      .team-grid { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,6 +89,17 @@
     <div class="section-tag reveal">Our Story</div>
     <h1 class="reveal">We believe clean energy deserves great software.</h1>
     <p class="reveal">SolarOS was founded in 2021 by engineers frustrated that solar panels were getting smarter while the software to manage them stayed stuck in 2008.</p>
+    <div class="reveal" style="display:flex;gap:16px;margin-top:24px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--text-mid)">
+        <span style="color:var(--gold)">📍</span> Bristol, UK
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--text-mid)">
+        <span style="color:var(--teal)">🚀</span> Founded 2021
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:50px;padding:8px 16px;font-size:.82rem;font-weight:600;color:var(--text-mid)">
+        <span style="color:var(--gold)">💰</span> Series A funded
+      </div>
+    </div>
   </div>
   <div class="page-hero-img">
     <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1200&q=80&fit=crop" alt="Solar panels in golden light">
@@ -84,6 +149,28 @@
     <h2>Built out of frustration</h2>
     <p>Our co-founder James installed a 6 kW solar system on his home in 2020. The inverter came with an app that crashed every morning, showed data 24 hours behind, and had no way to see if a panel was underperforming.</p>
     <p style="margin-top:0;margin-bottom:0">He called his installer. They couldn't see his data remotely. There was a gap — a big one. So he and his co-founder Priya built SolarOS on evenings and weekends. Within six months they had 200 beta users. Within a year, 5,000.</p>
+    <div class="timeline" style="margin-top:28px">
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-title">The idea sparks</div>
+        <div class="timeline-desc">James installs solar at home, frustrated by poor monitoring apps</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-title">SolarOS founded</div>
+        <div class="timeline-desc">James and Priya launch v1 with 200 beta users in Bristol</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-title">£4.2M seed round</div>
+        <div class="timeline-desc">Backed by Pale Blue Dot and Seedcamp · 5,000 customers</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">£18M Series A</div>
+        <div class="timeline-desc">Expanding to Europe · 12,000+ customers across UK &amp; Ireland</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -96,14 +183,16 @@
     <div class="section-tag">Backing</div>
     <h2>Backed to build further</h2>
     <p>We closed our £4.2M seed round in 2022 with Pale Blue Dot and Seedcamp, and followed with a £18M Series A in 2024. Today we're one of the UK's fastest-growing cleantech startups — and we're just getting started.</p>
-    <div style="display:flex;gap:40px;margin-top:8px">
-      <div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
         <div style="font-family:'Outfit',sans-serif;font-size:2rem;font-weight:900;color:var(--gold-dark)">£4.2M</div>
-        <div style="font-size:.82rem;color:var(--text-muted)">Seed · 2022</div>
+        <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Seed Round · 2022</div>
+        <div style="font-size:.78rem;color:var(--text-light);margin-top:2px">Pale Blue Dot · Seedcamp</div>
       </div>
-      <div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
         <div style="font-family:'Outfit',sans-serif;font-size:2rem;font-weight:900;color:var(--teal)">£18M</div>
-        <div style="font-size:.82rem;color:var(--text-muted)">Series A · 2024</div>
+        <div style="font-size:.82rem;color:var(--text-muted);margin-top:4px">Series A · 2024</div>
+        <div style="font-size:.78rem;color:var(--text-light);margin-top:2px">Undisclosed lead investor</div>
       </div>
     </div>
   </div>
@@ -118,32 +207,32 @@
     </div>
     <div class="values-grid">
       <div class="value-card reveal">
-        <div class="icon">🌍</div>
+        <span class="icon">🌍</span>
         <h3>Planet First</h3>
         <p>Every feature we build is evaluated against one question: does this help the planet? Reducing carbon is not a marketing line — it's our North Star.</p>
       </div>
       <div class="value-card reveal">
-        <div class="icon">🔍</div>
+        <span class="icon">🔍</span>
         <h3>Radical Transparency</h3>
         <p>We tell customers exactly how their data is used, what our uptime actually was last month, and when we get things wrong. No spin, no small print.</p>
       </div>
       <div class="value-card reveal">
-        <div class="icon">🎯</div>
+        <span class="icon">🎯</span>
         <h3>Obsessive Simplicity</h3>
         <p>Solar is already complex. SolarOS should make it feel simple. We fight relentlessly for clarity in every screen, every email, every word of copy.</p>
       </div>
       <div class="value-card reveal">
-        <div class="icon">🤝</div>
+        <span class="icon">🤝</span>
         <h3>Customer Champions</h3>
         <p>Every person who contacts our support team is greeted by a real human who knows solar inside out. We hire for empathy first, technical skill second.</p>
       </div>
       <div class="value-card reveal">
-        <div class="icon">⚡</div>
+        <span class="icon">⚡</span>
         <h3>Bias to Action</h3>
         <p>We ship fast, learn fast, and fix fast. A good feature released today is worth more than a perfect feature released next quarter.</p>
       </div>
       <div class="value-card reveal">
-        <div class="icon">🧩</div>
+        <span class="icon">🧩</span>
         <h3>Open by Default</h3>
         <p>Our API is public. Our uptime page is public. Our pricing is public. We believe the solar ecosystem grows faster when we play well with others.</p>
       </div>
@@ -215,21 +304,21 @@
       <div class="section-tag reveal">In the Press</div>
       <h2 class="section-title reveal">What people are saying</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="reveal">
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:32px">
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">The Guardian</div>
-        <p style="font-size:.95rem;color:var(--text-mid);font-style:italic;margin-bottom:16px">"SolarOS is what the smart home revolution actually needed — software that makes green tech genuinely useful for ordinary people."</p>
-        <div style="font-size:.8rem;color:var(--text-muted)">October 2025</div>
+    <div class="press-grid">
+      <div class="press-card reveal">
+        <div class="press-source">The Guardian</div>
+        <p class="press-quote">"SolarOS is what the smart home revolution actually needed — software that makes green tech genuinely useful for ordinary people."</p>
+        <div class="press-date">October 2025</div>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:32px">
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">TechCrunch</div>
-        <p style="font-size:.95rem;color:var(--text-mid);font-style:italic;margin-bottom:16px">"The Monzo of solar monitoring. Impossibly slick, data-dense, and — refreshingly — actually explains what the numbers mean."</p>
-        <div style="font-size:.8rem;color:var(--text-muted)">March 2025</div>
+      <div class="press-card reveal">
+        <div class="press-source">TechCrunch</div>
+        <p class="press-quote">"The Monzo of solar monitoring. Impossibly slick, data-dense, and — refreshingly — actually explains what the numbers mean."</p>
+        <div class="press-date">March 2025</div>
       </div>
-      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:32px">
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px">Which?</div>
-        <p style="font-size:.95rem;color:var(--text-mid);font-style:italic;margin-bottom:16px">"★★★★★ — The best solar monitoring app we've tested. Outperforms manufacturer apps in every category we measured."</p>
-        <div style="font-size:.8rem;color:var(--text-muted)">January 2026</div>
+      <div class="press-card reveal">
+        <div class="press-source">Which?</div>
+        <p class="press-quote">"★★★★★ — The best solar monitoring app we've tested. Outperforms manufacturer apps in every category we measured."</p>
+        <div class="press-date">January 2026</div>
       </div>
     </div>
   </div>
@@ -237,14 +326,32 @@
 
 <!-- CTA -->
 <div class="cta-band" style="position:relative;overflow:hidden">
-  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&fit=crop')"></div>
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop')"></div>
   <div class="cta-band-overlay"></div>
+  <div class="cta-band-icon">☀️</div>
+  <div class="cta-particles">
+    <span style="left:5%;animation-delay:0s;animation-duration:3.2s"></span>
+    <span style="left:18%;animation-delay:.5s;animation-duration:2.8s"></span>
+    <span style="left:30%;animation-delay:.2s;animation-duration:3.6s"></span>
+    <span style="left:45%;animation-delay:.8s;animation-duration:3s"></span>
+    <span style="left:60%;animation-delay:.3s;animation-duration:2.9s"></span>
+    <span style="left:72%;animation-delay:1.1s;animation-duration:3.4s"></span>
+    <span style="left:82%;animation-delay:.6s;animation-duration:3.1s"></span>
+    <span style="left:90%;animation-delay:.4s;animation-duration:2.7s"></span>
+    <span style="left:12%;animation-delay:.9s;animation-duration:3.3s"></span>
+    <span style="left:52%;animation-delay:.1s;animation-duration:3.5s"></span>
+  </div>
   <div class="container" style="position:relative;z-index:2">
-    <h2 style="color:#fff">Join the clean energy revolution</h2>
-    <p style="color:rgba(255,255,255,.75)">12,000+ households and businesses are already running smarter solar with SolarOS. Start free today.</p>
-    <div class="cta-btns">
+    <h2 style="color:#fff" class="reveal-cta">Join the clean energy revolution</h2>
+    <p style="color:rgba(255,255,255,.8)" class="reveal-cta">12,000+ households and businesses are already running smarter solar with SolarOS. Start free today.</p>
+    <div class="cta-btns reveal-cta">
       <a href="/contact" class="btn btn-primary">Get Started Free &rarr;</a>
       <a href="/contact" class="btn btn-white">Contact the Team</a>
+    </div>
+    <div class="cta-trust reveal-cta">
+      <span>✓ Free forever plan</span>
+      <span>✓ Set up in 5 minutes</span>
+      <span>✓ 12,000+ happy customers</span>
     </div>
   </div>
 </div>

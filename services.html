@@ -6,6 +6,33 @@
   <title>Services — SolarOS</title>
   <meta name="description" content="Explore SolarOS services — monitoring, analytics, AI optimisation, alerts, and commercial solutions for every solar energy need.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Services page extras ── */
+    .service-row { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); }
+    .service-img { position:relative; overflow:hidden; min-height:460px; }
+    .service-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease; }
+    .service-img:hover img { transform:scale(1.04); }
+    .service-img-badge { position:absolute; top:20px; left:20px; background:rgba(0,0,0,.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:10px 16px; color:#fff; font-family:'Outfit',sans-serif; font-size:.82rem; font-weight:700; display:flex; align-items:center; gap:8px; }
+    .service-img-badge .dot { width:8px; height:8px; border-radius:50%; background:#00d4aa; flex-shrink:0; animation:glow-pulse 2s ease-in-out infinite; }
+    .service-content { padding:64px 56px; display:flex; flex-direction:column; justify-content:center; }
+    .service-list { list-style:none; margin:24px 0 0; display:flex; flex-direction:column; gap:10px; }
+    .service-list li { display:flex; align-items:flex-start; gap:10px; font-size:.92rem; color:var(--text-mid); line-height:1.5; }
+    .service-list li::before { content:''; width:18px; height:18px; border-radius:50%; background:rgba(240,165,0,.15); border:1.5px solid var(--gold); flex-shrink:0; margin-top:2px; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2.5 2.5L8 3' stroke='%23f0a500' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; background-size:10px 10px; }
+
+    /* integrations strip */
+    .integrations-strip { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:40px 0; }
+    .integrations-strip h3 { text-align:center; font-size:1rem; font-weight:700; color:var(--text-muted); letter-spacing:.05em; margin-bottom:28px; }
+    .integrations-logos { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:800px; margin:0 auto; }
+    .integration-chip { display:flex; align-items:center; gap:8px; padding:10px 18px; background:var(--bg-soft); border:1px solid var(--border); border-radius:50px; font-size:.82rem; font-weight:600; color:var(--text-mid); transition:all .25s; }
+    .integration-chip:hover { border-color:var(--gold); color:var(--gold-dark); background:#fff; transform:translateY(-2px); box-shadow:0 4px 16px rgba(240,165,0,.12); }
+    .integration-chip span { font-size:1rem; }
+
+    @media(max-width:768px){
+      .service-row { grid-template-columns:1fr; }
+      .service-row[style*="direction:rtl"] { direction:ltr !important; }
+      .service-content { padding:40px 24px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -36,22 +63,45 @@
 <div class="page-hero">
   <div class="page-hero-content">
     <div class="section-tag reveal">Our Services</div>
-    <h1 class="reveal">Everything your solar system needs,<br>in one platform.</h1>
+    <h1 class="reveal">Everything your solar system needs, in one platform.</h1>
     <p class="reveal">From simple home monitoring to enterprise-grade fleet management — SolarOS scales with you.</p>
+    <div class="hero-mini-stats reveal" style="display:flex;gap:28px;margin-top:28px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-dark)" data-count="40" data-suffix="+">0</div>
+        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Inverter brands</div>
+      </div>
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--teal)" data-count="5" data-suffix="s">0</div>
+        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Data refresh</div>
+      </div>
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;color:var(--gold-dark)" data-count="99.9" data-suffix="%">0</div>
+        <div style="font-size:.78rem;color:var(--text-muted);font-weight:600">Uptime SLA</div>
+      </div>
+    </div>
   </div>
   <div class="page-hero-img">
     <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80&fit=crop" alt="Solar panels on rooftop">
+    <div style="position:absolute;bottom:20px;right:20px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 18px;color:#fff;font-family:'Outfit',sans-serif">
+      <div style="font-size:.7rem;color:rgba(255,255,255,.6);margin-bottom:4px">LIVE OUTPUT</div>
+      <div style="font-size:1.5rem;font-weight:900" class="hero-card-kpi">8.4 kW</div>
+      <div style="font-size:.72rem;color:#00d4aa;display:flex;align-items:center;gap:4px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#00d4aa;display:inline-block;animation:glow-pulse 2s ease-in-out infinite"></span>
+        Monitoring active
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- SERVICES -->
-<section class="section" style="padding-top:0;padding-bottom:0">
+<section class="section" style="padding:0">
   <div style="max-width:100%">
 
     <!-- 1 — Real-Time Monitoring -->
     <div class="service-row">
       <div class="service-img">
         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1000&q=80&fit=crop" alt="Solar monitoring dashboard on tablet">
+        <div class="service-img-badge"><span class="dot"></span> Live every 5 seconds</div>
       </div>
       <div class="service-content reveal">
         <div class="section-tag">Monitoring</div>
@@ -71,6 +121,7 @@
     <div class="service-row" style="direction:rtl">
       <div class="service-img" style="direction:ltr">
         <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=80&fit=crop" alt="Analytics dashboard with charts">
+        <div class="service-img-badge"><span class="dot" style="background:#f0a500"></span> 14-day history free</div>
       </div>
       <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
         <div class="section-tag">Analytics</div>
@@ -90,6 +141,7 @@
     <div class="service-row">
       <div class="service-img">
         <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1000&q=80&fit=crop" alt="Smartphone with notifications">
+        <div class="service-img-badge"><span class="dot" style="background:#ff7c20"></span> Instant push alerts</div>
       </div>
       <div class="service-content reveal">
         <div class="section-tag">Alerts</div>
@@ -109,6 +161,7 @@
     <div class="service-row" style="direction:rtl">
       <div class="service-img" style="direction:ltr">
         <img src="https://images.unsplash.com/photo-1620288627223-53302f4e8c74?w=1000&q=80&fit=crop" alt="Modern smart home energy management">
+        <div class="service-img-badge" style="direction:ltr"><span class="dot" style="background:#6366f1"></span> AI-powered</div>
       </div>
       <div class="service-content reveal" style="direction:ltr;background:var(--bg-soft)">
         <div class="section-tag">AI</div>
@@ -128,6 +181,7 @@
     <div class="service-row" style="border-bottom:none">
       <div class="service-img">
         <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1000&q=80&fit=crop" alt="Large commercial solar farm aerial view">
+        <div class="service-img-badge"><span class="dot"></span> Multi-site dashboard</div>
       </div>
       <div class="service-content reveal">
         <div class="section-tag">Enterprise</div>
@@ -140,23 +194,60 @@
           <li>SLA tracking and maintenance scheduling</li>
           <li>REST API and webhook integrations for your own systems</li>
         </ul>
-        <a href="/contact" class="btn btn-primary" style="margin-top:24px;align-self:flex-start">Talk to Sales &rarr;</a>
+        <a href="/contact" class="btn btn-primary" style="margin-top:28px;align-self:flex-start">Talk to Sales &rarr;</a>
       </div>
     </div>
 
   </div>
 </section>
 
+<!-- INTEGRATIONS STRIP -->
+<div class="integrations-strip">
+  <h3>Compatible with 40+ inverter brands &amp; energy platforms</h3>
+  <div class="integrations-logos">
+    <div class="integration-chip reveal"><span>⚡</span>SolarEdge</div>
+    <div class="integration-chip reveal"><span>🔋</span>Tesla Powerwall</div>
+    <div class="integration-chip reveal"><span>☀️</span>Fronius</div>
+    <div class="integration-chip reveal"><span>📊</span>SMA</div>
+    <div class="integration-chip reveal"><span>🌊</span>Sungrow</div>
+    <div class="integration-chip reveal"><span>🐙</span>Octopus Energy</div>
+    <div class="integration-chip reveal"><span>🔌</span>Huawei FusionSolar</div>
+    <div class="integration-chip reveal"><span>🏠</span>Givenergy</div>
+    <div class="integration-chip reveal"><span>📈</span>Growatt</div>
+    <div class="integration-chip reveal"><span>🌿</span>EDF</div>
+    <div class="integration-chip reveal"><span>📱</span>IFTTT</div>
+    <div class="integration-chip reveal"><span>🔗</span>REST API</div>
+  </div>
+</div>
+
 <!-- CTA BAND -->
 <div class="cta-band" style="position:relative;overflow:hidden">
-  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1400&q=80&fit=crop')"></div>
+  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1600&q=80&fit=crop')"></div>
   <div class="cta-band-overlay"></div>
+  <div class="cta-band-icon">☀️</div>
+  <div class="cta-particles">
+    <span style="left:5%;animation-delay:0s;animation-duration:3.2s"></span>
+    <span style="left:15%;animation-delay:.4s;animation-duration:2.8s"></span>
+    <span style="left:25%;animation-delay:.8s;animation-duration:3.6s"></span>
+    <span style="left:40%;animation-delay:.2s;animation-duration:3s"></span>
+    <span style="left:55%;animation-delay:.6s;animation-duration:2.9s"></span>
+    <span style="left:65%;animation-delay:1s;animation-duration:3.4s"></span>
+    <span style="left:75%;animation-delay:.3s;animation-duration:3.1s"></span>
+    <span style="left:85%;animation-delay:.7s;animation-duration:2.7s"></span>
+    <span style="left:92%;animation-delay:.1s;animation-duration:3.3s"></span>
+    <span style="left:48%;animation-delay:.9s;animation-duration:3.5s"></span>
+  </div>
   <div class="container" style="position:relative;z-index:2">
-    <h2 style="color:#fff">Find the right plan for you</h2>
-    <p style="color:rgba(255,255,255,.75)">Whether you're a homeowner with 6 panels or an installer managing 500 sites, there's a SolarOS plan built for you.</p>
-    <div class="cta-btns">
+    <h2 style="color:#fff" class="reveal-cta">Find the right plan for you</h2>
+    <p style="color:rgba(255,255,255,.8)" class="reveal-cta">Whether you're a homeowner with 6 panels or an installer managing 500 sites, there's a SolarOS plan built for you.</p>
+    <div class="cta-btns reveal-cta">
       <a href="/pricing" class="btn btn-primary">See Pricing &rarr;</a>
       <a href="/contact" class="btn btn-white">Contact Sales</a>
+    </div>
+    <div class="cta-trust reveal-cta">
+      <span>✓ Free 30-day trial</span>
+      <span>✓ No credit card needed</span>
+      <span>✓ Cancel any time</span>
     </div>
   </div>
 </div>
