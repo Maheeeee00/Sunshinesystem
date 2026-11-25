@@ -1,391 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunshine Solar — Solar Panels & Battery Storage UK</title>
-  <meta name="description" content="Sunshine Solar installs premium solar panels and battery storage systems for homes and businesses across the UK. Get a free quote today.">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sunsolar — Best Solar Company in Lahore, Pakistan</title>
+<meta name="description" content="Sunsolar — Lahore's most trusted solar panels & battery storage company. MCS certified, WAPDA net-metering approved. Free survey. PKR financing available.">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a href="/" class="nav-logo">
-    <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
-      <circle cx="16" cy="16" r="7" fill="#f59e0b"/>
-      <g stroke="#f59e0b" stroke-width="2" stroke-linecap="round">
-        <line x1="16" y1="1" x2="16" y2="6"/>
-        <line x1="16" y1="26" x2="16" y2="31"/>
-        <line x1="1" y1="16" x2="6" y2="16"/>
-        <line x1="26" y1="16" x2="31" y2="16"/>
-        <line x1="5.5" y1="5.5" x2="9" y2="9"/>
-        <line x1="23" y1="23" x2="26.5" y2="26.5"/>
-        <line x1="26.5" y1="5.5" x2="23" y2="9"/>
-        <line x1="9" y1="23" x2="5.5" y2="26.5"/>
-      </g>
-    </svg>
-    Sunshine <span>Solar</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/" class="active">Home</a></li>
-    <li><a href="/services">Products</a></li>
-    <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/about">About Us</a></li>
-    <li><a href="/contact" class="nav-cta">Free Quote</a></li>
-  </ul>
-  <button class="nav-burger">☰</button>
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar-inner">
+      <div class="top-bar-contact">
+        <a href="tel:+923001234567">📞 +92 300 1234567</a>
+        <a href="mailto:info@sunsolar.pk">✉️ info@sunsolar.pk</a>
+      </div>
+      <div class="top-bar-social">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">ig</a>
+        <a href="#" title="YouTube">▶</a>
+        <a href="#" title="TikTok">tk</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-sun">☀️</div>
+        <div class="logo-text"><span>SUN</span>SOLAR</div>
+      </a>
+      <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/services">Products</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <a href="/contact" class="nav-cta">REQUEST A QUOTE →</a>
+    </div>
+  </div>
 </nav>
-<nav class="nav-mobile">
-  <a href="/">Home</a>
-  <a href="/services">Products</a>
-  <a href="/pricing">Pricing</a>
-  <a href="/about">About Us</a>
-  <a href="/contact" class="nav-cta">Free Quote</a>
-</nav>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-label">Solar Panel Rates</div>
+  <div class="ticker-date" id="tickerDate"></div>
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Longi 580W Hi-MO6 Panel <strong>Rs 18,000/W</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Jinko 605W Tiger Neo Panel <strong>Rs 19,500/W</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Canadian 650W HiKu7 Bifacial <strong>Rs 21,000/W</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Risen 575W Titan S Panel <strong>Rs 17,500/W</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Huawei SUN2000 5kW Inverter <strong>Rs 2,20,000</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Solis 10kW Hybrid Inverter <strong>Rs 3,80,000</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">Longi 580W Hi-MO6 Panel <strong>Rs 18,000/W</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Jinko 605W Tiger Neo Panel <strong>Rs 19,500/W</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Canadian 650W HiKu7 Bifacial <strong>Rs 21,000/W</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Risen 575W Titan S Panel <strong>Rs 17,500/W</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Huawei SUN2000 5kW Inverter <strong>Rs 2,20,000</strong> <span class="arrow-down">▼</span></span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Solis 10kW Hybrid Inverter <strong>Rs 3,80,000</strong> <span class="arrow-up">▲</span></span>
+      <span class="ticker-sep">|</span>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-bg-img"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-inner">
-    <!-- Left content -->
-    <div>
-      <div class="hero-eyebrow fade-in">
-        <span class="dot"></span>
-        MCS Certified · 5-Star Rated
+  <div class="hero-particles"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">🌟 Lahore's #1 Solar Company 2025</div>
+        <h1>
+          Go Solar.<br>
+          Save Big.<br>
+          <span class="accent">Beat the Outages.</span>
+        </h1>
+        <p class="hero-sub">
+          Pakistan's most trusted solar panels, batteries & net-metering solutions. WAPDA approved, AEDB certified. Over 3,200 homes & businesses powered across Lahore.
+        </p>
+        <div class="hero-actions">
+          <a href="/contact" class="btn-primary">⚡ Get Free Survey</a>
+          <a href="/pricing" class="btn-outline">📋 View Packages</a>
+        </div>
+        <div class="hero-stats-row">
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="3200" data-suffix="+">0+</div>
+            <div class="hero-stat-lbl">Projects Done</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="14" data-suffix=" yrs">0 yrs</div>
+            <div class="hero-stat-lbl">In Business</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4.9★</div>
+            <div class="hero-stat-lbl">Trust Score</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="98" data-suffix="%">0%</div>
+            <div class="hero-stat-lbl">Satisfaction</div>
+          </div>
+        </div>
       </div>
-      <h1 class="fade-in delay-1">Power Your Home With Clean <em>Solar Energy</em></h1>
-      <p class="hero-desc fade-in delay-2">Premium solar panels and battery storage systems, expertly installed across the UK. Slash your energy bills and protect yourself from rising electricity costs — guaranteed.</p>
-      <div class="hero-btns fade-in delay-3">
-        <a href="/contact" class="btn btn-gold btn-lg">Get Free Quote ☀️</a>
-        <a href="/pricing" class="btn btn-outline-white btn-lg">View Packages</a>
+      <div class="hero-right">
+        <div class="hero-img-main">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=80&fit=crop&auto=format" alt="Solar panels on rooftop">
+          <div class="hero-img-badge">
+            <div class="hib-icon">⚡</div>
+            <div>
+              <div class="hib-label">Annual Saving</div>
+              <div class="hib-val">Rs 4,44,000/yr</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-cards-row">
+          <div class="hero-mini-card">
+            <div class="hmc-icon">🔋</div>
+            <div class="hmc-val">24/7</div>
+            <div class="hmc-lbl">Battery Backup</div>
+          </div>
+          <div class="hero-mini-card">
+            <div class="hmc-icon">🏦</div>
+            <div class="hmc-val">Rs 0</div>
+            <div class="hmc-lbl">Upfront Finance</div>
+          </div>
+        </div>
       </div>
-      <div class="hero-trust fade-in delay-3">
-        <div class="hero-trust-item"><span class="icon">✅</span> No obligation — free survey included</div>
-        <div class="hero-trust-item"><span class="icon">⚡</span> Installed in as little as 1 day</div>
-        <div class="hero-trust-item"><span class="icon">🛡️</span> 25-year panel performance warranty</div>
-      </div>
-    </div>
-    <!-- Right: instant quote card -->
-    <div class="hero-card">
-      <div class="hero-card-title">Estimated Annual Savings</div>
-      <div class="saving-row">
-        <span class="saving-label">🏠 Average household (4kW system)</span>
-        <span class="saving-val gold">Rs 4,44,000 / yr</span>
-      </div>
-      <div class="saving-row">
-        <span class="saving-label">⚡ With battery storage added</span>
-        <span class="saving-val green">+Rs 2,52,000 / yr</span>
-      </div>
-      <div class="saving-row">
-        <span class="saving-label">📈 SEG export earnings</span>
-        <span class="saving-val white">Rs 1,41,000 / yr</span>
-      </div>
-      <div class="saving-row">
-        <span class="saving-label">🌍 CO₂ offset annually</span>
-        <span class="saving-val white">1.8 tonnes</span>
-      </div>
-      <div class="saving-row" style="border-top:1px solid rgba(255,255,255,.15);margin-top:4px;padding-top:16px">
-        <span class="saving-label" style="font-weight:700;color:#fff">Total potential saving</span>
-        <span class="saving-val gold" style="font-size:1.4rem">Rs 8,36,000 / yr</span>
-      </div>
-      <a href="/contact" class="btn btn-gold btn-lg hero-card-cta">Calculate My Savings</a>
-      <p class="hero-card-note">Based on current energy prices. Your surveyor will give exact figures.</p>
     </div>
   </div>
 </section>
 
 <!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stats-strip-inner">
-    <div class="stat-block">
-      <div class="stat-num" data-count="3200" data-suffix="+">0</div>
-      <div class="stat-lbl">Installations Completed</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" data-count="14" data-suffix=" yrs">0</div>
-      <div class="stat-lbl">Years of Experience</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" data-count="4.9" data-suffix="★">0</div>
-      <div class="stat-lbl">Average Customer Rating</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-num" data-count="98" data-suffix="%">0</div>
-      <div class="stat-lbl">Would Recommend Us</div>
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-strip-inner">
+      <div class="stat-block">
+        <div class="stat-num" data-count="3200" data-suffix="+">0+</div>
+        <div class="stat-lbl">Projects Completed</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-count="14" data-suffix=" yrs">0</div>
+        <div class="stat-lbl">Years Experience</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">4.9/5</div>
+        <div class="stat-lbl">Customer Rating</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-count="98" data-suffix="%">0</div>
+        <div class="stat-lbl">Satisfaction Rate</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- WHY SOLAR -->
-<section class="section bg-slate">
+<!-- SERVICES -->
+<section class="section bg-dark">
   <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow reveal">Why Go Solar</div>
-      <h2 class="section-title reveal">The smart choice for your home and wallet</h2>
-      <p class="section-sub reveal">With energy prices at historic highs, solar is no longer just eco-friendly — it's one of the best financial decisions a homeowner can make.</p>
+    <div class="text-center reveal">
+      <div class="eyebrow">What We Offer</div>
+      <h2 class="section-title">Complete Solar <span class="text-orange">Solutions</span></h2>
+      <p class="section-sub" style="margin:0 auto">From Tier-1 panel supply to full EPC installation, net-metering, battery storage and maintenance — we do it all.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal delay-1">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=80&fit=crop&auto=format" alt="Solar Panel Supply">
+          <div class="service-card-icon">☀️</div>
+        </div>
+        <div class="service-card-body">
+          <h3>Solar Panel Supply</h3>
+          <p>Tier-1 monocrystalline & bifacial panels from Longi, Jinko, Canadian Solar and more at market-leading prices.</p>
+          <a href="/services" class="btn-read-more">Read More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=600&q=80&fit=crop&auto=format" alt="Battery Storage">
+          <div class="service-card-icon">🔋</div>
+        </div>
+        <div class="service-card-body">
+          <h3>Battery Storage</h3>
+          <p>Lithium-ion home battery systems — store your solar energy and run through loadshedding without generators.</p>
+          <a href="/services" class="btn-read-more">Read More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=600&q=80&fit=crop&auto=format" alt="EPC Solar Installation">
+          <div class="service-card-icon">🔧</div>
+        </div>
+        <div class="service-card-body">
+          <h3>EPC Installation</h3>
+          <p>Complete design, engineering, procurement & installation by our certified engineers. WAPDA net-metering included.</p>
+          <a href="/services" class="btn-read-more">Read More →</a>
+        </div>
+      </div>
+      <div class="service-card reveal delay-4">
+        <div class="service-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop&auto=format" alt="Solar Financing">
+          <div class="service-card-icon">🏦</div>
+        </div>
+        <div class="service-card-body">
+          <h3>Solar Installments</h3>
+          <p>Go solar with Rs 0 upfront through our bank financing partnerships. Easy monthly installments, flexible terms.</p>
+          <a href="/pricing" class="btn-read-more">Read More →</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="/services" class="btn-primary">View All Services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Why Sunsolar</div>
+      <h2 class="section-title">Lahore's Most <span class="text-orange">Trusted</span> Solar Partner</h2>
     </div>
     <div class="why-grid">
-      <div class="why-card reveal">
-        <div class="why-icon">💷</div>
-        <h3>Cut Your Energy Bills</h3>
-        <p>Most households save between Rs 3,33,000 and Rs 5,18,000 per year after installation. Your system typically pays for itself in 7–9 years — then it's pure profit for 20+ more.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">🔋</div>
-        <h3>Store & Use Your Own Power</h3>
-        <p>Pair your panels with a battery and use the solar energy you generate at night. Stop buying expensive grid electricity during peak hours.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">📈</div>
-        <h3>Increase Property Value</h3>
-        <p>Homes with solar panels sell for an average of 4% more. Estate agents consistently report solar as one of the most sought-after home improvements.</p>
-      </div>
-      <div class="why-card reveal">
-        <div class="why-icon">🌱</div>
-        <h3>Reduce Your Carbon Footprint</h3>
-        <p>A typical 4kW system offsets around 1.6 tonnes of CO₂ per year — the equivalent of not flying London to New York 3 times.</p>
-      </div>
-      <div class="why-card reveal">
+      <div class="why-card reveal delay-1">
         <div class="why-icon">💰</div>
-        <h3>Earn Money Selling Surplus</h3>
-        <p>The Smart Export Guarantee (SEG) pays you for every unit of electricity you export back to the grid. Earn hundreds of pounds extra each year.</p>
+        <h3>Slash Your Electricity Bill</h3>
+        <p>Most customers save Rs 3,33,000 to Rs 5,18,000 per year on electricity. Your system pays itself back in 4–6 years.</p>
       </div>
-      <div class="why-card reveal">
+      <div class="why-card reveal delay-2">
+        <div class="why-icon">🔋</div>
+        <h3>Beat the Load-shedding</h3>
+        <p>Battery storage means your home keeps running during WAPDA outages — no noise, no fumes, no generator.</p>
+      </div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon">🏠</div>
+        <h3>Increase Property Value</h3>
+        <p>Solar-equipped homes in Pakistan sell faster and for 15–20% more. It's an investment, not just an expense.</p>
+      </div>
+      <div class="why-card reveal delay-1">
+        <div class="why-icon">⚡</div>
+        <h3>WAPDA Net Metering</h3>
+        <p>Export surplus electricity back to the grid and earn credits. NEPRA & WAPDA approved net-metering applications handled by us.</p>
+      </div>
+      <div class="why-card reveal delay-2">
         <div class="why-icon">🛡️</div>
-        <h3>Protection From Price Rises</h3>
-        <p>Energy prices have risen 300% since 2020. Solar locks in your electricity cost at near-zero for 25+ years, insulating you from future market volatility.</p>
+        <h3>25-Year Warranty</h3>
+        <p>All panels come with 25-year performance warranties. Inverters covered 5–10 years. We handle all after-sales support.</p>
+      </div>
+      <div class="why-card reveal delay-3">
+        <div class="why-icon">🏦</div>
+        <h3>Easy Bank Financing</h3>
+        <p>Partner with leading Pakistani banks — HBL, MCB, Meezan — for solar loans with 0% down payment options.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS -->
-<section class="section">
+<section class="section bg-dark">
   <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow reveal">Our Products</div>
-      <h2 class="section-title reveal">Solar panels & battery storage systems</h2>
-      <p class="section-sub reveal">We supply and install premium equipment from the world's leading manufacturers. All systems come fully designed, installed, and commissioned by our MCS-certified engineers.</p>
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Our Packages</div>
+      <h2 class="section-title">Solar Packages in <span class="text-orange">Pakistan</span></h2>
+      <p class="section-sub" style="margin:0 auto">Fully installed, WAPDA approved. All prices include panels, inverter, structure, DC/AC cables and installation.</p>
     </div>
     <div class="products-grid">
-      <div class="product-card reveal">
+      <div class="product-card reveal delay-1">
         <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80&fit=crop&auto=format" alt="Residential solar panel installation on house roof">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80&fit=crop&auto=format" alt="Residential Solar">
           <span class="product-badge">Best Seller</span>
         </div>
         <div class="product-body">
-          <div class="product-category">Solar Panels</div>
+          <div class="product-eyebrow">Solar Panels</div>
           <h3>Residential Solar System</h3>
           <p>Premium monocrystalline panels for homes. Discreet all-black design, high efficiency even in low light, and a 25-year performance warranty included.</p>
-          <div class="product-specs">
-            <span class="spec-chip">4kW – 12kW</span>
-            <span class="spec-chip">Monocrystalline</span>
-            <span class="spec-chip">25yr Warranty</span>
-            <span class="spec-chip">MCS Certified</span>
+          <div class="product-chips">
+            <span class="chip">4kW – 12kW</span>
+            <span class="chip">Monocrystalline</span>
+            <span class="chip">25yr Warranty</span>
+            <span class="chip">MCS Certified</span>
           </div>
           <div class="product-price">From Rs 18,48,000 <span>fully installed</span></div>
-          <a href="/contact" class="btn btn-gold" style="width:100%;justify-content:center">Get Free Quote</a>
+          <a href="/contact" class="product-cta">Get Free Quote →</a>
         </div>
       </div>
-      <div class="product-card featured reveal">
+      <div class="product-card featured reveal delay-2">
         <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80&fit=crop&auto=format" alt="Home battery storage unit installed on wall">
+          <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80&fit=crop&auto=format" alt="Solar + Battery Bundle">
           <span class="product-badge">Most Popular</span>
         </div>
         <div class="product-body">
-          <div class="product-category">Battery Storage</div>
+          <div class="product-eyebrow">Battery Storage</div>
           <h3>Solar + Battery Bundle</h3>
-          <p>Our most popular package. Pair your solar with a 10kWh home battery and become truly energy independent — day and night, sun or cloud.</p>
-          <div class="product-specs">
-            <span class="spec-chip">6kW Solar</span>
-            <span class="spec-chip">10kWh Battery</span>
-            <span class="spec-chip">App Control</span>
-            <span class="spec-chip">Export Ready</span>
+          <p>Our most popular package. Pair your solar with a 10kWh home battery and become truly energy independent — day, night, and loadshedding.</p>
+          <div class="product-chips">
+            <span class="chip">6kW Solar</span>
+            <span class="chip">10kWh Battery</span>
+            <span class="chip">App Control</span>
+            <span class="chip">Export Ready</span>
           </div>
           <div class="product-price">From Rs 35,15,000 <span>fully installed</span></div>
-          <a href="/contact" class="btn btn-gold" style="width:100%;justify-content:center">Get Free Quote</a>
+          <a href="/contact" class="product-cta">Get Free Quote →</a>
         </div>
       </div>
-      <div class="product-card reveal">
+      <div class="product-card reveal delay-3">
         <div class="product-img">
-          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800&q=80&fit=crop&auto=format" alt="Commercial solar panels on factory roof">
+          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800&q=80&fit=crop&auto=format" alt="Commercial Solar">
           <span class="product-badge">Commercial</span>
         </div>
         <div class="product-body">
-          <div class="product-category">Commercial Solar</div>
+          <div class="product-eyebrow">Commercial Solar</div>
           <h3>Business Solar Systems</h3>
           <p>Larger installations for warehouses, factories, offices and farms. Reduce your electricity overheads by up to 80% with a commercial solar array.</p>
-          <div class="product-specs">
-            <span class="spec-chip">20kW – 500kW</span>
-            <span class="spec-chip">3-phase</span>
-            <span class="spec-chip">ROI Analysis</span>
-            <span class="spec-chip">Finance Available</span>
+          <div class="product-chips">
+            <span class="chip">20kW – 500kW</span>
+            <span class="chip">3-phase</span>
+            <span class="chip">ROI Analysis</span>
+            <span class="chip">Finance Available</span>
           </div>
           <div class="product-price">From Rs 66,60,000 <span>fully installed</span></div>
-          <a href="/contact" class="btn btn-navy" style="width:100%;justify-content:center">Talk to Sales</a>
+          <a href="/contact" class="product-cta">Get Free Quote →</a>
         </div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:40px">
-      <a href="/services" class="btn btn-outline-navy btn-lg reveal">View All Products & Services →</a>
+  </div>
+</section>
+
+<!-- TRUST / COUNTER -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="reveal">
+        <div class="eyebrow">Why Customers Choose Us</div>
+        <h2>4k+ Happy<br>Customers <span class="text-orange">Across Pakistan</span></h2>
+        <p class="trust-quote">"Sunsolar is a very reliable brand in Pakistan. I received excellent customer service and my system was installed in one day. Highly recommended!" — Tariq Ahmed, Lahore</p>
+        <div class="trust-score">
+          <div class="trust-score-num">4.9/5</div>
+          <div>
+            <div class="trust-score-label">⭐ Trust Score Rated</div>
+            <div class="trust-score-sub">Rated by over 2,000+ customers</div>
+          </div>
+        </div>
+      </div>
+      <div class="counter-grid reveal delay-2">
+        <div class="counter-card">
+          <span class="counter-icon">🏠</span>
+          <span class="counter-num" data-count="3200" data-suffix="+">0</span>
+          <span class="counter-lbl">Sites Covered</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-icon">😊</span>
+          <span class="counter-num">100%</span>
+          <span class="counter-lbl">Happy Clients</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-icon">🏆</span>
+          <span class="counter-num" data-count="14" data-suffix="+">0</span>
+          <span class="counter-lbl">Years Experience</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-icon">⚡</span>
+          <span class="counter-num" data-count="45" data-suffix="MW">0</span>
+          <span class="counter-lbl">Total Capacity</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="section bg-slate">
+<section class="section bg-dark">
   <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow reveal">The Process</div>
-      <h2 class="section-title reveal">From free survey to generating power</h2>
-      <p class="section-sub reveal">We handle everything from design to final sign-off. Most residential installations are completed in a single day.</p>
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">The Process</div>
+      <h2 class="section-title">From Survey to <span class="text-orange">Savings</span></h2>
     </div>
     <div class="steps-grid">
-      <div class="step-item reveal">
-        <div class="step-num">1</div>
+      <div class="step reveal delay-1">
+        <div class="step-num">01</div>
+        <span class="step-icon">📋</span>
         <h3>Free Survey</h3>
-        <p>One of our surveyors visits your property, assesses your roof, energy usage and recommends the ideal system size.</p>
+        <p>Our engineer visits your site, checks your bill and roof — completely free, no obligation.</p>
       </div>
-      <div class="step-item reveal">
-        <div class="step-num">2</div>
+      <div class="step reveal delay-2">
+        <div class="step-num">02</div>
+        <span class="step-icon">🎨</span>
         <h3>Custom Design</h3>
-        <p>We design your system using 3D modelling, optimise panel placement for maximum output and provide a detailed quote.</p>
+        <p>We design the perfect system size for your usage, roof space, and budget with a full report.</p>
       </div>
-      <div class="step-item reveal">
-        <div class="step-num">3</div>
-        <h3>Expert Installation</h3>
-        <p>Our MCS-certified engineers install your system professionally, safely and tidily — usually in just one day.</p>
+      <div class="step reveal delay-3">
+        <div class="step-num">03</div>
+        <span class="step-icon">🔧</span>
+        <h3>Expert Install</h3>
+        <p>Our certified team installs in 1–2 days. WAPDA net-metering application handled by us.</p>
       </div>
-      <div class="step-item reveal">
-        <div class="step-num">4</div>
+      <div class="step reveal delay-4">
+        <div class="step-num">04</div>
+        <span class="step-icon">💰</span>
         <h3>Start Saving</h3>
-        <p>We register your system with the grid, set up your monitoring app and hand over a full system walkthrough.</p>
+        <p>Your system goes live and your bills drop immediately. Track it live from your phone app.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- REVIEWS -->
 <section class="section">
   <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow reveal">Customer Reviews</div>
-      <h2 class="section-title reveal">Trusted by thousands of UK homeowners</h2>
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Customer Reviews</div>
+      <h2 class="section-title">What Lahore <span class="text-orange">Says</span></h2>
     </div>
     <div class="reviews-grid">
-      <div class="review-card reveal">
-        <div class="review-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="review-text">"Sunshine Solar were fantastic from start to finish. The surveyors were knowledgeable, the install team were clean and professional, and the system is performing even better than they predicted."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">SH</div>
+      <div class="review-card reveal delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Got a 6kW system installed in DHA Lahore. Bill went from Rs 45,000 per month to under Rs 4,000. Absolutely brilliant team, very professional and clean work."</p>
+        <div class="review-author">
+          <div class="review-avatar">TA</div>
           <div>
-            <div class="reviewer-name">Sarah H.</div>
-            <div class="reviewer-location">Bristol, BS6</div>
-            <span class="review-saving">Saving Rs 4,96,000 / year</span>
+            <div class="review-name">Tariq Ahmed</div>
+            <div class="review-loc">DHA Lahore</div>
           </div>
         </div>
+        <span class="review-saving">Saving Rs 4,96,000 / year</span>
       </div>
-      <div class="review-card reveal">
-        <div class="review-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="review-text">"We went with the solar + battery bundle and genuinely cannot believe how much our bills have dropped. We're basically grid-independent most of the year. Best money we've ever spent on the house."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">MJ</div>
+      <div class="review-card reveal delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We added a 10kWh battery too. During 8-hour loadshedding, our house runs perfectly — AC, fridge, lights, everything. Best investment we ever made."</p>
+        <div class="review-author">
+          <div class="review-avatar">SF</div>
           <div>
-            <div class="reviewer-name">Mark J.</div>
-            <div class="reviewer-location">Birmingham, B15</div>
-            <span class="review-saving">Saving Rs 8,07,000 / year</span>
+            <div class="review-name">Sara Farooq</div>
+            <div class="review-loc">Gulberg, Lahore</div>
           </div>
         </div>
+        <span class="review-saving">Saving Rs 8,07,000 / year</span>
       </div>
-      <div class="review-card reveal">
-        <div class="review-stars">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-        </div>
-        <p class="review-text">"The whole installation took one day and the team left our house spotless. Already seeing real savings — the monitoring app is brilliant too. Highly recommend Sunshine Solar to anyone thinking about it."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">PW</div>
+      <div class="review-card reveal delay-3">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Used HBL bank financing so paid nothing upfront. My monthly solar installment is Rs 18,000 and my bill dropped Rs 32,000. I'm saving Rs 14,000 from day one!"</p>
+        <div class="review-author">
+          <div class="review-avatar">RM</div>
           <div>
-            <div class="reviewer-name">Patricia W.</div>
-            <div class="reviewer-location">Leeds, LS8</div>
-            <span class="review-saving">Saving Rs 3,55,000 / year</span>
+            <div class="review-name">Rizwan Malik</div>
+            <div class="review-loc">Model Town, Lahore</div>
           </div>
         </div>
+        <span class="review-saving">Saving Rs 3,55,000 / year</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- BRANDS -->
-<div class="brands-strip">
-  <div class="brands-label">Equipment we install from leading manufacturers</div>
-  <div class="brands-row">
-    <div class="brand-item">☀️ SunPower</div>
-    <div class="brand-item">⚡ Tesla Powerwall</div>
-    <div class="brand-item">🔋 Givenergy</div>
-    <div class="brand-item">🌞 LG Solar</div>
-    <div class="brand-item">🔆 SolarEdge</div>
-    <div class="brand-item">⚙️ Fronius</div>
-    <div class="brand-item">🏭 Jinko Solar</div>
-    <div class="brand-item">🔌 Solis</div>
-  </div>
-</div>
-
-<!-- GUARANTEES -->
-<section class="section bg-navy">
+<section class="brands-section">
   <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow reveal">Our Promise</div>
-      <h2 class="section-title white reveal">Every installation is fully guaranteed</h2>
-      <p class="section-sub white reveal">We don't just install and disappear. We stand behind every system we fit with industry-leading warranties and aftercare.</p>
+    <div class="reveal" style="text-align:center">
+      <div class="eyebrow">Authorised Dealer</div>
+      <h2 class="section-title">Top <span class="text-orange">Brands</span> We Supply</h2>
     </div>
-    <div class="guarantee-grid">
-      <div class="guarantee-item reveal">
-        <span class="guarantee-icon">☀️</span>
-        <h4>25-Year Panel Warranty</h4>
-        <p>Performance guaranteed for a quarter century. Your panels will still produce at least 80% of rated output after 25 years.</p>
-      </div>
-      <div class="guarantee-item reveal">
-        <span class="guarantee-icon">🔋</span>
-        <h4>10-Year Battery Warranty</h4>
-        <p>All battery storage systems come with a full 10-year manufacturer warranty for peace of mind.</p>
-      </div>
-      <div class="guarantee-item reveal">
-        <span class="guarantee-icon">🛠️</span>
-        <h4>5-Year Workmanship</h4>
-        <p>Our installation work is guaranteed for 5 years. If anything goes wrong with our workmanship, we fix it free.</p>
-      </div>
-      <div class="guarantee-item reveal">
-        <span class="guarantee-icon">🏆</span>
-        <h4>MCS Certified</h4>
-        <p>All our installers hold MCS accreditation — required for Smart Export Guarantee payments and finance schemes.</p>
-      </div>
+    <div class="brands-row reveal delay-1">
+      <div class="brand-pill">Longi</div>
+      <div class="brand-pill">Jinko</div>
+      <div class="brand-pill">Canadian Solar</div>
+      <div class="brand-pill">Risen</div>
+      <div class="brand-pill">Huawei</div>
+      <div class="brand-pill">Solis</div>
+      <div class="brand-pill">Growatt</div>
+      <div class="brand-pill">Pylontech</div>
     </div>
   </div>
 </section>
 
 <!-- CTA BAND -->
 <section class="cta-band">
-  <div class="cta-band-bg" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&fit=crop&auto=format')"></div>
+  <div class="cta-band-bg"></div>
   <div class="cta-band-overlay"></div>
-  <div class="container">
-    <div class="section-eyebrow reveal" style="justify-content:center;color:var(--gold)">Limited Availability</div>
-    <h2 class="reveal">Ready to start saving? Book your free survey today.</h2>
-    <p class="reveal">Our surveys are completely free and no-obligation. We'll visit your property, assess your roof and give you a full savings projection — all at no cost.</p>
-    <div class="cta-btns reveal">
-      <a href="/contact" class="btn btn-gold btn-lg">Book Free Survey ☀️</a>
-      <a href="tel:+441179001820" class="btn btn-outline-white btn-lg">📞 Call Us Now</a>
-    </div>
-    <div class="cta-trust reveal">
-      <span>No obligation</span>
-      <span>Free site survey</span>
-      <span>MCS certified</span>
-      <span>Finance available</span>
+  <div class="container cta-band-inner">
+    <div class="reveal">
+      <div class="eyebrow">Start Today</div>
+      <h2>Go Solar with <span class="text-orange">Rs 0 Upfront</span></h2>
+      <p>Free site survey. No pressure. Our engineer visits, designs your system, and you decide — zero obligation.</p>
+      <div class="cta-band-actions">
+        <a href="/contact" class="btn-primary">⚡ Book Free Survey</a>
+        <a href="tel:+923001234567" class="btn-outline">📞 Call Now</a>
+      </div>
     </div>
   </div>
 </section>
@@ -393,67 +515,72 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="nav-logo" style="color:#fff">
-          <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
-            <circle cx="16" cy="16" r="7" fill="#f59e0b"/>
-            <g stroke="#f59e0b" stroke-width="2" stroke-linecap="round">
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="16" y1="26" x2="16" y2="30"/>
-              <line x1="2" y1="16" x2="6" y2="16"/>
-              <line x1="26" y1="16" x2="30" y2="16"/>
-            </g>
-          </svg>
-          Sunshine <span style="color:var(--gold)">Solar</span>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="/" class="logo">
+          <div class="logo-sun" style="width:40px;height:40px;font-size:1.2rem">☀️</div>
+          <div class="logo-text" style="font-size:1.2rem"><span>SUN</span>SOLAR</div>
+        </a>
+        <p>Sunsolar specialises in trading high-quality solar products including Tier-1 panels, inverters, batteries, and accessories. We also provide complete EPC solar solutions, net-metering, and maintenance across Pakistan.</p>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">in</a><a href="#">ig</a><a href="#">▶</a><a href="#">tk</a>
         </div>
-        <p>Premium solar panels and battery storage, expertly installed across the UK since 2010.</p>
-        <div class="footer-cert">
-          <span class="cert-badge">MCS Certified</span>
-          <span class="cert-badge">NICEIC Approved</span>
-          <span class="cert-badge">Which? Trusted</span>
-          <span class="cert-badge">TrustMark</span>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="/services">Solar Panels</a></li>
-          <li><a href="/services">Battery Storage</a></li>
-          <li><a href="/services">Commercial Solar</a></li>
-          <li><a href="/services">EV Chargers</a></li>
-        </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <ul>
+        <ul class="footer-links">
           <li><a href="/about">About Us</a></li>
           <li><a href="/about">Our Team</a></li>
-          <li><a href="/about">Certifications</a></li>
+          <li><a href="/services">Projects</a></li>
+          <li><a href="/contact">Our Branches</a></li>
           <li><a href="/contact">Careers</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Get In Touch</h4>
-        <ul>
-          <li><a href="/contact">Free Survey</a></li>
-          <li><a href="/pricing">Packages & Pricing</a></li>
-          <li><a href="tel:+441179001820">📞 0117 900 1820</a></li>
-          <li><a href="mailto:hello@sunshinesolar.co.uk">✉️ hello@sunshinesolar.co.uk</a></li>
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="/services">Solar Panels</a></li>
+          <li><a href="/services">Battery Storage</a></li>
+          <li><a href="/services">EPC Solutions</a></li>
+          <li><a href="/services">Net Metering</a></li>
+          <li><a href="/pricing">Financing</a></li>
         </ul>
       </div>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:.82rem;color:rgba(255,255,255,.35);flex-wrap:wrap;gap:12px">
-      <p>© 2026 Sunshine Solar Ltd. All rights reserved. Company No. 07341820. Registered in England & Wales.</p>
-      <div style="display:flex;gap:16px">
-        <a href="#" style="color:rgba(255,255,255,.35)">Privacy Policy</a>
-        <a href="#" style="color:rgba(255,255,255,.35)">Terms</a>
-        <a href="#" style="color:rgba(255,255,255,.35)">Cookie Settings</a>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📞</span>
+          <div class="footer-contact-text"><a href="tel:+923001234567">+92 300 1234567</a><br><a href="tel:+923001234568">+92 300 1234568</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">✉️</span>
+          <div class="footer-contact-text"><a href="mailto:info@sunsolar.pk">info@sunsolar.pk</a></div>
+        </div>
+        <div class="footer-contact-item">
+          <span class="footer-contact-icon">📍</span>
+          <div class="footer-contact-text">Main Boulevard, Gulberg III, Lahore, Pakistan</div>
+        </div>
       </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 Sunsolar Pakistan. All rights reserved.</div>
+      <div><a href="#">Privacy Policy</a> · <a href="#">Terms & Conditions</a></div>
     </div>
   </div>
 </footer>
 
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
+  <div class="whatsapp-tooltip">Chat with us!</div>
+  💬
+</a>
+
 <script src="js/main.js"></script>
+<script src="js/solar-animation.js"></script>
+<script>
+  // Ticker date
+  const d = new Date();
+  document.getElementById('tickerDate').textContent = d.toLocaleDateString('en-PK',{day:'numeric',month:'long',year:'numeric'});
+</script>
 </body>
 </html>
